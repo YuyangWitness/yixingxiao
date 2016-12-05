@@ -1,0 +1,55 @@
+{
+	"customer.html": {
+		"resources": [
+			"js/mui.min.js",
+			"fonts/mui.ttf",
+			"css/iconfont.css",
+			"css/mui.min.css",
+			"fonts/iconfont.ttf",
+			"css/Customer.css",
+			"User.html",
+			"js/jquery-3.1.0.min.js",
+			"PUser.html",
+			"test4.html",
+			"SearchUser.html"
+		],
+		"refer": [
+			"User.html",
+			"PUser.html",
+			"test4.html",
+			"SearchUser.html"
+		]
+	},
+	"User.html": {
+		"resources": [
+			"js/mui.min.js",
+			"css/mui.min.css",
+			"img/jian.png",
+			"css/Customer.css",
+			"js/jquery-3.1.0.min.js",
+			"js/pinyin.js",
+			"js/Customer.js"
+		],
+		"refer": []
+	},
+	"PUser.html": {
+		"resources": [
+			"js/Customer.js",
+			"js/mui.min.js",
+			"js/pinyin.js",
+			"css/mui.min.css",
+			"css/Customer.css",
+			"js/jquery-3.1.0.min.js",
+			"img/jian.png"
+		],
+		"refer": []
+	},
+	"test4.html": {
+		"resources": [
+			"js/mui.min.js",
+			"css/mui.min.css",
+			"js/jquery-3.1.0.min.js"
+		],
+		"refer": []
+	}
+}

@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title></title>
+		<script src="js/mui.min.js"></script>
+		<link href="css/mui.min.css" rel="stylesheet" />
+		<script type="text/javascript" src="js/jquery-3.1.0.min.js"></script>
+		<script type="text/javascript" charset="utf-8">
+			mui.init();
+		</script>
+		<link rel="stylesheet" href="css/iconfont.css" />
+		<link rel="stylesheet" href="css/Customer.css" />
+	</head>
+
+	<body>
+		<header id="head" class="mui-bar mui-bar-nav">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<h1 class="mui-title">客户</h1>
+			<a class="mui-icon iconfont icon-chaxun mui-pull-right"></a>
+		</header>
+		<div class="mui-content">
+			<div id="SelectUser">
+				<div id="PUser">潜在客户</div>
+				<div id="User">正式客户</div>
+			</div>
+		</div>
+		
+	</body>
+	<script>
+		mui.plusReady(function() {
+			var subpage = ["PUser.html", "User.html"];
+			var wb = plus.webview.currentWebview();
+			var styles = {
+				top: "85px",
+				bottom: "0px"
+								
+			};
+			var webviewT = plus.webview.create("SearchUser.html", "SearchUser", {
+				top: "43px",				
+				height:"190px"
+				          
+			});
+			 wb.append(webviewT);
+			webviewT.hide();
+			var index = 0;
+			for(var i = 0; i < 2; i++) {
+				var webview = plus.webview.create(subpage[i], subpage[i], styles);
+
+				if(index != i) {
+					webview.hide();
+				}
+
+				wb.append(webview);
+				
+			}
+
+			var activeTab = 'PUser';
+			mui('#SelectUser').on('tap', 'div', function(e) {
+				var ClickTab = this.getAttribute('id');
+				if(ClickTab == activeTab) {
+					return;
+				} else {
+
+					$(this).css({
+						"color": "white",
+						"background": "dodgerblue"
+					});
+					if(activeTab == 'User') {
+						$("#User").css({
+							"color": "#000000",
+							"background": "#EEEEEE"
+						});
+					} else {
+						$("#PUser").css({
+							"color": "#000000",
+							"background": "#EEEEEE"
+						});
+					}
+					plus.webview.hide(activeTab + ".html")
+					plus.webview.show(ClickTab + ".html");
+
+					activeTab = ClickTab;
+				}
+			});
+
+			
+			var webviewU = plus.webview.getWebviewById("User.html");
+			var webviewP = plus.webview.getWebviewById("PUser.html");
+			$(".icon-chaxun").click(function() {
+
+                 
+			
+                
+				webviewU.setStyle({
+					mask: "rgba(0,0,0,0.5)"
+				});
+				webviewP.setStyle({
+					mask: "rgba(0,0,0,0.5)"
+				});
+					plus.webview.show("SearchUser", "slide-in-top");
+			});
+
+			webviewU.addEventListener("maskClick", function() {
+				webviewU.setStyle({
+					mask: "none"
+				});
+				webviewP.setStyle({
+					mask: "none"
+				});
+				plus.webview.hide("SearchUser", "slide-in-top");
+			});
+			webviewP.addEventListener("maskClick", function() {
+				webviewU.setStyle({
+					mask: "none"
+				});
+				webviewP.setStyle({
+					mask: "none"
+				});
+
+				plus.webview.hide("SearchUser", "slide-in-top");
+			});
+//			//拖拽按键
+			var disx = 0;
+			var disy = 0;
+			var check = document.getElementById("check");
+			var Gswitch = document.getElementById("switch");
+			mui("#switch").on("dragstart", "#check", function(ev) {
+				var e = ev.detail;
+				disx = e.touches[0].clientX - check.offsetLeft - Gswitch.offsetLeft;
+				disy = e.touches[0].clientY - check.offsetTop - Gswitch.offsetTop;
+				// console.log(disx+":"+disy);
+			});
+
+			mui("#switch").on("drag", "#check", function(ev) {
+
+				var e = ev.detail;
+				var l = e.touches[0].clientX - disx - Gswitch.offsetLeft;
+				var t = e.touches[0].clientY - disy - Gswitch.offsetTop;
+				//console.log(l + ":" + t);
+
+				if(l < 0) {
+					l = 0;
+				} else if(l > Gswitch.offsetWidth - check.offsetWidth - 5) {
+					l = Gswitch.offsetWidth - check.offsetWidth - 5;
+				}
+
+				if(t < 0) {
+					t = 0;
+				} else if(t > Gswitch.offsetHeight - check.offsetHeight - 5) {
+					t = Gswitch.offsetHeight - check.offsetHeight - 5;
+				}
+
+				check.style.top = t + "px";
+				check.style.left = l + "px";
+			});
+
+		});
+	</script>
+
+</html>

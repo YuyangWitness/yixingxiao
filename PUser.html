@@ -1,0 +1,109 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="css/mui.min.css" rel="stylesheet" />
+		<script type="text/javascript" src="js/pinyin.js" ></script>
+		<script type="text/javascript" src="js/Customer.js" ></script>
+		<script type="text/javascript" src="js/jquery-3.1.0.min.js"></script>
+		<link rel="stylesheet" href="css/Customer.css" />
+	</head>
+	<style>
+		.mui-table-view-cell {
+			background: #efeff4;
+		}
+				.mui-table-view-cell {
+			background: #efeff4;
+		}
+		
+		#nav {
+			height: 100%;
+			width: 5%;
+			position: fixed;
+			right: 0px;
+			top: 0;
+			text-align: center;
+		}
+		
+		#nav a {
+			display: block;
+			height: 3.6%;
+			color: #007AFF;
+		}
+		
+		#word {
+			width: 70px;
+			height: 70px;
+			background: darkslategrey;
+			opacity: 0.8;
+			text-align: center;
+			line-height: 70px;
+			font-size: large;
+			position: absolute;
+			color: white;
+			display: none;
+		}
+	</style>
+
+	<body>
+		<script src="js/mui.min.js"></script>
+		<script type="text/javascript">
+			mui.init()
+		</script>
+
+		<ul class="mui-table-view"></ul>
+
+		<p id="word"></p>
+		<div id="nav">
+
+		</div>
+	</body>
+	<script>
+		mui.init({
+			gestureConfig: {
+				tap: true, //默认为true
+				hold: true, //默认为false，不监听
+				release: true //默认为false，不监听
+			}
+		});
+
+		var db = getDB();
+		if(!db) {
+			alert("该浏览器不支持html5本地数据库存储");
+		}
+		createPTable(db);
+		getPcustomer(db);
+		//var linkList = new LinkedList();
+		//linkList = sortPY(username);
+		//linkList.show();
+		var navP = $("#nav").children("a");
+
+		mui("#nav").on("hold", "a", function() {
+			var index = $(this).index()
+			var getFirst = $(".mui-table-view").children(".firstBlood")[index];
+			window.scrollTo(0, getFirst.offsetTop);
+			var context = $(this).text();
+			var scolltop = document.documentElement.scrollTop || document.body.scrollTop;
+			var height = (document.documentElement.clientHeight - $("#word").height()) / 2;
+			var left = (document.documentElement.clientWidth - $("#word").width()) / 2;
+			$("#word").text(context);
+			$("#word").css("top", scolltop + height + "px");
+			$("#word").css("left", left);
+			$("#word").css("display", "block");
+
+			
+			//console.log(getFirst);
+			//console.log(getFirst.offsetTop);
+			
+		});
+
+		mui("#nav").on("release", "a", function() {
+			$("#word").css("display", "none");
+
+		});
+	</script>
+
+</html>
