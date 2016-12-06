@@ -116,13 +116,12 @@
 					mask: "none"
 				});
 				webviewP.setStyle({
-<<<<<<< Updated upstream:customer/customer.html
 					mask: "none"
 				});
 				plus.webview.hide("SearchUser", "slide-in-top");
 			});
 			webviewP.addEventListener("maskClick", function() {
-				webviewU.setStyle({
+				webviewU.setStyle({ 
 					mask: "none"
 				});
 				webviewP.setStyle({
@@ -143,29 +142,6 @@
 				// console.log(disx+":"+disy);
 			});
 
-			mui("#switch").on("drag", "#check", function(ev) {
-
-				var e = ev.detail;
-				var l = e.touches[0].clientX - disx - Gswitch.offsetLeft;
-				var t = e.touches[0].clientY - disy - Gswitch.offsetTop;
-				//console.log(l + ":" + t);
-
-				if(l < 0) {
-					l = 0;
-				} else if(l > Gswitch.offsetWidth - check.offsetWidth - 5) {
-					l = Gswitch.offsetWidth - check.offsetWidth - 5;
-				}
-
-				if(t < 0) {
-					t = 0;
-				} else if(t > Gswitch.offsetHeight - check.offsetHeight - 5) {
-					t = Gswitch.offsetHeight - check.offsetHeight - 5;
-				}
-
-				check.style.top = t + "px";
-				check.style.left = l + "px";
-			});
-
 			document.getElementById("addCustomer").addEventListener("tap", function() {
 				mui.openWindow("AddCustomer.html", "AddCustomer", {
 					show: {
@@ -175,22 +151,6 @@
 				})
 			});
 
-=======
-					mask: "none"
-				});
-				plus.webview.hide("SearchUser", "slide-in-top");
-			});
-			webviewP.addEventListener("maskClick", function() {
-				webviewU.setStyle({
-					mask: "none"
-				});
-				webviewP.setStyle({
-					mask: "none"
-				});
-
-				plus.webview.hide("SearchUser", "slide-in-top");
-			});		
->>>>>>> Stashed changes:customer.html
 		});
 	</script>
 

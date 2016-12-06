@@ -269,7 +269,7 @@ function getCustomer(dataBase) {
 						//console.log(result.rows.item(index));		
 					}
 				} else {
-					//console.log("没有任何客户资料");
+					console.log("没有任何客户资料"); 
 				}
 				LinkList = sortPY(username);
 				//LinkList.show();
@@ -293,7 +293,7 @@ function getPcustomer(dataBase) {
 				if(result.rows.length != 0) {
 					for(var index = 0; index < result.rows.length; index++) {
 						username[index] = result.rows.item(index).name;
-						console.log(result.rows.item(index).name);
+						//console.log(result.rows.item(index).name);
 					}
 				} else {
 					console.log("没有任何客户资料"); 
@@ -312,13 +312,13 @@ function getPcustomer(dataBase) {
 
 function addPCustomer(dataBase,Cusname) { 
 	alert(Cusname);
-//	dataBase.transaction(function(tx) {
-//		tx.executeSql("Insert into Pcustomer values (?,?)",["4",Cusname],function(tx,rs){ 
-//			console.log("保存数据成功");
-//		},function(tx,error){
-//			console.log("error messages"+error.message);
-//		})
-//	});
+	dataBase.transaction(function(tx) {
+		tx.executeSql("Insert into Pcustomer values (?,?)",["4",Cusname],function(tx,rs){ 
+			console.log("保存数据成功");
+		},function(tx,error){
+			console.log("error messages"+error.message);  
+		})
+	});
 }
 
 function createLi(linkList) {

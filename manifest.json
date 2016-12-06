@@ -243,6 +243,68 @@
 				],
 				"refer": [],
 				"priority": 0
+			},
+			"customer/customer.html": {
+				"resources": [
+					"js/mui.min.js",
+					"fonts/mui.ttf",
+					"css/iconfont.css",
+					"css/mui.min.css",
+					"fonts/iconfont.ttf",
+					"css/Customer.css",
+					"js/jquery-3.1.0.min.js",
+					"customer/SearchUser.html"
+				],
+				"refer": [
+					"customer/User.html",
+					"customer/PUser.html",
+					"customer/AddCustomer.html"
+				],
+				"priority": 0
+			},
+			"customer/PUser.html": {
+				"resources": [
+					"js/Customer.js",
+					"js/pinyin.js",
+					"js/mui.min.js",
+					"css/mui.min.css",
+					"css/Customer.css",
+					"js/jquery-3.1.0.min.js",
+					"img/jian.png"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"customer/User.html": {
+				"resources": [
+					"js/Customer.js",
+					"js/pinyin.js",
+					"js/mui.min.js",
+					"css/mui.min.css",
+					"css/Customer.css",
+					"js/jquery-3.1.0.min.js"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"customer/AddCustomer.html": {
+				"resources": [
+					"customer/BasicInformation.html",
+					"js/Customer.js",
+					"js/mui.min.js",
+					"css/mui.min.css",
+					"js/jquery-3.1.0.min.js",
+					"css/Customer.css"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"customer/BasicInformation.html": {
+				"resources": [
+					"fonts/mui.ttf"
+				],
+				"refer": [],
+				"priority": 0
 			}
 		},
 		"idle": {
