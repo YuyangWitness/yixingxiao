@@ -5,29 +5,41 @@
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
 		<title></title>
-		<script src="js/mui.min.js"></script>
-		<link href="css/mui.min.css" rel="stylesheet" />
-		<script type="text/javascript" src="js/jquery-3.1.0.min.js"></script>
+		<script type="text/javascript" src="../js/mui.min.js"></script>
+		<link href="../css/mui.min.css" rel="stylesheet" />
+		<script type="text/javascript" src="../js/jquery-3.1.0.min.js"></script>
 		<script type="text/javascript" charset="utf-8">
 			mui.init();
 		</script>
-		<link rel="stylesheet" href="css/iconfont.css" />
-		<link rel="stylesheet" href="css/Customer.css" />
+		<link rel="stylesheet" href="../css/iconfont.css" />
+		<link rel="stylesheet" href="../css/Customer.css" />
 	</head>
+	<style>
+		.Select {
+			width: 55%;
+			margin: 0 auto;
+		}
+		
+		.Select div {
+			width: 50%;
+		}
+	</style>
 
 	<body>
 		<header id="head" class="mui-bar mui-bar-nav">
 			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
 			<h1 class="mui-title">客户</h1>
+
 			<a class="mui-icon iconfont icon-chaxun mui-pull-right"></a>
+			<a class="mui-icon mui-icon-plus mui-pull-right" style="margin-right: 2%;" id="addCustomer"></a>
 		</header>
 		<div class="mui-content">
-			<div id="SelectUser">
-				<div id="PUser">潜在客户</div>
-				<div id="User">正式客户</div>
+			<div id="SelectUser" class="Select">
+				<div id="PUser" class="SelectActive">潜在客户</div>
+				<div id="User" class="SelectNoActive">正式客户</div>
 			</div>
 		</div>
-		
+
 	</body>
 	<script>
 		mui.plusReady(function() {
@@ -36,14 +48,14 @@
 			var styles = {
 				top: "85px",
 				bottom: "0px"
-								
+
 			};
 			var webviewT = plus.webview.create("SearchUser.html", "SearchUser", {
-				top: "43px",				
-				height:"190px"
-				          
+				top: "43px",
+				height: "190px"
+
 			});
-			 wb.append(webviewT);
+			wb.append(webviewT);
 			webviewT.hide();
 			var index = 0;
 			for(var i = 0; i < 2; i++) {
@@ -54,7 +66,7 @@
 				}
 
 				wb.append(webview);
-				
+
 			}
 
 			var activeTab = 'PUser';
@@ -86,21 +98,17 @@
 				}
 			});
 
-			
 			var webviewU = plus.webview.getWebviewById("User.html");
 			var webviewP = plus.webview.getWebviewById("PUser.html");
 			$(".icon-chaxun").click(function() {
 
-                 
-			
-                
 				webviewU.setStyle({
 					mask: "rgba(0,0,0,0.5)"
 				});
 				webviewP.setStyle({
 					mask: "rgba(0,0,0,0.5)"
 				});
-					plus.webview.show("SearchUser", "slide-in-top");
+				plus.webview.show("SearchUser", "slide-in-top");
 			});
 
 			webviewU.addEventListener("maskClick", function() {
@@ -122,7 +130,7 @@
 
 				plus.webview.hide("SearchUser", "slide-in-top");
 			});
-//			//拖拽按键
+			//			//拖拽按键
 			var disx = 0;
 			var disy = 0;
 			var check = document.getElementById("check");
@@ -155,6 +163,15 @@
 
 				check.style.top = t + "px";
 				check.style.left = l + "px";
+			});
+
+			document.getElementById("addCustomer").addEventListener("tap", function() {
+				mui.openWindow("AddCustomer.html", "AddCustomer", {
+					show: {
+						autoShow: true, //页面loaded事件发生后自动显示，默认为true
+						aniShow: "zoom-fade-out", //页面显示动画，默认为”slide-in-right“；						
+					}
+				})
 			});
 
 		});

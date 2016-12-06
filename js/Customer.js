@@ -210,16 +210,22 @@ function LinkedList() {
 			for(var i = 0; i < index; i++) {
 				current = current.next;
 			}
-		}else if(index >= length || index<0){
-			return ;
+		} else if(index >= length || index < 0) {
+			return;
 		}
 		return current;
 	};
 }
 
 function getDB() {
-	var db = openDatabase("yixingxiao", "1.0", "it's to save data !", 1024 * 1024);
-	return db;
+	if(window.localStorage) {
+		var db = openDatabase("yixingxiao", "1.0", "it's to save data !", 1024 * 1024);
+		return db;
+	} else {
+		alert('This browser does NOT support localStorage');
+		return ;
+	}
+
 }
 
 function createTable(dataBase) {
@@ -235,7 +241,7 @@ function createTable(dataBase) {
 	});
 }
 
-function createPTable(dataBase){
+function createPTable(dataBase) {
 	dataBase.transaction(function(tx) {
 		tx.executeSql(
 			"create table if not exists Pcustomer (id REAL UNIQUE, name TEXT)", [],
@@ -252,9 +258,10 @@ function getCustomer(dataBase) {
 	dataBase.transaction(function(tx) {
 		tx.executeSql("select * from customer", [],
 			function(tx, result) {
-				var username = ["赵丽颖", "李易峰", "陈伟霆", "王者荣耀", "Angularjs", "beats", "成昆", "赵小刀", "1111风云", "Lol", "helloworld", "五杀", "团灭", "发型", 
-				"姓名大全", "分类", "一亿个多", "勇士", "惨淡", "请于", "终于", "重于", "人生", "编程", "Google", "Claire", "hellow", "卢兰", "牛腩", "陆运", "丰田", "北京", "上海", "太平", "跳转", "运行", "工具", "面试", "帮助", "试图", "开发", "赣州", "上官云", "临客", "天下大同", "不屈不挠", "勇往直前", "电灯", "手机", "iphone", "323", "123ddd", "444", "1233aa", "1233xxx", "444fff", "baby", "文件"];
-				//var username = new Array();
+				//var username = ["赵丽颖", "李易峰", "陈伟霆", "王者荣耀", "Angularjs", "beats", "成昆", "赵小刀", "1111风云", "Lol", "helloworld", "五杀", "团灭", "发型",
+				//	"姓名大全", "分类", "一亿个多", "勇士", "惨淡", "请于", "终于", "重于", "人生", "编程", "Google", "Claire", "hellow", "卢兰", "牛腩", "陆运", "丰田", "北京", "上海", "太平", "跳转", "运行", "工具", "面试", "帮助", "试图", "开发", "赣州", "上官云", "临客", "天下大同", "不屈不挠", "勇往直前", "电灯", "手机", "iphone", "323", "123ddd", "444", "1233aa", "1233xxx", "444fff", "baby", "文件"
+				//];
+				var username = new Array();
 				var LinkList = new LinkedList();
 				if(result.rows.length != 0) {
 					for(var index = 0; index < result.rows.length; index++) {
@@ -262,7 +269,7 @@ function getCustomer(dataBase) {
 						//console.log(result.rows.item(index));		
 					}
 				} else {
-					console.log("没有任何客户资料");
+					//console.log("没有任何客户资料");
 				}
 				LinkList = sortPY(username);
 				//LinkList.show();
@@ -276,20 +283,20 @@ function getCustomer(dataBase) {
 	})
 }
 
-function getPcustomer(dataBase){
+function getPcustomer(dataBase) {
 	dataBase.transaction(function(tx) {
 		tx.executeSql("select * from Pcustomer", [],
 			function(tx, result) {
 				var username = ["王者荣耀", "Angularjs", "beats", "成昆", "赵小刀", "1111风云", "Lol", "helloworld", "五杀", "团灭", "发型", "文件"];
-				//var username = new Array();
-				var LinkList = new LinkedList();
+				var username = new Array();
+			var LinkList = new LinkedList();
 				if(result.rows.length != 0) {
 					for(var index = 0; index < result.rows.length; index++) {
 						username[index] = result.rows.item(index).name;
-						console.log(result.rows.item(index));		
+						console.log(result.rows.item(index).name);
 					}
 				} else {
-					console.log("没有任何客户资料");
+					console.log("没有任何客户资料"); 
 				}
 				LinkList = sortPY(username);
 				//LinkList.show();
@@ -303,6 +310,16 @@ function getPcustomer(dataBase){
 	})
 }
 
+function addPCustomer(dataBase,Cusname) { 
+	alert(Cusname);
+//	dataBase.transaction(function(tx) {
+//		tx.executeSql("Insert into Pcustomer values (?,?)",["4",Cusname],function(tx,rs){ 
+//			console.log("保存数据成功");
+//		},function(tx,error){
+//			console.log("error messages"+error.message);
+//		})
+//	});
+}
 
 function createLi(linkList) {
 	var word = ["#", "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"];
@@ -314,11 +331,11 @@ function createLi(linkList) {
 				if(zindex == 0) {
 					$(".mui-table-view").append('<li class="mui-table-view-cell firstBlood">' +
 						'<div class="UserName"><p>' + data[zindex] + '</p></div><div class="mui-pull-right xian">' +
-						'<img class="mui-pull-left" id="Imgl" src="img/jian.png" /></div></li>');
+						'<img class="mui-pull-left" id="Imgl" src="../img/jian.png" /></div></li>');
 				} else {
 					$(".mui-table-view").append('<li class="mui-table-view-cell">' +
 						'<div class="UserName"><p>' + data[zindex] + '</p></div><div class="mui-pull-right xian">' +
-						'<img class="mui-pull-left" id="Imgl" src="img/jian.png" /></div></li>');
+						'<img class="mui-pull-left" id="Imgl" src="../img/jian.png" /></div></li>');
 				}
 
 			}
@@ -328,7 +345,7 @@ function createLi(linkList) {
 
 }
 
-function getMask(){
+function getMask() {
 	var mask = mui.createMask();
 	mask.show();
 }

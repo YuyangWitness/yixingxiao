@@ -1,0 +1,84 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" href="../css/Customer.css" />
+		<script type="text/javascript" src="../js/Customer.js"></script>
+		<script type="text/javascript" src="../js/jquery-3.1.0.min.js"></script>
+	</head>
+	<style>
+		header p {
+			line-height: 45px;
+			color: white;
+			font-size: 18px;
+		}
+		
+		.Select {
+			width: 87%;
+			margin: 0 auto;
+		}
+		
+		.Select div {
+			width: 33.3%;
+		}
+	</style>
+
+	<body>
+		<script src="../js/mui.min.js"></script>
+		<script type="text/javascript">
+			mui.init()
+		</script>
+		<header class="mui-bar mui-bar-nav" id="head">
+			<p class="mui-pull-left" style="margin-left: 10px;" id="cancle">取消</p>
+			<h1 class="mui-title">新增客户</h1>
+			<p class="mui-pull-right" style="margin-right: 10px;" id="confirm">确定</p>
+		</header>
+		<div class="mui-content">
+			<div class="Select">
+				<div class="SelectActive">基本信息</div>
+				<div class="">业务意向</div>
+				<div class="SelectNoActive">联系人</div>
+			</div>
+		</div>
+	</body>
+	<script>
+		mui.plusReady(function() {
+			var subpages = ['BasicInformation.html'];
+			var wb = plus.webview.currentWebview();
+			var detailPage = null;
+			var styles = {
+				top: "85px",
+				bottom: "0px"
+			}
+			for(var i = 0; i < subpages.length; i++) {
+				var newWb = plus.webview.create(subpages[i], subpages[i], styles)
+				wb.append(newWb);
+			}
+
+			document.getElementById("cancle").addEventListener("tap", function() {
+				plus.nativeUI.confirm("放弃操作?", function(e) {
+					if(e.index == 1) {
+						mui.back();
+					}
+				}, "", ["否", "是"]);
+			});
+
+			document.getElementById("confirm").addEventListener("tap", function() {
+				if(!detailPage) {
+					detailPage = plus.webview.getWebviewById('BasicInformation.html');
+				}
+				plus.nativeUI.confirm("确定提交吗?", function(e) {
+					if(e.index == 1) {
+						mui.fire(detailPage, 'addCustomerForChild', {});
+					}
+				}, "信息提交", ["否", "是"]);
+			});
+
+		});
+	</script>
+
+</html>

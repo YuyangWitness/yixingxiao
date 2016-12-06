@@ -1,0 +1,38 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../css/mui.min.css" rel="stylesheet" />
+		<script type="text/javascript" src="../js/jquery-3.1.0.min.js" ></script>
+		<script type="text/javascript" src="../js/Customer.js" ></script>
+	</head>
+
+	<body>
+		<script src="../js/mui.min.js"></script>
+		<script type="text/javascript">
+			mui.init()
+		</script>
+		<form class="mui-input-group" style="background: #efeff4;">
+			<div class="mui-input-row">
+				<label>客户名称</label>
+				<input type="text" class="mui-input-clear" id="customerName">
+			</div>
+
+		</form>
+	</body>
+	<script>
+		window.addEventListener('addCustomerForChild', function(event) {
+			var dataBase = getDB();
+			var cusName = $("#customerName").val()
+			if(dataBase != null) {
+				createPTable(dataBase);
+				addPCustomer(dataBase,cusName);
+			}
+              
+	});
+	</script>
+
+</html>
