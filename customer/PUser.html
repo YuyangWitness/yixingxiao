@@ -70,6 +70,7 @@
 			}
 		});
 
+      mui.plusReady(function(){
 		var db = getDB();
 		if(!db) {
 			alert("该浏览器不支持html5本地数据库存储");
@@ -102,8 +103,27 @@
 
 		mui("#nav").on("release", "a", function() {
 			$("#word").css("display", "none");
-
 		});
+		
+		window.addEventListener("Prefresh",function(event){     			
+			var cusName = event.detail.cusname;
+			createPTable(db);
+			addPCustomer(db,cusName);
+			$(".mui-table-view li").remove();
+			$("#nav a").remove();
+			getPcustomer(db);
+		});
+		window.addEventListener("PrefreshFromName",function(event){
+			alert("aaaa");
+			var CustomerName = "%"+event.detail.customerName+"%";
+			alert(CustomerName);
+			SelectPCusFromName(db,CustomerName);
+			plus.webview.hide("SearchPUser");
+			plus.webview.currentWebview().setStyle({
+					mask: "none"
+				});
+		});
+      });
 	</script>
 
 </html>

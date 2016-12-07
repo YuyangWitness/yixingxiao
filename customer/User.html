@@ -26,7 +26,7 @@
 		#nav {
 			height: 100%;
 			width: 5%;
-			position: fixed; 
+			position: fixed;
 			right: 0px;
 			top: 0;
 			text-align: center;
@@ -71,41 +71,52 @@
 			}
 		});
 
-		var db = getDB();
-		if(!db) {
-			alert("该浏览器不支持html5本地数据库存储"); 
+		window.onload = function() {
+			var db = getDB();
+			if(!db) {
+				alert("该浏览器不支持html5本地数据库存储");
+			}
+			createTable(db);
+			getCustomer(db);
+			//var linkList = new LinkedList();
+			//linkList = sortPY(username);
+			//linkList.show();
+			var navP = $("#nav").children("a");
+
+			mui("#nav").on("hold", "a", function() {
+
+				var index = $(this).index()
+				var getFirst = $(".mui-table-view").children(".firstBlood")[index];
+				//console.log(getFirst);
+				//console.log(getFirst.offsetTop);
+				window.scrollTo(0, getFirst.offsetTop);
+				var context = $(this).text();
+				var scolltop = document.documentElement.scrollTop || document.body.scrollTop;
+				var height = (document.documentElement.clientHeight - $("#word").height()) / 2;
+				var left = (document.documentElement.clientWidth - $("#word").width()) / 2;
+				$("#word").text(context);
+				$("#word").css("top", scolltop + height + "px");
+				$("#word").css("left", left);
+				$("#word").css("display", "block");
+
+			});
+
+			mui("#nav").on("release", "a", function() {
+				$("#word").css("display", "none");
+
+			});
+
+			window.addEventListener("PrefreshFromName", function(event) {
+				alert("aaaa");
+				var CustomerName = "%" + event.detail.customerName + "%";
+				alert(CustomerName);
+				SelectCusFromName(db, CustomerName);
+				plus.webview.hide("SearchUser");
+				plus.webview.currentWebview().setStyle({
+					mask: "none"
+				});
+			});
 		}
-		createTable(db);
-		getCustomer(db);
-		//var linkList = new LinkedList();
-		//linkList = sortPY(username);
-		//linkList.show();
-		var navP = $("#nav").children("a");
-
-		mui("#nav").on("hold", "a", function() {
-			
-			var index = $(this).index()
-			var getFirst = $(".mui-table-view").children(".firstBlood")[index];
-			//console.log(getFirst);
-			//console.log(getFirst.offsetTop);
-			window.scrollTo(0, getFirst.offsetTop);
-			var context = $(this).text();
-			var scolltop = document.documentElement.scrollTop || document.body.scrollTop;
-			var height = (document.documentElement.clientHeight - $("#word").height()) / 2;
-			var left = (document.documentElement.clientWidth - $("#word").width()) / 2;
-			$("#word").text(context);
-			$("#word").css("top", scolltop + height + "px");
-			$("#word").css("left", left);
-			$("#word").css("display", "block");
-
-			
-		});
-
-		mui("#nav").on("release", "a", function() {
-			$("#word").css("display", "none");
-
-		});
-		
 	</script>
 
 </html>

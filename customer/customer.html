@@ -30,7 +30,8 @@
 			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
 			<h1 class="mui-title">客户</h1>
 
-			<a class="mui-icon iconfont icon-chaxun mui-pull-right"></a>
+			<a class="mui-icon iconfont icon-chaxun mui-pull-right" id="PUserSearch"></a>
+			<a class="mui-icon iconfont icon-chaxun mui-pull-right" id="UserSearch" style="display: none;"></a>
 			<a class="mui-icon mui-icon-plus mui-pull-right" style="margin-right: 2%;" id="addCustomer"></a>
 		</header>
 		<div class="mui-content">
@@ -55,8 +56,15 @@
 				height: "190px"
 
 			});
+			var webviewF =  plus.webview.create("SearchPUser.html", "SearchPUser", {
+				top: "43px",
+				height: "120px"
+
+			});
+			wb.append(webviewF);
 			wb.append(webviewT);
 			webviewT.hide();
+			webviewF.hide();
 			var index = 0;
 			for(var i = 0; i < 2; i++) {
 				var webview = plus.webview.create(subpage[i], subpage[i], styles);
@@ -81,11 +89,17 @@
 						"background": "dodgerblue"
 					});
 					if(activeTab == 'User') {
+						$("#UserSearch").hide();
+						$("#PUserSearch").show();
+						$("#addCustomer").show();
 						$("#User").css({
 							"color": "#000000",
 							"background": "#EEEEEE"
 						});
 					} else {
+						$("#UserSearch").show();
+						$("#PUserSearch").hide();
+						$("#addCustomer").hide();
 						$("#PUser").css({
 							"color": "#000000",
 							"background": "#EEEEEE"
@@ -100,15 +114,20 @@
 
 			var webviewU = plus.webview.getWebviewById("User.html");
 			var webviewP = plus.webview.getWebviewById("PUser.html");
-			$(".icon-chaxun").click(function() {
+			$("#PUserSearch").click(function() {  
+				webviewP.setStyle({
+					mask: "rgba(0,0,0,0.5)"
+				});
+				plus.webview.show("SearchPUser", "slide-in-top");
+			});
+			
+			$("#UserSearch").click(function() {
 
 				webviewU.setStyle({
 					mask: "rgba(0,0,0,0.5)"
 				});
-				webviewP.setStyle({
-					mask: "rgba(0,0,0,0.5)"
-				});
 				plus.webview.show("SearchUser", "slide-in-top");
+				
 			});
 
 			webviewU.addEventListener("maskClick", function() {
@@ -118,7 +137,7 @@
 				webviewP.setStyle({
 					mask: "none"
 				});
-				plus.webview.hide("SearchUser", "slide-in-top");
+				plus.webview.hide("SearchUser");
 			});
 			webviewP.addEventListener("maskClick", function() {
 				webviewU.setStyle({ 
@@ -128,18 +147,7 @@
 					mask: "none"
 				});
 
-				plus.webview.hide("SearchUser", "slide-in-top");
-			});
-			//			//拖拽按键
-			var disx = 0;
-			var disy = 0;
-			var check = document.getElementById("check");
-			var Gswitch = document.getElementById("switch");
-			mui("#switch").on("dragstart", "#check", function(ev) {
-				var e = ev.detail;
-				disx = e.touches[0].clientX - check.offsetLeft - Gswitch.offsetLeft;
-				disy = e.touches[0].clientY - check.offsetTop - Gswitch.offsetTop;
-				// console.log(disx+":"+disy);
+				plus.webview.hide("SearchPUser");
 			});
 
 			document.getElementById("addCustomer").addEventListener("tap", function() {

@@ -223,7 +223,7 @@ function getDB() {
 		return db;
 	} else {
 		alert('This browser does NOT support localStorage');
-		return ;
+		return;
 	}
 
 }
@@ -269,7 +269,7 @@ function getCustomer(dataBase) {
 						//console.log(result.rows.item(index));		
 					}
 				} else {
-					console.log("没有任何客户资料"); 
+					console.log("没有任何客户资料");
 				}
 				LinkList = sortPY(username);
 				//LinkList.show();
@@ -287,16 +287,16 @@ function getPcustomer(dataBase) {
 	dataBase.transaction(function(tx) {
 		tx.executeSql("select * from Pcustomer", [],
 			function(tx, result) {
-				var username = ["王者荣耀", "Angularjs", "beats", "成昆", "赵小刀", "1111风云", "Lol", "helloworld", "五杀", "团灭", "发型", "文件"];
+				//var username = ["王者荣耀", "Angularjs", "beats", "成昆", "赵小刀", "1111风云", "Lol", "helloworld", "五杀", "团灭", "发型", "文件"];
 				var username = new Array();
-			var LinkList = new LinkedList();
+				var LinkList = new LinkedList();
 				if(result.rows.length != 0) {
 					for(var index = 0; index < result.rows.length; index++) {
 						username[index] = result.rows.item(index).name;
-						//console.log(result.rows.item(index).name);
+						console.log(result.rows.item(index).name);
 					}
 				} else {
-					console.log("没有任何客户资料"); 
+					console.log("没有任何客户资料");
 				}
 				LinkList = sortPY(username);
 				//LinkList.show();
@@ -310,15 +310,33 @@ function getPcustomer(dataBase) {
 	})
 }
 
-function addPCustomer(dataBase,Cusname) { 
-	alert(Cusname);
-	dataBase.transaction(function(tx) {
-		tx.executeSql("Insert into Pcustomer values (?,?)",["4",Cusname],function(tx,rs){ 
-			console.log("保存数据成功");
-		},function(tx,error){
-			console.log("error messages"+error.message);  
-		})
-	});
+function addPCustomer(dataBase, Cusname) {
+	if(window.localStorage) {
+		//		dataBase.transaction(function(tx){
+		//			tx.executeSql("DELETE from Pcustomer WHERE id = 1",[],function(tx,rs){},function(tx,error){});
+		//		});
+		//		localStorage.removeItem("sqlNum");
+		var sqlNUm = localStorage.getItem("sqlNum");
+		if(sqlNUm == null) {
+			sqlNUm = 1;
+		} else {
+			sqlNUm = parseInt(sqlNUm) + 1;
+		}
+		//alert(sqlNUm);
+		dataBase.transaction(function(tx) {
+			tx.executeSql("Insert into Pcustomer values (?,?)", [sqlNUm, Cusname], function(tx, rs) {
+				console.log("保存数据成功");
+				localStorage.setItem("sqlNum", sqlNUm);			
+				plus.webview.getWebviewById("AddCustomer").close();
+				plus.webview.getWebviewById("BasicInformation.html").close();
+
+			}, function(tx, error) {
+				console.log("error messages" + error.message);
+			})
+		});
+	} else {
+		console.log('This browser does NOT support localStorage');
+	}
 }
 
 function createLi(linkList) {
@@ -345,7 +363,54 @@ function createLi(linkList) {
 
 }
 
-function getMask() {
-	var mask = mui.createMask();
-	mask.show();
+function SelectPCusFromName(dataBase, name) {
+	dataBase.transaction(function(tx) {
+		tx.executeSql("select * from Pcustomer where name like ?", [name],
+			function(tx, rs) {
+				var username = new Array();
+				$(".mui-table-view li").remove();
+				$("#nav a").remove();
+				if(rs.rows.length != 0) {
+					for(var i = 0; i < rs.rows.length; i++) {
+						//console.log(rs.rows.item(i).name);
+                         username[i] = rs.rows.item(i).name;
+					}
+					LinkList = sortPY(username);
+					//LinkList.show();
+					createLi(LinkList);
+				} else {
+					console.log("没有资料");
+				}
+			},
+			function(tx, error) {
+				console.log(error.message);
+			})
+
+	});
+}
+
+function SelectCusFromName(dataBase, name) {
+	dataBase.transaction(function(tx) {
+		tx.executeSql("select * from customer where name like ?", [name],
+			function(tx, rs) {
+				var username = new Array();
+				$(".mui-table-view li").remove();
+				$("#nav a").remove();
+				if(rs.rows.length != 0) {
+					for(var i = 0; i < rs.rows.length; i++) {
+						//console.log(rs.rows.item(i).name);
+                         username[i] = rs.rows.item(i).name;
+					}
+					LinkList = sortPY(username);
+					//LinkList.show();
+					createLi(LinkList);
+				} else {
+					console.log("没有资料");
+				}
+			},
+			function(tx, error) {
+				console.log(error.message);
+			})
+
+	});
 }

@@ -24,15 +24,18 @@
 		</form>
 	</body>
 	<script>
+	mui.plusReady(function(){ 
 		window.addEventListener('addCustomerForChild', function(event) {
 			var dataBase = getDB();
 			var cusName = $("#customerName").val()
 			if(dataBase != null) {
-				createPTable(dataBase);
-				addPCustomer(dataBase,cusName);
+				var PUser = plus.webview.getWebviewById("PUser.html");
+				mui.fire(PUser,"Prefresh",{cusname:cusName});	
 			}
               
 	});
+	});
+		
 	</script>
 
 </html>
