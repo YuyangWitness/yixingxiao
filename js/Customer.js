@@ -340,13 +340,14 @@ function addPCustomer(dataBase, Cusname) {
 }
 
 function createLi(linkList) {
+	 //为侧栏导航做准备
 	var word = ["#", "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"];
-	for(var index = 0; index < linkList.size(); index++) {
+	for(var index = 0; index < linkList.size(); index++) {//遍历链表
 		var data = linkList.getVal(index).data;
 		if(data.length != 0) {
-			$("#nav").append("<a>" + word[index] + "</a>")
-			for(var zindex = 0; zindex < data.length; zindex++) {
-				if(zindex == 0) {
+			$("#nav").append("<a>" + word[index] + "</a>")//侧栏导航代码，哪种字母有名字存在侧栏导航就需要有该字母
+			for(var zindex = 0; zindex < data.length; zindex++) {//遍历数组，把信息放到<li>标签
+				if(zindex == 0) {//如果是字母数组第一个名字，就加入class＝"firstBlood"，为以后导航做准备
 					$(".mui-table-view").append('<li class="mui-table-view-cell firstBlood">' +
 						'<div class="UserName"><p>' + data[zindex] + '</p></div><div class="mui-pull-right xian">' +
 						'<img class="mui-pull-left" id="Imgl" src="../img/jian.png" /></div></li>');

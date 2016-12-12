@@ -6,9 +6,14 @@
 		<title></title>
 		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
 		<link href="../css/mui.min.css" rel="stylesheet" />
-		<script type="text/javascript" src="../js/jquery-3.1.0.min.js" ></script>
-		<script type="text/javascript" src="../js/Customer.js" ></script>
+		<script type="text/javascript" src="../js/jquery-3.1.0.min.js"></script>
+		<script type="text/javascript" src="../js/Customer.js"></script>
 	</head>
+	<style>
+		form a {
+			color: black;
+		}
+	</style>
 
 	<body>
 		<script src="../js/mui.min.js"></script>
@@ -20,22 +25,99 @@
 				<label>客户名称</label>
 				<input type="text" class="mui-input-clear" id="customerName">
 			</div>
+			<div class="mui-input-row">
+				<label>
+				 <a class="mui-navigate-right">客户渠道</a>
+				</label>
+			</div>
+			<div class="mui-input-row">
+				<label><a class="mui-navigate-right">行业类别</a></label>
+			</div>
+			<div class="mui-input-row">
+				<label><a class="mui-navigate-right">企业性质</a></label>
+			</div>
+			<div class="mui-input-row">
+				<label style="width: 35%;">年销售额</label>
+				<input style="width: 45%; float: left;" type="text" class="mui-input-clear" id="NumberPeople">
+				<label style="width: 20%; text-align: right;">万元</label>
+			</div>
+			<div class="mui-input-row">
+				<label style="width: 35%;">工资总额</label>
+				<input style="width: 45%; float: left;" type="text" class="mui-input-clear" id="NumberPeople">
+				<label style="width: 20%; text-align: right;">万元</label>
+			</div>
+			<div class="mui-input-row">
+				<label style="width: 35%;">企业人数</label>
+				<input style="width: 45%; float: left;" type="text" class="mui-input-clear" id="NumberPeople">
+				<label style="width: 20%; text-align: right;">人</label>
+			</div>
+			<div style="width: 100%;">
+				<label style="width: 35%; float: left; line-height: 80px; text-align: left; margin-left: 15px;">公司地址</label>
+				<div style="width: 60%; float: left;">
+					<div class="mui-input-row">
+						<input type="text" placeholder="请选择省市" class="mui-input-clear" id="Address">
+					</div>
+					<div class="mui-input-row">
+						<input type="text" placeholder="请输入地址" class="mui-input-clear" id="deatilAddress">
+					</div>
+				</div>
+			</div>
+			<div class="mui-input-row">
+				<label>企业福利计划</label>
+				<div class="mui-switch" id="myswitch">
+					<div class="mui-switch-handle"></div>
+				</div>
+			</div>
+			<div class="mui-input-row" id="Plan" style="display: none;">
+				<label style="width: 100%;"><a style="color: #1E90FF;" class="mui-icon mui-icon-plus"></a>福利计划</label>
+			</div>
+
+			<div class="mui-input-row">
+				<label><a class="mui-navigate-right">代理网点</a></label>
+			</div>
 
 		</form>
 	</body>
 	<script>
-	mui.plusReady(function(){ 
-		window.addEventListener('addCustomerForChild', function(event) {
-			var dataBase = getDB();
-			var cusName = $("#customerName").val()
-			if(dataBase != null) {
-				var PUser = plus.webview.getWebviewById("PUser.html");
-				mui.fire(PUser,"Prefresh",{cusname:cusName});	
-			}
-              
-	});
-	});
-		
+		mui.plusReady(function() {
+			window.addEventListener('addCustomerForChild', function(event) {
+				var dataBase = getDB();
+				var cusName = $("#customerName").val()
+				if(dataBase != null) {
+					var PUser = plus.webview.getWebviewById("PUser.html");
+					mui.fire(PUser, "Prefresh", {
+						cusname: cusName
+					});
+				}
+
+			});
+			document.getElementById("myswitch").addEventListener("toggle", function(event) {
+				if(event.detail.isActive) {
+					$("#Plan").show();
+					$(".addNew").show();
+				} else {
+					$("#Plan").hide();
+					$(".addNew").hide();
+
+				}
+			})
+			var numb = 1;
+			$("#Plan").click(function() {
+				var now = $(this);
+				var add = "<div class='addNew' style='width: 100%; float: left;'><label style='width: 10%; float: left;text-align: center; margin-left: 15px;'><h3 style='line-height: 80px; '>" + numb + " </h3></label > " +
+					"<div style='width: 83%; float: left;'>" +
+					"<div class='mui-input-row'><label>福利计划</label><input type='text' class='mui-input-clear' id='Address'></div>" +
+					"<div class='mui-input-row'><label>保险公司</label><input type='text' class='mui-input-clear' id='deatilAddress'></div></div></div>";
+
+				var rs = $("form").children().is('.addNew'); //获取在form的子节点中是否有addNew类
+				if(rs) {
+					$(".addNew").last().append(add); //有，则在addNew类的最后面加add
+				} else {
+					now.after(add); //没有，则新建第一个addNew类
+				}
+				numb++;
+			});
+		});
 	</script>
 
 </html>
