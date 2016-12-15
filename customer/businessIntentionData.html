@@ -1,0 +1,134 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" href="../css/Customer.css" />
+		<script type="text/javascript" src="../js/jquery-3.1.0.min.js"></script>
+	</head>
+
+	<body>
+		<script src="../js/mui.min.js"></script>
+		<script type="text/javascript">
+			mui.init()
+		</script>
+		<header class="mui-bar mui-bar-nav" id="head">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<h1 class="mui-title">业务意向</h1>
+			<a class="mui-pull-right" id="confirm">确定</a>
+		</header>
+		<div class="mui-content">
+			<form class="mui-input-group" style="background: #efeff4;" id="myform">
+				<div class="mui-input-row mui-checkbox">
+					<label>团险</label>
+					<input type="checkbox" /><label class="hideLabel">1</label>
+				</div>
+				<div class="mui-input-row mui-checkbox">
+					<label>企业年金</label>
+					<input type="checkbox" /><label class="hideLabel">2</label>
+				</div>
+				<div class="mui-input-row mui-checkbox">
+					<label>金世计划</label>
+					<input type="checkbox" /><label class="hideLabel">3</label>
+				</div>
+				<div class="mui-input-row mui-checkbox">
+					<label>个人养老保障</label>
+					<input type="checkbox" /><label class="hideLabel">4</label>
+				</div>
+				<div class="mui-input-row mui-checkbox">
+					<label>其他</label>
+					<input type="checkbox" id="other" /><label class="hideLabel">5</label>
+				</div>
+				<div class="mui-input-row" id="otherContent" style="display: none;">
+					<label></label>
+					<input type="text" placeholder="请输入内容..." />
+				</div>
+			</form>
+		</div>
+
+	</body>
+	<script>
+		mui.plusReady(function() {
+           		
+			var other = document.getElementById("other");
+			other.addEventListener("tap", function() {
+
+				if($("#other").is(':checked')) {
+					$("#otherContent").hide();
+				} else {
+					$("#otherContent").show();
+				}
+
+			});
+
+			var Myform = document.getElementById("myform");
+			var AInput = Myform.getElementsByTagName("input");
+			var Acheck = new Array();
+			for(var i = 0; i < AInput.length; i++) { //从所有input中获取所有的checkbox
+				if(AInput[i].type == 'checkbox') {
+					Acheck.push(AInput[i]);
+				}
+			}
+
+			for(var i = 0; i < Acheck.length; i++) {
+				Acheck[i].onclick = function() {
+					var realCheck = $(this).is(":checked");
+					$("[type='checkbox']").each(function() { //把所有的checkbox都设为false
+						if($(this).is(':checked')) {
+							$(this).prop("checked", false);//因为jquery新版本，导致了不能用attr，只能用prop才有效果
+						}
+
+					});
+					//	$(this).prop("checked", true);
+					if(realCheck) { //目前正在点击的checkbox，假如我要选中它，前面已经全部为false了，所以这边要设置为true；
+						            //假如我不选中它，前面全部设置为false了，所以这边就不做任何事
+						$(this).prop("checked", true);
+					}
+					if($(this).attr("id") == "other" && realCheck == true) {//假如目前所点击的id为other，并且选中checkbox，则显示对话框
+						                                                    //否则其他任何情况，包括不选中other，或者other的checkbox为false，不显示对话框                
+						$("#otherContent").show();
+					} else {
+						$("#otherContent").hide();
+					}
+
+				}
+			}
+			
+			var confirm = document.getElementById("confirm");
+			confirm.addEventListener("tap",function(){
+				var checkedBox = new Array();
+				var numBox = new Array();
+				var flage = true;
+				$("[type='checkbox']").each(function() {
+					if($(this).is(":checked")){
+						if ($(this).attr("id")=="other") {
+							if($("#otherContent").children('input').val()==""){
+								flage=false;
+								alert("其他不能为空");
+							}
+							checkedBox.push($("#otherContent").children('input').val());
+						}else{
+							checkedBox.push($(this).prev().text());
+						}
+						//alert($(this).next().text());
+						numBox.push($(this).next().text());
+					}
+				});
+				if(flage){
+				var BusinessIntention = plus.webview.getWebviewById("BusinessIntention.html");//待改动				
+			    mui.fire(BusinessIntention,"backData",{businessData:checkedBox,numBoxData:numBox});
+				mui.back();
+				
+				}
+
+				
+			});
+		});
+
+
+	</script>
+
+</html>

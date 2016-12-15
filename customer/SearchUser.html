@@ -92,7 +92,7 @@
 		var AllWidth = Gswitch.offsetWidth;
 		var selectType=1;
 		mui("#switch").on("dragstart", "#check", function(ev) {
-			var e = ev.detail;
+			var e = ev.detail||event;
 			disx = e.touches[0].clientX - check.offsetLeft - Gswitch.offsetLeft;
 			disy = e.touches[0].clientY - check.offsetTop - Gswitch.offsetTop;
 			// console.log(disx+":"+disy);
@@ -100,7 +100,7 @@
 
 		mui("#switch").on("drag", "#check", function(ev) {
 
-			var e = ev.detail;
+			var e = ev.detail||event;
 			var l = e.touches[0].clientX - disx - Gswitch.offsetLeft;
 			var t = e.touches[0].clientY - disy - Gswitch.offsetTop;
 			//console.log(l + ":" + t);

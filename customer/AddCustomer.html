@@ -18,12 +18,19 @@
 		}
 		
 		.Select {
-			width: 87%;
+			width: 75%;
 			margin: 0 auto;
 		}
 		
 		.Select div {
 			width: 33.3%;
+		}
+		
+		#addContact {
+			position: absolute;
+			right: 3%;
+			top: 47px;
+			display: none;
 		}
 	</style>
 
@@ -38,26 +45,62 @@
 			<p class="mui-pull-right" style="margin-right: 10px;" id="confirm">确定</p>
 		</header>
 		<div class="mui-content">
-			<div class="Select">
-				<div class="SelectActive">基本信息</div>
-				<div class="">业务意向</div>
-				<div class="SelectNoActive">联系人</div>
+			<div class="Select" id="addCustomer">
+				<div class="SelectActive active">基本信息</div>
+				<a href="BasicInformation.html"></a>
+				<div class="Notactive">业务意向</div>
+				<a href="BusinessIntention.html"></a>
+				<div class="SelectNoActive Notactive">联系人</div>
+				<a href="Contact.html"></a>
 			</div>
+			<a class="mui-icon mui-icon-plus" id="addContact"></a>
 		</div>
 	</body>
 	<script>
 		mui.plusReady(function() {
-			var subpages = ['BasicInformation.html'];
+			var subpages = ['BasicInformation.html', 'BusinessIntention.html', 'Contact.html'];
 			var wb = plus.webview.currentWebview();
 			var detailPage = null;
+			var index = 0;
 			var styles = {
 				top: "85px",
 				bottom: "0px"
 			}
 			for(var i = 0; i < subpages.length; i++) {
-				var newWb = plus.webview.create(subpages[i], subpages[i], styles)
-				wb.append(newWb);
+				var webview = plus.webview.create(subpages[i], subpages[i], styles);
+
+				if(index != i) {
+					webview.hide();
+				}
+
+				wb.append(webview);
 			}
+
+			var activeView = "BasicInformation.html";
+			mui("#addCustomer").on("tap", "div", function(e) {
+				var webview = $(this).next().attr("href");
+				//alert(webview);
+				if(webview == activeView) {
+					return;
+				}
+				plus.webview.show(webview);
+				plus.webview.hide(activeView);
+
+				if(webview == "Contact.html") { //显示添加联系人图标
+					$("#addContact").show();
+				} else {
+					$("#addContact").hide();
+				}
+
+				$(this).removeClass("Notactive");
+				$(this).addClass("active");
+				//alert($(this).attr("class"));
+
+				$("a[href='" + activeView + "']").prev().removeClass("active");
+				$("a[href='" + activeView + "']").prev().addClass("Notactive");
+
+				activeView = webview;
+			})
 
 			document.getElementById("cancle").addEventListener("tap", function() {
 				plus.nativeUI.confirm("放弃操作?", function(e) {
@@ -76,6 +119,14 @@
 						mui.fire(detailPage, 'addCustomerForChild', {});
 					}
 				}, "信息提交", ["否", "是"]);
+			});
+
+			//添加通讯录信息自定义事件
+
+			document.getElementById("addContact").addEventListener("tap", function() {
+				
+				var ContactView = plus.webview.getWebviewById("Contact.html");
+				mui.fire(ContactView, "addContact", {});
 			});
 
 		});

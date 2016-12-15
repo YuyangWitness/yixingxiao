@@ -1,0 +1,194 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../css/mui.min.css" rel="stylesheet" />
+		<script type="text/javascript" src="../js/mui.js" ></script>
+		<link href="../css/Customer.css" rel="stylesheet" />		
+		<script type="text/javascript" src="../js/mui.poppicker.js"></script>
+		<script type="text/javascript" src="../js/mui.picker.js"></script>
+		<script type="text/javascript" src="../js/pick.data.js"></script>
+		<script type="text/javascript" src="../js/jquery-3.1.0.min.js"></script>
+		<link rel="stylesheet" href="../css/mui.poppicker.css" />
+		<link rel="stylesheet" href="../css/mui.picker.css" />
+	</head>
+
+	<body>
+		<script type="text/javascript">
+			mui.init()
+		</script>
+		<form class="mui-input-group form1">
+			<div class="mui-input-row" id="businessIntention">
+				<label><a class="mui-navigate-right">业务意向</a></label>
+			</div>
+			<div class="mui-input-row" id="businessType">
+				<label><a class="mui-navigate-right">业务类型</a></label>
+			</div>
+			<div class="mui-input-row">
+				<label class="label1">业务规模</label>
+				<input class="input1" type="number">
+				<label class="label2">万元</label>
+			</div>
+			<div class="mui-input-row" id="progess">
+				<label><a class="mui-navigate-right">进展阶段</a></label>
+			</div>
+			<div class="mui-input-row" id="competitor">
+				<label><a class="mui-navigate-right">竞争对手</a></label>
+			</div>
+			<div class="mui-input-row" id="attitude">
+				<label><a class="mui-navigate-right">客户态度</a></label>
+			</div>
+			<div class="mui-input-row" id="customerJudge">
+				<label><a class="mui-navigate-right">客户评判</a></label>
+			</div>
+			<div class="mui-input-row remark">
+				<label>备注</label>
+				<textarea></textarea>
+			</div>
+		</form>
+	</body>
+	<script>
+		mui.plusReady(function() {
+			//alert(plus.webview.currentWebview().id); 
+			//业务意向选择器
+			var TypePick;
+			var businessIntention = document.getElementById("businessIntention");
+			businessIntention.addEventListener("tap", function() {
+				document.activeElement.blur();
+				mui.openWindow("businessIntentionData.html", "businessIntentionData");
+			});
+
+			//业务类型选择器
+			var businessType = document.getElementById("businessType"); 
+			businessType.addEventListener("tap", function() {
+				document.activeElement.blur();
+				if(TypePick == null) {
+					alert("请先选择业务意向");
+				} else {
+					TypePick.show(function(item) {
+						if($("#businessType").children().is('span')) {
+							$("#businessType").children('span').remove();
+							$("#businessType").append("<span>" + item[0].text + "</span>");
+
+						} else {
+							$("#businessType").append("<span>" + item[0].text + "</span>");
+						}
+					});
+				}
+			});
+
+			//进展阶段选择器
+			var progess = document.getElementById("progess");
+			progess.addEventListener("tap", function() {
+				document.activeElement.blur();
+				var progessPick = new mui.PopPicker();
+				progessPick.setData(progessData);
+				progessPick.show(function(item) {
+					if($("#progess").children().is('span')) {
+						$("#progess").children('span').remove();
+						$("#progess").append("<span>" + item[0].text + "</span>");
+
+					} else {
+						$("#progess").append("<span>" + item[0].text + "</span>");
+					}
+				})
+			});
+			
+			//竞争对手选择器
+			var competitor = document.getElementById("competitor");
+			competitor.addEventListener("tap",function(){
+				document.activeElement.blur();
+				mui.openWindow("Competitors.html","competitors");
+			});
+
+			//客户态度选择器
+			var attitude = document.getElementById("attitude");
+			attitude.addEventListener("tap", function() {
+				document.activeElement.blur();
+				var attitudePick = new mui.PopPicker();
+				attitudePick.setData(attitudeData);
+				attitudePick.show(function(item) {
+					if($("#attitude").children().is('span')) {
+						$("#attitude").children('span').remove();
+						$("#attitude").append("<span>" + item[0].text + "</span>");
+
+					} else {
+						$("#attitude").append("<span>" + item[0].text + "</span>");
+					}
+				});
+			});
+
+			//客户评判选择器
+			var customerJudge = document.getElementById("customerJudge");
+			customerJudge.addEventListener("tap", function() {
+				document.activeElement.blur();
+				var judgePick = new mui.PopPicker();
+				judgePick.setData(judgeData);
+				judgePick.show(function(item) {
+					if($("#customerJudge").children().is('span')) {
+						$("#customerJudge").children('span').remove();
+						$("#customerJudge").append("<span>" + item[0].text + "</span>");
+
+					} else {
+						$("#customerJudge").append("<span>" + item[0].text + "</span>");
+					}
+				});
+			});
+
+			window.addEventListener("backData", function(event) {
+				var backData = event.detail.businessData;
+				var backNum = event.detail.numBoxData;
+
+				if($("#businessIntention").children().is('span')) { //把获取的值放到页面上
+					$("#businessIntention").children('span').remove();
+					$("#businessIntention").append("<span>" + backData + "</span>");
+
+				} else {
+					$("#businessIntention").append("<span>" + backData + "</span>");
+				}
+
+				if(backNum == 4 || backNum == 5) {
+					$("#businessType").hide();
+				} else {
+					$("#businessType").show();
+					$("#businessType").children('span').remove();
+					TypePick = new mui.PopPicker();
+					switch(backNum[0]) {
+						case "1":
+						//alert(1);
+							TypePick.setData(groupData);
+							break;
+						case "2":
+						//alert(2);
+							TypePick.setData(yearData);
+							break;
+						case "3":
+						//alert(3);
+							TypePick.setData(goldData);
+							break;
+						default:
+						alert("other");
+
+					}
+
+				}
+
+			});
+			
+			window.addEventListener("backCompetitors",function(event){
+				var competitors = event.detail.competitorsData;
+				if($("#competitor").children().is('span')) { //把获取的值放到页面上
+					$("#competitor").children('span').remove();
+					$("#competitor").append("<span>" + competitors.toString() + "</span>");
+
+				} else {
+					$("#competitor").append("<span>" + competitors.toString()  + "</span>");
+				}
+			});
+		});
+	</script>
+
+</html>

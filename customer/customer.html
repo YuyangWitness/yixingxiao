@@ -36,8 +36,8 @@
 		</header>
 		<div class="mui-content">
 			<div id="SelectUser" class="Select">
-				<div id="PUser" class="SelectActive">潜在客户</div>
-				<div id="User" class="SelectNoActive">正式客户</div>
+				<div id="PUser" class="SelectActive active">潜在客户</div>
+				<div id="User" class="SelectNoActive Notactive">正式客户</div>
 			</div>
 		</div>
 
@@ -84,27 +84,28 @@
 					return;
 				} else {
 
-					$(this).css({
-						"color": "white",
-						"background": "dodgerblue"
-					});
 					if(activeTab == 'User') {
 						$("#UserSearch").hide();
 						$("#PUserSearch").show();
 						$("#addCustomer").show();
-						$("#User").css({
-							"color": "#000000",
-							"background": "#EEEEEE"
-						});
+									
+						$("#User").addClass("Notactive");
+						$("#User").removeClass("active");
+						$("#PUser").addClass("active");
+						$("#PUser").removeClass("Notactive");
+						
+						
 					} else {
 						$("#UserSearch").show();
 						$("#PUserSearch").hide();
 						$("#addCustomer").hide();
-						$("#PUser").css({
-							"color": "#000000",
-							"background": "#EEEEEE"
-						});
+						
+						$("#User").addClass("active");
+						$("#User").removeClass("Notactive");
+						$("#PUser").addClass("Notactive");
+						$("#PUser").removeClass("active");
 					}
+
 					plus.webview.hide(activeTab + ".html")
 					plus.webview.show(ClickTab + ".html");
 

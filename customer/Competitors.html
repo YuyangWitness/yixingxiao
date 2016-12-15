@@ -1,0 +1,112 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../css/mui.min.css" rel="stylesheet" />
+		<script type="text/javascript" src="../js/jquery-3.1.0.min.js"></script>
+		<link rel="stylesheet" href="../css/Customer.css" />
+	</head>
+	<style>
+
+	</style>
+
+	<body>
+		<script src="../js/mui.min.js"></script>
+		<script type="text/javascript">
+			mui.init()
+		</script>
+		<header class="mui-bar mui-bar-nav" id="head">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<h1 class="mui-title">业务意向</h1>
+			<a class="mui-pull-right" id="confirm">确定</a>
+		</header>
+		<div class="mui-content">
+			<form class="mui-input-group" style="background: #efeff4;" id="myform">
+				<div class="mui-input-row mui-checkbox">
+					<label>国寿养老</label>
+					<input type="checkbox" /><label class="hideLabel">1</label>
+				</div>
+				<div class="mui-input-row mui-checkbox">
+					<label>平安养老</label>
+					<input type="checkbox" /><label class="hideLabel">2</label>
+				</div>
+				<div class="mui-input-row mui-checkbox">
+					<label>太平洋人寿</label>
+					<input type="checkbox" /><label class="hideLabel">3</label>
+				</div>
+				<div class="mui-input-row mui-checkbox">
+					<label>泰康养老</label>
+					<input type="checkbox" /><label class="hideLabel">4</label>
+				</div>
+				<div class="mui-input-row mui-checkbox">
+					<label>新华人寿</label>
+					<input type="checkbox" /><label class="hideLabel">5</label>
+				</div>
+				<div class="mui-input-row mui-checkbox">
+					<label>人保寿险</label>
+					<input type="checkbox" /><label class="hideLabel">6</label>
+				</div>
+				<div class="mui-input-row mui-checkbox">
+					<label>人保健康</label>
+					<input type="checkbox" /><label class="hideLabel">7</label>
+				</div>
+				<div class="mui-input-row mui-checkbox">
+					<label>中意人寿</label>
+					<input type="checkbox" /><label class="hideLabel">8</label>
+				</div>
+				<div class="mui-input-row mui-checkbox">
+					<label>其他</label>
+					<input type="checkbox" id="other" /><label class="hideLabel">9</label>
+				</div>
+				<div class="mui-input-row" id="otherContent" style="display: none;">
+					<label></label>
+					<input type="text" placeholder="请输入内容..." />
+				</div>
+			</form>
+		</div>
+	</body>
+	<script>
+		mui.plusReady(function() {
+
+		})
+		var other = document.getElementById("other");
+		other.addEventListener("tap", function() {
+
+			if($("#other").is(':checked')) {
+				$("#otherContent").hide();
+			} else {
+				$("#otherContent").show();
+			}
+
+		});
+		var confirm = document.getElementById("confirm");
+		confirm.addEventListener("tap", function() {
+			if($("#other").is(":checked") && $("#otherContent").children("input").val() == "") {
+				alert("请填写其他");
+			} else {
+				var competitors = new Array();
+				$("input[type='checkbox']").each(function() {
+
+					if($(this).is(":checked")) {
+						if($("#other").is(":checked")&&$(this).attr("id")=="other") { //放置竞争对手到数组里面，如果是其他，则要放填写的信息
+							competitors.push($("#otherContent").children('input').val());
+						} else {
+							competitors.push($(this).prev().text());
+						}
+
+					}
+
+				})
+				var BusinessIntention = plus.webview.getWebviewById("BusinessIntention.html"); //待改动	
+				mui.fire(BusinessIntention, "backCompetitors", {
+					competitorsData: competitors
+				});
+				mui.back();
+			}
+		})
+	</script>
+
+</html>

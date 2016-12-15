@@ -1685,3 +1685,139 @@ var companyDate = [{
 	value: "5",
 	text: "其他企业"
 }]
+
+var businessData = [{
+	value: "1",
+	text: "团险"
+}, {
+	value: "2",
+	text: "企业年金"
+}, {
+	value: "3",
+	text: "金世计划"
+}, {
+	value: "4",
+	text: "个人养老保障"
+}, {
+	value: "5",
+	text: "其他"
+}]
+
+var progessData = [{
+	value: "1",
+	text: "客户分析"
+}, {
+	value: "2",
+	text: "建立关系"
+}, {
+	value: "3",
+	text: "方案沟通"
+}, {
+	value: "4",
+	text: "方案报价"
+}, {
+	value: "5",
+	text: "谈判竞标"
+}, {
+	value: "6",
+	text: "签约承保"
+}, {
+	value: "7",
+	text: "沟通停滞"
+}]
+
+var attitudeData = [{
+	value: "1",
+	text: "积极"
+}, {
+	value: "2",
+	text: "中性"
+}, {
+	value: "3",
+	text: "犹豫"
+}, {
+	value: "4",
+	text: "无意向"
+}]
+
+var judgeData = [{
+	value: "1",
+	text: "一周内有结果的客户"
+}, {
+	value: "2",
+	text: "一个月内有结果的客户"
+}, {
+	value: "3",
+	text: "三个月内有结果的客户"
+}, {
+	value: "4",
+	text: "半年内有结果的客户"
+}, {
+	value: "5",
+	text: "需长期跟踪的客户"
+}]
+
+var groupData = [{
+	value: "1",
+	text: "短EB"
+}, {
+	value: "2",
+	text: "长EB",
+}, {
+	value: "3",
+	text: "高端医疗"
+}, {
+	value: "4",
+	text: "短期意外"
+}, {
+	value: "5",
+	text: "小额信贷"
+}, {
+	value: "6",
+	text: "学平险"
+}, {
+	value: "7",
+	text: "建工险"
+}, {
+	value: "8",
+	text: "网销"
+}, {
+	value: "9",
+	text: "政府项目"
+}, {
+	value: "10",
+	text: "委托管理医疗"
+}, {
+	value: "11",
+	text: "其他口子业务"
+}, {
+	value: "12",
+	text: "传统年金"
+}, {
+	value: "13",
+	text: "职域拓展"
+}]
+
+var yearData = [{
+	value: "1",
+	text: "集合计划"
+}, {
+	value: "2",
+	text: "单一受托",
+}, {
+	value: "3",
+	text: "单一投资"
+}, {
+	value: "4",
+	text: "标准单一"
+}]
+
+var goldData = [
+	{
+		value: "1",
+		text: "金世计划（开放式）"
+	}, {
+		value: "2",
+		text: "金世计划（封闭式）"
+	}
+]

@@ -1,40 +1,28 @@
 <!doctype html>
 <html>
-
 	<head>
 		<meta charset="UTF-8">
 		<title></title>
 		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
 		<link href="../css/mui.min.css" rel="stylesheet" />
-		<script src="../js/mui.min.js"></script>
+		<script type="text/javascript" src="../js/mui.js" ></script>
 		<script type="text/javascript" src="../js/jquery-3.1.0.min.js"></script>
 		<script type="text/javascript" src="../js/Customer.js"></script>
 		<link rel="stylesheet" href="../css/mui.picker.css" />
 		<link rel="stylesheet" href="../css/mui.poppicker.css" />
 		<script type="text/javascript" src="../js/mui.picker.js"></script>
 		<script type="text/javascript" src="../js/mui.poppicker.js"></script>
-		<script type="text/javascript" src="../js/city.data.js"></script>
+		<script type="text/javascript" src="../js/pick.data.js"></script>
+	    <link rel="stylesheet" href="../css/Customer.css" />
 	</head>
-	<style>
-	form{
-		font-size:0.8em;
-	}
-		form a {
-			color: black;
-		}
-		form input{
-			font-size:0.8em;
-		}
-	</style>
-
 	<body>
 		<script type="text/javascript">
 			mui.init()
 		</script>
-		<form class="mui-input-group" style="background: #efeff4;">
+		<form class="mui-input-group form1">
 			<div class="mui-input-row">
 				<label>客户名称</label>
-				<input type="text" class="mui-input-clear" id="customerName">
+				<input type="text"  id="customerName">
 			</div>
 			<div class="mui-input-row" id="customerRoad">
 				<label>				
@@ -49,28 +37,28 @@
 				<label><a class="mui-navigate-right">企业性质</a></label>
 			</div>
 			<div class="mui-input-row">
-				<label style="width: 35%;">年销售额</label>
-				<input style="width: 45%; float: left;" type="text" class="mui-input-clear" id="NumberPeople">
-				<label style="width: 20%; text-align: right;">万元</label>
+				<label class="label1">年销售额</label>
+				<input class="input1" type="number"  id="NumberPeople">
+				<label class="label2">万元</label>
 			</div>
 			<div class="mui-input-row">
-				<label style="width: 35%;">工资总额</label>
-				<input style="width: 45%; float: left;" type="text" class="mui-input-clear" id="NumberPeople">
-				<label style="width: 20%; text-align: right;">万元</label>
+				<label class="label1">工资总额</label>
+				<input class="input1" type="number"  id="NumberPeople">
+				<label class="label2">万元</label>
 			</div>
 			<div class="mui-input-row">
-				<label style="width: 35%;">企业人数</label>
-				<input style="width: 45%; float: left;" type="text" class="mui-input-clear" id="NumberPeople">
-				<label style="width: 20%; text-align: right;">人</label>
+				<label class="label1">企业人数</label>
+				<input class="input1" type="number"  id="NumberPeople">
+				<label class="label2">人</label>
 			</div>
-			<div style="width: 100%;">
-				<label style="width: 35%; float: left; line-height: 80px; text-align: left; margin-left: 15px;">公司地址</label>
-				<div style="width: 60%; float: left;">
+			<div class="address">
+				<label>公司地址</label>
+				<div class="addressDiv">
 					<div class="mui-input-row">
-						<input type="text" placeholder="请选择省市" class="mui-input-clear" id="Address">
+						<input style="text-align: left;" type="text" placeholder="请选择省市"  id="Address">
 					</div>
 					<div class="mui-input-row">
-						<input type="text" placeholder="请输入地址" class="mui-input-clear" id="deatilAddress">
+						<input style="text-align: left;" type="text" placeholder="请输入地址"  id="deatilAddress">
 					</div>
 				</div>
 			</div>
@@ -135,6 +123,7 @@
 			//省市选择
 			var address = document.getElementById("Address");
 			address.addEventListener("tap", function() {
+				document.activeElement.blur();//关闭软键盘
 				var addressPicker = new mui.PopPicker({
 					layer: 2
 				});
@@ -147,9 +136,9 @@
 			//客户渠道选择
 			var customerRoad = document.getElementById("customerRoad");
 			customerRoad.addEventListener("tap", function() {
-
-				var roadPick = new mui.PopPicker();
-				roadPick.setData([{
+document.activeElement.blur();
+				var roadPick = new mui.PopPicker();//获取弹出列表组建，假如是二联则在括号里面加入{layer:2}
+				roadPick.setData([{//设置弹出列表的信息，假如是二联，还需要一个children属性
 					value: "1",
 					text: "直销"
 				}, {
@@ -157,13 +146,13 @@
 					text: "传统寿销养"
 				}]);
 
-				roadPick.show(function(item) {
+				roadPick.show(function(item) {//弹出列表并在里面写业务代码
 					if($("#customerRoad").children().is('span')) {
 						$("#customerRoad").children('span').remove();
-						$("#customerRoad").append("<span style='line-height: 40px;font-size: 0.8em;'>" + item[0].text + "</span>");
+						$("#customerRoad").append("<span>" + item[0].text + "</span>");
 
 					} else {
-						$("#customerRoad").append("<span style='line-height: 40px;font-size: 0.8em;'>" + item[0].text + "</span>");
+						$("#customerRoad").append("<span>" + item[0].text + "</span>");
 					}
 				});
 			});
@@ -171,16 +160,17 @@
 			//行业类别选择
 			var industryCategory = document.getElementById("industryCategory");
 			industryCategory.addEventListener("tap", function() {
+				document.activeElement.blur();
 				var categoryPick = new mui.PopPicker();
 				categoryPick.setData(industryDate);
 
 				categoryPick.show(function(item) {
 					if($("#industryCategory").children().is('span')) {
 						$("#industryCategory").children('span').remove();
-						$("#industryCategory").append("<span style='line-height: 40px;font-size: 0.8em;'>" + item[0].text + "</span>");
+						$("#industryCategory").append("<span>" + item[0].text + "</span>");
 
 					} else {
-						$("#industryCategory").append("<span style='line-height: 40px;font-size: 0.8em;'>" + item[0].text + "</span>");
+						$("#industryCategory").append("<span>" + item[0].text + "</span>");
 					}
 				});
 			});
@@ -188,15 +178,16 @@
 			//企业性质选择
 			var companyNature = document.getElementById("companyNature");
 			companyNature.addEventListener("tap",function(){
+				document.activeElement.blur();
 				var companyPick = new mui.PopPicker();
 				companyPick.setData(companyDate);
 				companyPick.show(function(item){
 					if($("#companyNature").children().is('span')) {
 						$("#companyNature").children('span').remove();
-						$("#companyNature").append("<span style='line-height: 40px;font-size: 0.8em;'>" + item[0].text + "</span>");
+						$("#companyNature").append("<span>" + item[0].text + "</span>");
 
 					} else {
-						$("#companyNature").append("<span style='line-height: 40px;font-size: 0.8em;'>" + item[0].text + "</span>");
+						$("#companyNature").append("<span>" + item[0].text + "</span>");
 					}
 				});
 			});
