@@ -18,7 +18,7 @@
 	</style>
 
 	<body>
-		<script src="../js/mui.min.js"></script>
+		<!--<script src="../js/mui.min.js"></script>
 		<script type="text/javascript">
 			mui.init()
 		</script>
@@ -39,27 +39,27 @@
 					左滑显示删除按钮
 				</div>
 			</li>
-		</ul>
+		</ul>-->
 
 	</body>
 	<script>
-		mui.plusReady(function() {
-			window.addEventListener("addContact", function() {
-				plus.nativeUI.actionSheet({
-					
-					cancel: "取消",
-					buttons: [{
-						title: "手动新增联系人"
-					}, {
-						title: "从通信录导入联系人"
-					}]
-				}, function(e) {
-                    if(e.index==1){
-                    	mui.openWindow("addContact.html","addContact");
-                    }
-				});
-			});
-		});
+//		mui.plusReady(function() {
+//			window.addEventListener("addContact", function() {
+//				plus.nativeUI.actionSheet({
+//					
+//					cancel: "取消",
+//					buttons: [{
+//						title: "手动新增联系人"
+//					}, {
+//						title: "从通信录导入联系人"
+//					}]
+//				}, function(e) {
+//                  if(e.index==1){
+//                  	mui.openWindow("addContact.html","addContact");
+//                  }
+//				});
+//			});
+//		});
 	</script>
 
 </html>
