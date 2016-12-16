@@ -80,7 +80,7 @@
 		//var linkList = new LinkedList();
 		//linkList = sortPY(username);
 		//linkList.show();
-		var navP = $("#nav").children("a");
+		//var navP = $("#nav").children("a");
 
 		mui("#nav").on("hold", "a", function() {
 			var index = $(this).index()
@@ -105,7 +105,7 @@
 			$("#word").css("display", "none");
 		});
 		
-		window.addEventListener("Prefresh",function(event){     			
+		window.addEventListener("Prefresh",function(event){ //添加新的用户以后更新列表    			
 			var cusName = event.detail.cusname;
 			createPTable(db);
 			addPCustomer(db,cusName);
@@ -113,10 +113,10 @@
 			$("#nav a").remove();
 			getPcustomer(db);
 		});
-		window.addEventListener("PrefreshFromName",function(event){
-			alert("aaaa");
+		window.addEventListener("PrefreshFromName",function(event){//查询的时候更换列表
+			//alert("aaaa");
 			var CustomerName = "%"+event.detail.customerName+"%";
-			alert(CustomerName);
+			//alert(CustomerName);
 			SelectPCusFromName(db,CustomerName);
 			plus.webview.hide("SearchPUser");
 			plus.webview.currentWebview().setStyle({

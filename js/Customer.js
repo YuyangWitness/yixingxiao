@@ -339,6 +339,33 @@ function addPCustomer(dataBase, Cusname) {
 	}
 }
 
+function createLiCheckBox(linkList){
+	//为侧栏导航做准备
+	var word = ["#", "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"];
+	var usernameIndex = new Array();
+	for(var index = 0; index < linkList.size(); index++) {//遍历链表
+		var data = linkList.getVal(index).data;
+		if(data.length != 0) {
+			$("#nav").append("<a>" + word[index] + "</a>")//侧栏导航代码，哪种字母有名字存在侧栏导航就需要有该字母
+			for(var zindex = 0; zindex < data.length; zindex++) {//遍历数组，把信息放到<li>标签
+				var split = data[zindex].split("-");//分割信息，获取用户名字和index
+				if(zindex == 0) {//如果是字母数组第一个名字，就加入class＝"firstBlood"，为以后导航做准备
+					$(".mui-table-view").append('<li class="mui-table-view-cell firstBlood">' +
+						'<div class="UserName"><p>' + split[0] + '</p><label>'+split[1]+'</label></div><div class="mui-pull-right mui-checkbox">' +
+						'<input type="checkbox" /></div></li>');
+				} else {
+					$(".mui-table-view").append('<li class="mui-table-view-cell">' +
+						'<div class="UserName"><p>' + split[0] + '</p><label>'+split[1]+'</label></div><div class="mui-pull-right mui-checkbox">' +
+						'<input type="checkbox" /></div></li>');
+				}
+
+			}
+		}
+
+	}
+}
+
+
 function createLi(linkList) {
 	 //为侧栏导航做准备
 	var word = ["#", "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"];

@@ -80,7 +80,7 @@
 	</body>
 	<script>
 		mui.plusReady(function() {
-			window.addEventListener('addCustomerForChild', function(event) {
+			window.addEventListener('addCustomerForChild', function(event) {//父页面调用的事件，“确定”以后传递客户数据到主页面
 				var dataBase = getDB();
 				var cusName = $("#customerName").val()
 				if(dataBase != null) {

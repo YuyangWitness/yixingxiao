@@ -7,6 +7,7 @@
 		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
 		<link href="../css/mui.min.css" rel="stylesheet" />
 		<link rel="stylesheet" href="../css/Customer.css" />
+		<script type="text/javascript" src="../js/jquery-3.1.0.min.js" ></script>
 	</head>
 	<style>
 		.mui-radio {
@@ -45,7 +46,7 @@
 			<div class="mui-input-group">
 				<div class="mui-input-row">
 					<label>姓名</label>
-					<input type="text" />
+					<input type="text"id="Username"/>
 				</div>
 				<div class="mui-input-row mui-input-range" id="sex">
 					<label>性别</label>
@@ -102,5 +103,20 @@
 			</div>
 		</div>
 	</body>
+	<script>
+		mui.plusReady(function(){
+			var confirm = document.getElementById("confirm");
+			confirm.addEventListener("tap",function(){
+				var username = $("#Username").val();
+				if(username==""){
+					plus.nativeUI.alert("请填写联系人姓名");
+				}else{
+					var contactView = plus.webview.getWebviewById("Contact.html");
+					mui.fire(contactView,"NewContact",{username:username});
+					plus.webview.currentWebview().close();
+				}
+			});
+		});
+	</script>
 
 </html>

@@ -1,11 +1,15 @@
 <!doctype html>
 <html>
+
 	<head>
 		<meta charset="UTF-8">
 		<title></title>
 		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
 		<link rel="stylesheet" href="../css/Customer.css" />
 		<link href="../css/mui.min.css" rel="stylesheet" />
+		<script type="text/javascript" src="../js/jquery-3.1.0.min.js"></script>
+		<script type="text/javascript" src="../js/pinyin.js"></script>
+		<script type="text/javascript" src="../js/Customer.js"></script>
 	</head>
 	<style>
 		.mui-table-view {
@@ -15,6 +19,10 @@
 		.mui-table-view-cell .mui-slider-handle {
 			background: #efeff4;
 		}
+		
+		.mui-table-view-cell label {
+			display: none;
+		}
 	</style>
 
 	<body>
@@ -22,22 +30,12 @@
 		<script type="text/javascript">
 			mui.init()
 		</script>
-		<ul class="mui-table-view">
+		<ul class="mui-table-view" id="ContactList">
 			<li class="mui-table-view-cell">
 				<div class="mui-slider-right mui-disabled">
-					<a class="mui-btn mui-btn-red">删除</a>
+					<a class="mui-btn mui-btn-red delete">删除</a>
 				</div>
-				<div class="mui-slider-handle">
-					左滑显示删除按钮
-				</div>
-			</li>
-			<li class="mui-table-view-cell">
-				<div class="mui-slider-right mui-disabled">
-					<a class="mui-btn mui-btn-red">删除</a>
-				</div>
-				<div class="mui-slider-handle">
-					左滑显示删除按钮
-				</div>
+				<div class="mui-slider-handle">asasd </div>
 			</li>
 		</ul>
 
@@ -46,7 +44,7 @@
 		mui.plusReady(function() {
 			window.addEventListener("addContact", function() {
 				plus.nativeUI.actionSheet({
-					
+
 					cancel: "取消",
 					buttons: [{
 						title: "手动新增联系人"
@@ -54,11 +52,62 @@
 						title: "从通信录导入联系人"
 					}]
 				}, function(e) {
-                    if(e.index==1){
-                    	mui.openWindow("addContact.html","addContact");
-                    }
+
+					if(e.index == 1) {
+
+						mui.openWindow("addContact.html", "addContact");
+					} else if(e.index == 2) {
+
+						mui.openWindow("getContact.html", "getContact");
+					}
 				});
 			});
+
+           //通讯录导入传回事件
+			window.addEventListener("SelectUser", function(event) {
+				var username = event.detail.username;//获取上个一页面的username数组
+				var usernameIndex = event.detail.usernameIndex;
+				console.log(username.toString());
+				console.log(usernameIndex.toString());
+				for(var i = 0; i < username.length; i++) {//循环数组，获取名字
+					if(username.length == usernameIndex.length) {
+						//console.log("Add");
+						var Inner = '<li class="mui-table-view-cell">' +
+							'<div class="mui-slider-right mui-disabled">' +
+							'<a class="mui-btn mui-btn-red">删除</a></div>' +
+							'<div class="mui-slider-handle">' + username[i] + '</div><label>' + usernameIndex[i] + '</label></li>';
+						$("#ContactList").append(Inner);//把姓名显示在页面上
+					} else {
+						alert("信息有误");
+					}
+				}
+
+			});
+			
+			//删除客户
+			mui("#ContactList").on("tap", "a", function() {//这里很重要，绑定事件的时候$()里面的元素一定要是固定的！！！
+
+				var username = $(this).parent().next().text();
+				var objectDelete = $(this).parent().parent();//获取整个li
+
+				plus.nativeUI.confirm("您确定要删除" + username + "吗?", function(e) {
+					if(e.index == 1) {
+
+						objectDelete.remove(); //在这里面无法得知$(this),所以只能用变量传递
+					}
+				}, "", ["取消", "确定"]);
+			});
+			
+			//手动添加客户信息回传事件
+			window.addEventListener("NewContact", function(event) {
+				var username = event.detail.username;
+				var Inner = '<li class="mui-table-view-cell">' +
+					'<div class="mui-slider-right mui-disabled">' +
+					'<a class="mui-btn mui-btn-red delete">删除</a></div>' +
+					'<div class="mui-slider-handle">' + username + '</div></li>'; //<label>' + usernameIndex[i] + '</label>
+				$("#ContactList").append(Inner);//添加客户姓名到页面
+			});
+
 		});
 	</script>
 

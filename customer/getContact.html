@@ -1,0 +1,157 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../css/mui.min.css" rel="stylesheet" />
+		<script type="text/javascript" src="../js/jquery-3.1.0.min.js"></script>
+		<script type="text/javascript" src="../js/pinyin.js"></script>
+		<link rel="stylesheet" href="../css/Customer.css" />
+		<script type="text/javascript" src="../js/Customer.js"></script>
+	</head>
+	<style>
+		.mui-table-view-cell {
+			background: #efeff4;
+		}
+		
+		.mui-table-view-cell {
+			background: #efeff4;
+		}
+		
+		#nav {
+			height: 100%;
+			width: 5%;
+			position: fixed;
+			right: 0px;
+			top: 0;
+			text-align: center;
+		}
+		
+		#nav a {
+			display: block;
+			height: 3.6%;
+			color: #007AFF;
+		}
+		
+		#word {
+			width: 70px;
+			height: 70px;
+			background: darkslategrey;
+			opacity: 0.8;
+			text-align: center;
+			line-height: 70px;
+			font-size: large;
+			position: absolute;
+			color: white;
+			display: none;
+		}
+	</style>
+
+	<body>
+		<script src="../js/mui.min.js"></script>
+		<script type="text/javascript">
+			mui.init()
+		</script>
+
+		<header class="mui-bar mui-bar-nav" id="head">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<h1 class="mui-title">选择通讯录用户</h1>
+			<a class="mui-pull-right" id="confirm">确定</a>
+		</header>
+		<div class="mui-content">
+			<ul class="mui-table-view">
+				
+			</ul>
+			<p id="word"></p>
+			<div id="nav"></div>
+		</div>
+
+	</body>
+	<script>
+		mui.init({ //设置手势
+			gestureConfig: {
+				tap: true, //默认为true
+				hold: true, //默认为false，不监听
+				release: true //默认为false，不监听
+			}
+		});
+
+		mui.plusReady(function() {
+
+			plus.contacts.getAddressBook(plus.contacts.ADDRESSBOOK_PHONE, function(addressbook) { //获取通讯录信息
+				// 可通过addressbook进行通讯录操作
+				//alert("aaaa");
+				var contact = addressbook.find(null, function(contacts) {
+
+					var username = new Array();
+					
+					var LinkList = new LinkedList();
+					if(contacts.length > 0) {//获取当前通讯录里面所有人
+						for(var i = 0; i < contacts.length; i++) {
+							username[i] = contacts[i].displayName+"-"+contacts[i].id;//连接id和username，为后面筛选最准备
+							
+						}
+						//console.log(username.toString());
+						LinkList = sortPY(username); //把联系人数组分类
+						//LinkList.show();
+						createLiCheckBox(LinkList);//分类信息显示至页面
+					}
+
+				}, function(e) {
+					alert("Find contact error: " + e.message);
+				});
+
+			}, function(e) {
+
+			});
+
+			mui("#nav").on("hold", "a", function() { //侧栏手势，按住跳转到首字母第一个名字上，并在屏幕中间显示字母
+				var index = $(this).index() //获取当前第几个index
+				var getFirst = $(".mui-table-view").children(".firstBlood")[index]; //获取第几个firstBlood类，为跳转做准备
+				window.scrollTo(0, getFirst.offsetTop); //跳转
+				var context = $(this).text(); //中间方框需要显示的字母
+				var scolltop = document.documentElement.scrollTop || document.body.scrollTop;
+				var height = (document.documentElement.clientHeight - $("#word").height()) / 2;
+				var left = (document.documentElement.clientWidth - $("#word").width()) / 2;
+				$("#word").text(context); //显示字母
+				$("#word").css("top", scolltop + height + "px"); //方框top高度，需要加上scrolltop
+				$("#word").css("left", left);
+				$("#word").css("display", "block"); //显示
+
+				//console.log(getFirst);
+				//console.log(getFirst.offsetTop);
+
+			});
+
+			mui("#nav").on("release", "a", function() {
+				$("#word").css("display", "none"); //释放手势隐藏div
+			});
+
+              //点击“确定”业务处理
+              var confirm = document.getElementById("confirm");
+              confirm.addEventListener("tap",function(){
+              	var username = new Array();
+              	var usernameIndex = new Array();
+              	//筛选已经被选中的checkbox
+              	$("input:checked").each(function(){
+              		var index = $(this).parent().prev().children('label').text();//获取id
+              		var name = $(this).parent().prev().children('p').text();//获取姓名
+              		username.push(name);
+              		usernameIndex.push(index);
+              		//console.log(name);
+              		//console.log(index);
+              	});
+              	
+              	//自定义事件，回传用户名称数组和用户index数组到列表页面
+              	var addContactView = plus.webview.getWebviewById("Contact.html");
+              	mui.fire(addContactView,"SelectUser",{username:username,usernameIndex:usernameIndex});
+       
+              	mui.back();
+             })
+             
+		});
+	</script>
+
+</html>

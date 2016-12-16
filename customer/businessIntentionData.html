@@ -102,7 +102,7 @@
 				var checkedBox = new Array();
 				var numBox = new Array();
 				var flage = true;
-				$("[type='checkbox']").each(function() {
+				$("[type='checkbox']").each(function() {//重构一下这里
 					if($(this).is(":checked")){
 						if ($(this).attr("id")=="other") {
 							if($("#otherContent").children('input').val()==""){
