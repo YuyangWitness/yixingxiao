@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<link rel="stylesheet" href="../css/mui.min.css" />
+		<script type="text/javascript" src="../js/mui.min.js" ></script>
+		<script type="text/javascript" src="../js/Customer.js" ></script>
+		<script type="text/javascript" src="../js/jquery-3.1.0.min.js" ></script>
+	</head>
+	<script>
+		window.onload = function(){
+			var db = getDB();
+			$("#searchId").click(function(){
+				db.transaction(function(tx){
+					tx.executeSql("select rowid from Contact",[],function(tx,rs){
+						if(rs.rows.length>0){
+							//console.log("有数据");
+							for (var i = 0 ; i<rs.rows.length;i++) {
+								console.log(rs.rows.item(i).rowid);
+							}
+							
+						}else{
+							console.log("没有数据");
+						}
+						
+					},function(){
+						console.log("查找id失败");
+					})
+				});
+			});
+			
+			$("#deleteAll").click(function(){
+					db.transaction(function(tx){
+					tx.executeSql("delete from Contact",[],function(tx,rs){
+							for (var i = 0 ; i<rs.rows.length;i++) {
+								console.log(rs.rows.item(i).rowid);
+							}
+							localStorage.removeItem("index");
+						console.log("删除成功");
+					},function(){
+						console.log("删除失败");
+					})
+				});
+			});
+			
+			$("#selectAll").click(function(){
+				db.transaction(function(tx){
+					tx.executeSql("select * from Contact",[],function(tx,rs){
+							for (var i = 0 ; i<rs.rows.length;i++) {
+								console.log(rs.rows.item(i).birthday);
+							}
+						
+					},function(){
+						console.log("获取失败");
+					})
+				});
+			});
+		}
+	</script>
+	<body>
+		<header class="mui-bar mui-bar-nav">
+		    <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+		    <h1 class="mui-title">返回</h1>
+		</header>
+		<div class="mui-content">
+		    <button id="searchId">查找id</button>
+		<button id="deleteAll">删除全部</button>
+		<button id="selectAll">获取全部信息</button>
+		</div>
+		
+	</body>
+</html>

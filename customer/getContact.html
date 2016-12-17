@@ -6,10 +6,12 @@
 		<title></title>
 		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
 		<link href="../css/mui.min.css" rel="stylesheet" />
+		<script src="../js/mui.min.js"></script>
 		<script type="text/javascript" src="../js/jquery-3.1.0.min.js"></script>
 		<script type="text/javascript" src="../js/pinyin.js"></script>
 		<link rel="stylesheet" href="../css/Customer.css" />
 		<script type="text/javascript" src="../js/Customer.js"></script>
+		<script type="text/javascript" src="../js/addContact.js"></script>
 	</head>
 	<style>
 		.mui-table-view-cell {
@@ -50,7 +52,6 @@
 	</style>
 
 	<body>
-		<script src="../js/mui.min.js"></script>
 		<script type="text/javascript">
 			mui.init()
 		</script>
@@ -62,7 +63,7 @@
 		</header>
 		<div class="mui-content">
 			<ul class="mui-table-view">
-				
+
 			</ul>
 			<p id="word"></p>
 			<div id="nav"></div>
@@ -84,19 +85,16 @@
 				// 可通过addressbook进行通讯录操作
 				//alert("aaaa");
 				var contact = addressbook.find(null, function(contacts) {
-
 					var username = new Array();
-					
 					var LinkList = new LinkedList();
-					if(contacts.length > 0) {//获取当前通讯录里面所有人
+					if(contacts.length > 0) { //获取当前通讯录里面所有人
 						for(var i = 0; i < contacts.length; i++) {
-							username[i] = contacts[i].displayName+"-"+contacts[i].id;//连接id和username，为后面筛选最准备
-							
+							username[i] = contacts[i].displayName + "-" + contacts[i].id; //连接id和username，为后面筛选最准备
 						}
 						//console.log(username.toString());
 						LinkList = sortPY(username); //把联系人数组分类
 						//LinkList.show();
-						createLiCheckBox(LinkList);//分类信息显示至页面
+						createLiCheckBox(LinkList); //分类信息显示至页面
 					}
 
 				}, function(e) {
@@ -129,28 +127,71 @@
 				$("#word").css("display", "none"); //释放手势隐藏div
 			});
 
-              //点击“确定”业务处理
-              var confirm = document.getElementById("confirm");
-              confirm.addEventListener("tap",function(){
-              	var username = new Array();
-              	var usernameIndex = new Array();
-              	//筛选已经被选中的checkbox
-              	$("input:checked").each(function(){
-              		var index = $(this).parent().prev().children('label').text();//获取id
-              		var name = $(this).parent().prev().children('p').text();//获取姓名
-              		username.push(name);
-              		usernameIndex.push(index);
-              		//console.log(name);
-              		//console.log(index);
-              	});
-              	
-              	//自定义事件，回传用户名称数组和用户index数组到列表页面
-              	var addContactView = plus.webview.getWebviewById("Contact.html");
-              	mui.fire(addContactView,"SelectUser",{username:username,usernameIndex:usernameIndex});
-       
-              	mui.back();
-             })
-             
+			//点击“确定”业务处理
+			var confirm = document.getElementById("confirm");
+			confirm.addEventListener("tap", function() {
+				var username = new Array();
+				var usernameIndex = new Array();
+				//筛选已经被选中的checkbox
+				$("input:checked").each(function() {
+					var index = $(this).parent().prev().children('label').text(); //获取id
+					var name = $(this).parent().prev().children('p').text(); //获取姓名
+					username.push(name);
+					usernameIndex.push(index);
+					//console.log(name);
+					//console.log(index);
+				});
+				//console.log(usernameIndex.toString());
+				//把信息保存到HTML5数据库中
+				var db = getDB();
+			
+
+				for(var i = 0; i < username.length; i++) {
+					//					console.log(usernameIndex[i]);
+					//					plus.contacts.getAddressBook(plus.contacts.ADDRESSBOOK_PHONE, function(addressbook) { //获取通讯录信息
+					//						addressbook.find(null, function(contacts) {
+					var Contact = {
+						contactName: username[i],
+						sex: "",
+						department: "",
+						positions: "",
+						tel: "",
+						phone: "",
+						eMail: "",
+						birthday: "",
+						hobby: "",
+						remark: ""
+					};
+					console.log(username.length);
+					//createContactTable(db);
+					InsertContact(db, Contact);//多个信息插入有线程安全的问题出现！！！！！！！
+					
+					//console.log(index);
+					//						}, function(e) {
+					//							console.log("查询错误");
+					//						}, {
+					//							filter: [{
+					//								logic: "and",
+					//								field: "id",
+					//								value: "336"
+					//							}],
+					//							multi: true
+					//						});
+					//
+					//					}, function(e) {
+					//						console.log("打开通讯录错误");
+					//					});
+					
+				}
+				for(var i = 0; i < username.length; i++) {
+					//自定义事件，回传用户名称数组和用户index数组到列表页面
+					var addContactView = plus.webview.getWebviewById("Contact.html");
+					mui.fire(addContactView, "SelectUser", {username:username[i]});
+				}      
+					
+					mui.back();
+			})
+
 		});
 	</script>
 

@@ -40,7 +40,7 @@
 		</script>
 		<header class="mui-bar mui-bar-nav" id="head">
 			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
-			<h1 class="mui-title">新增联系人</h1>
+			<h1 class="mui-title">联系人详情</h1>
 			<a class="mui-pull-right" id="confirm">确定</a>
 		</header>
 		<div class="mui-content">
@@ -66,84 +66,89 @@
 				</div>
 				<div class="mui-input-row">
 					<label>部门</label>
-					<input type="text" id="department"/>
+					<input type="text" id="department" />
 				</div>
 				<div class="mui-input-row">
 					<label>职务</label>
-					<input type="text" id="positions"/>
+					<input type="text" id="positions" />
 				</div>
 			</div>
 
 			<div class="mui-input-group group">
 				<div class="mui-input-row">
 					<label>手机</label>
-					<input type="number" id="tel"/>
+					<input type="number" id="tel" />
 				</div>
 				<div class="mui-input-row">
 					<label>电话</label>
-					<input type="number" id="phone"/>
+					<input type="number" id="phone" />
 				</div>
 				<div class="mui-input-row">
 					<label>邮箱</label>
-					<input type="text" id="eMail"/>
+					<input type="text" id="eMail" />
 				</div>
 			</div>
 			<div class="mui-input-group group">
 				<div class="mui-input-row">
 					<label>生日</label>
-					<input type="number" id="birthday"/>
+					<input type="number" id="birthday" />
 				</div>
 				<div class="mui-input-row">
 					<label>爱好</label>
-					<input type="number" id="hobby"/>
+					<input type="text" id="hobby" />
 				</div>
 				<div class="mui-input-row">
 					<label>备注</label>
-					<input type="text" placeholder="请输入内容" id="remark"/>
+					<input type="text" placeholder="请输入内容" id="remark" />
 				</div>
 			</div>
 		</div>
 	</body>
 	<script>
 		mui.plusReady(function() {
-			var confirm = document.getElementById("confirm");
+			var webview = plus.webview.currentWebview();
+			var id = webview.rowid;
 			var db = getDB();
-			confirm.addEventListener("tap", function() {
-				var username = $("#Username").val();
-				var sex = $("input:checked").attr("value");
-			    var department = $("#department").val();
-			    var positions = $("#positions").val();
-			    var tel = $("#tel").val();
-			    var phone = $("#phone").val();
-			    var eMail = $("#eMail").val();
-			    var birthday = $("#birthday").val();
-			    var hobby = $("#hobby").val();
-			    var remark = $("#remark").val();
-				if(username == "") {
-					plus.nativeUI.alert("请填写联系人姓名");
-				} else {
-					//把数据存储HTML5本地数据库中
-					var Contact = {
-						contactName: username, 
-						sex: sex,
-						department: department,
-						positions: positions,
-						tel: tel,
-						phone: phone,
-						eMail: eMail,
-						birthday: birthday,
-						hobby: hobby,
-						remark: remark
-					}
-					createContactTable(db);
-					InsertContact(db,Contact);
-					var contactView = plus.webview.getWebviewById("Contact.html");
-					mui.fire(contactView, "NewContact", {
-						username: username
+			selectFromId(db, id);
+
+			$("#confirm").click(function() {
+					var username = $("#Username").val();
+					var sex = $("input:checked").attr("value");
+					var department = $("#department").val();
+					var positions = $("#positions").val();
+					var tel = $("#tel").val();
+					var phone = $("#phone").val();
+					var eMail = $("#eMail").val();
+					var birthday = $("#birthday").val();
+					var hobby = $("#hobby").val();
+					var remark = $("#remark").val();
+					if(username == "") {
+						plus.nativeUI.alert("请填写联系人姓名");
+					} else {
+						//把数据存储HTML5本地数据库中
+						var Contact = {
+							id:id,
+							contactName: username,
+							sex: sex,
+							department: department,
+							positions: positions,
+							tel: tel,
+							phone: phone,
+							eMail: eMail,
+							birthday: birthday,
+							hobby: hobby,
+							remark: remark
+						}
+						plus.nativeUI.confirm("是否确定修改", function(e) {
+							if(e.index == 1) {
+								updateContact(db, Contact);
+								//console.log(Contact.eMail);
+								mui.back();
+							}
+						}, "", ["否", "是"]);
+						}
 					});
-					plus.webview.currentWebview().close();
-				}
-			});
+			
 		});
 	</script>
 

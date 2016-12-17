@@ -10,6 +10,7 @@
 		<script type="text/javascript" src="../js/jquery-3.1.0.min.js"></script>
 		<script type="text/javascript" src="../js/pinyin.js"></script>
 		<script type="text/javascript" src="../js/Customer.js"></script>
+		<script type="text/javascript" src="../js/addContact.js" ></script>
 	</head>
 	<style>
 		.mui-table-view {
@@ -19,10 +20,10 @@
 		.mui-table-view-cell .mui-slider-handle {
 			background: #efeff4;
 		}
-		
-		.mui-table-view-cell label {
+		.mui-table-view-cell label{
 			display: none;
 		}
+		
 	</style>
 
 	<body>
@@ -31,23 +32,22 @@
 			mui.init()
 		</script>
 		<ul class="mui-table-view" id="ContactList">
-			<li class="mui-table-view-cell">
-				<div class="mui-slider-right mui-disabled">
-					<a class="mui-btn mui-btn-red delete">删除</a>
-				</div>
-				<div class="mui-slider-handle">asasd </div>
-			</li>
 		</ul>
+		<!--
+        <button id="btn">打开数据操控</button>
+        -->
 
-	</body>
+	</body> 
 	<script>
-		mui.plusReady(function() {
+		mui.plusReady(function() {   
+			var db = getDB();
+			selectContactName(db);
 			window.addEventListener("addContact", function() {
 				plus.nativeUI.actionSheet({
 
 					cancel: "取消",
 					buttons: [{
-						title: "手动新增联系人"
+						title: "手动新增联系人" 
 					}, {
 						title: "从通信录导入联系人"
 					}]
@@ -63,37 +63,37 @@
 				});
 			});
 
-           //通讯录导入传回事件
+           //通讯录传回事件
 			window.addEventListener("SelectUser", function(event) {
-				var username = event.detail.username;//获取上个一页面的username数组
-				var usernameIndex = event.detail.usernameIndex;
-				console.log(username.toString());
-				console.log(usernameIndex.toString());
-				for(var i = 0; i < username.length; i++) {//循环数组，获取名字
-					if(username.length == usernameIndex.length) {
+				var username = event.detail.username;//获取上个一页面的username数组 
+				//var usernameIndex = event.detail.usernameIndex;						
 						//console.log("Add");
+						var index = getIndex(); 
+						console.log(index);
 						var Inner = '<li class="mui-table-view-cell">' +
 							'<div class="mui-slider-right mui-disabled">' +
 							'<a class="mui-btn mui-btn-red">删除</a></div>' +
-							'<div class="mui-slider-handle">' + username[i] + '</div><label>' + usernameIndex[i] + '</label></li>';
-						$("#ContactList").append(Inner);//把姓名显示在页面上
-					} else {
-						alert("信息有误");
-					}
-				}
-
+							'<div class="mui-slider-handle">' + username + '</div><label>' + index + '</label></li>';
+						 $("#ContactList").append(Inner);//把姓名显示在页面上  
+				
+				var newIndex = parseInt(index)+1;  
+				localStorage.setItem("index",newIndex);                  
 			});
 			
 			//删除客户
 			mui("#ContactList").on("tap", "a", function() {//这里很重要，绑定事件的时候$()里面的元素一定要是固定的！！！
-
+            
 				var username = $(this).parent().next().text();
-				var objectDelete = $(this).parent().parent();//获取整个li
-
+				var objectDelete = $(this).parent().parent();//获取整个li 
+				var rowId = $(this).parent().next().next().text();
+                   console.log(rowId);  
 				plus.nativeUI.confirm("您确定要删除" + username + "吗?", function(e) {
 					if(e.index == 1) {
-
-						objectDelete.remove(); //在这里面无法得知$(this),所以只能用变量传递
+						 
+                      var db = getDB();
+                     
+                      deleteContact(db,rowId);  
+					 objectDelete.remove(); //在这里面无法得知$(this),所以只能用变量传递
 					}
 				}, "", ["取消", "确定"]);
 			});
@@ -101,13 +101,25 @@
 			//手动添加客户信息回传事件
 			window.addEventListener("NewContact", function(event) {
 				var username = event.detail.username;
+				var index = getIndex();
 				var Inner = '<li class="mui-table-view-cell">' +
-					'<div class="mui-slider-right mui-disabled">' +
+					'<div class="mui-slider-right mui-disabled">' + 
 					'<a class="mui-btn mui-btn-red delete">删除</a></div>' +
-					'<div class="mui-slider-handle">' + username + '</div></li>'; //<label>' + usernameIndex[i] + '</label>
+					'<div class="mui-slider-handle">' + username + '</div><label>' + index + '</label></li>'; 
 				$("#ContactList").append(Inner);//添加客户姓名到页面
+				var newIndex = parseInt(index)+1;  
+				localStorage.setItem("index",newIndex);  
 			});
-
+			
+			$("#btn").click(function(){
+				mui.openWindow("dataBaseController.html","database"); 
+			});
+            
+            //联系人查看，传递rowid到modifyContact
+            mui("#ContactList").on("tap",".mui-slider-handle",function(){
+            	    var id = $(this).next().text();
+                 mui.openWindow({url:"modifyContact.html",id:"modifyContact",extras:{rowid:id}})
+            })
 		});
 	</script>
 
