@@ -46,7 +46,7 @@
 			
 			$("#selectAll").click(function(){
 				db.transaction(function(tx){
-					tx.executeSql("select * from Contact",[],function(tx,rs){
+					tx.executeSql("select * from Contact where rowid = 3",[],function(tx,rs){
 							for (var i = 0 ; i<rs.rows.length;i++) {
 								console.log(rs.rows.item(i).phone);
 							}

@@ -1,0 +1,122 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" href="../css/Customer.css" />
+		<script type="text/javascript" src="../js/jquery-3.1.0.min.js"></script>
+		<script type="text/javascript" src="../js/Customer.js"></script>
+		<script type="text/javascript" src="../js/addContact.js"></script>
+	</head>
+	<style>
+		.mui-radio {
+			float: left;
+		}
+
+		
+		#sex div {
+			float: left;			
+			height: 40px;
+		}
+		
+		.group {
+			margin-top: 20px;
+		}
+		
+		.mui-input-row input {
+			text-align: left;
+		}
+	</style>
+
+	<body>
+		<script src="../js/mui.min.js"></script>
+		<script type="text/javascript">
+			mui.init()
+		</script>
+		<header class="mui-bar mui-bar-nav" id="head">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<h1 class="mui-title">联系人详情</h1>
+			<a class="mui-pull-right mui-icon mui-icon-compose" id="modify"></a>
+		</header>
+		<div class="mui-content">
+			<div class="mui-input-group">
+				<div class="mui-input-row">
+					<label>姓名</label>
+					<input type="text" id="Username" disabled="disabled"/>
+				</div>
+				<div class="mui-input-row mui-input-range" id="sex">
+					<label>性别</label>
+					<div>
+						<p class="mui-radio mui-left">
+							<label>男</label>
+							<input name="radio1" type="radio" value="1" disabled="disabled">
+						</p>
+					</div>
+					<div>
+						<p class="mui-radio mui-left">
+							<label>女</label>
+							<input name="radio1" type="radio" value="2" disabled="disabled">
+						</p>
+					</div>
+				</div>
+				<div class="mui-input-row">
+					<label>部门</label>
+					<input type="text" id="department" disabled="disabled"/>
+				</div>
+				<div class="mui-input-row">
+					<label>职务</label>
+					<input type="text" id="positions" disabled="disabled"/>
+				</div>
+			</div>
+
+			<div class="mui-input-group group">
+				<div class="mui-input-row">
+					<label>手机</label>
+					<input type="text" id="tel" disabled="disabled"/>
+				</div>
+				<div class="mui-input-row">
+					<label>电话</label>
+					<input type="text" id="phone" disabled="disabled"/>
+				</div>
+				<div class="mui-input-row">
+					<label>邮箱</label>
+					<input type="text" id="eMail" disabled="disabled"/>
+				</div>
+			</div>
+			<div class="mui-input-group group">
+				<div class="mui-input-row">
+					<label>生日</label>
+					<input type="text" id="birthday" disabled="disabled"/>
+				</div>
+				<div class="mui-input-row">
+					<label>爱好</label>
+					<input type="text" id="hobby" disabled="disabled"/>
+				</div>
+				<div class="mui-input-row">
+					<label>备注</label>
+					<input type="text" placeholder="请输入内容" id="remark" disabled="disabled"/>
+				</div>
+			</div>
+		</div>
+	</body>
+	<script>
+		mui.plusReady(function() {
+			var webview = plus.webview.currentWebview();
+			var id = webview.rowid;
+			var db = getDB();
+			var modify = document.getElementById("modify");
+			selectFromId(db, id);
+		   modify.addEventListener("tap",function(){
+		   	   mui.openWindow({url:"modifyContact.html",id:"modify",extras:{rowid:id}});
+		   });
+		   
+		   window.addEventListener("reload",function(){
+		   	selectFromId(db, id);
+		   });
+		});
+	</script>
+
+</html>

@@ -83,6 +83,7 @@ function selectFromId(db,id){
 			"select * from Contact where rowid = ?", [id],
 			function(tx, result) {
 				if(result.rows.length != 0) {
+					
 					$("#Username").val(result.rows.item(0).contactName);
 					var sex = result.rows.item(0).sex;
 					if(sex=="1"){
@@ -116,7 +117,7 @@ function updateContact(db,Contact){
 			"update Contact set contactName = ?,sex = ?, department = ?, positions = ?, tel = ?, phone = ?, eMail = ?, birthday = ?, hobby = ?, remark = ? where rowid = ?",
 			[Contact.contactName, Contact.sex, Contact.department, Contact.positions, Contact.tel, Contact.phone, Contact.eMail, Contact.birthday, Contact.hobby, Contact.remark, Contact.id],
 			function(tx, result) {	
-				console.log(Contact.eMail);
+				//console.log(Contact.eMail);
              	console.log('修改成功');	
          
 			},

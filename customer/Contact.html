@@ -91,7 +91,7 @@
 				plus.nativeUI.confirm("您确定要删除" + username + "吗?", function(e) {
 					if(e.index == 1) {
 						 
-                      var db = getDB();
+                      var db = getDB(); 
                      
                       deleteContact(db,rowId);  
 					 objectDelete.remove(); //在这里面无法得知$(this),所以只能用变量传递
@@ -119,7 +119,7 @@
             //联系人查看，传递rowid到modifyContact
             mui("#ContactList").on("tap",".mui-slider-handle",function(){
             	    var id = $(this).next().text();
-                 mui.openWindow({url:"modifyContact.html",id:"modifyContact",extras:{rowid:id}})
+                 mui.openWindow({url:"searchContact.html",id:"searchContact",extras:{rowid:id}})
             })
 		});
 	</script>

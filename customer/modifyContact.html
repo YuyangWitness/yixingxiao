@@ -21,7 +21,8 @@
 		}
 		
 		#sex div {
-			float: left;
+			float: left;			
+			height: 40px;
 		}
 		
 		.group {
@@ -77,11 +78,11 @@
 			<div class="mui-input-group group">
 				<div class="mui-input-row">
 					<label>手机</label>
-					<input type="number" id="tel" />
+					<input type="text" id="tel" />
 				</div>
 				<div class="mui-input-row">
 					<label>电话</label>
-					<input type="number" id="phone" />
+					<input type="text" id="phone" />
 				</div>
 				<div class="mui-input-row">
 					<label>邮箱</label>
@@ -91,7 +92,7 @@
 			<div class="mui-input-group group">
 				<div class="mui-input-row">
 					<label>生日</label>
-					<input type="number" id="birthday" />
+					<input type="text" id="birthday" />
 				</div>
 				<div class="mui-input-row">
 					<label>爱好</label>
@@ -143,7 +144,10 @@
 							if(e.index == 1) {
 								updateContact(db, Contact);
 								//console.log(Contact.eMail);
-								mui.back();
+								var searchView = plus.webview.getWebviewById("searchContact");
+								mui.fire(searchView,"reload");
+								plus.webview.currentWebview().close();
+								
 							}
 						}, "", ["否", "是"]);
 						}
