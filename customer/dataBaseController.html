@@ -48,7 +48,7 @@
 				db.transaction(function(tx){
 					tx.executeSql("select * from Contact",[],function(tx,rs){
 							for (var i = 0 ; i<rs.rows.length;i++) {
-								console.log(rs.rows.item(i).birthday);
+								console.log(rs.rows.item(i).phone);
 							}
 						
 					},function(){

@@ -10,7 +10,7 @@
 		<script type="text/javascript" src="../js/jquery-3.1.0.min.js"></script>
 		<script type="text/javascript" src="../js/pinyin.js"></script>
 		<script type="text/javascript" src="../js/Customer.js"></script>
-		<script type="text/javascript" src="../js/addContact.js" ></script>
+		<script type="text/javascript" src="../js/addContact.js" ></script> 
 	</head>
 	<style>
 		.mui-table-view {
@@ -34,13 +34,14 @@
 		<ul class="mui-table-view" id="ContactList">
 		</ul>
 		<!--
-        <button id="btn">打开数据操控</button>
-        -->
+       <button id="btn">打开数据操控</button>
+        --> 
 
 	</body> 
 	<script>
 		mui.plusReady(function() {   
 			var db = getDB();
+			createContactTable(db);
 			selectContactName(db);
 			window.addEventListener("addContact", function() {
 				plus.nativeUI.actionSheet({
