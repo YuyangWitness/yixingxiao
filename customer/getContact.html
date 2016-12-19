@@ -144,52 +144,78 @@
 				//console.log(usernameIndex.toString());
 				//把信息保存到HTML5数据库中
 				var db = getDB();
-			
 
-				for(var i = 0; i < username.length; i++) {
-					//					console.log(usernameIndex[i]);
-					//					plus.contacts.getAddressBook(plus.contacts.ADDRESSBOOK_PHONE, function(addressbook) { //获取通讯录信息
-					//						addressbook.find(null, function(contacts) {
-					var Contact = {
-						contactName: username[i],
-						sex: "",
-						department: "",
-						positions: "",
-						tel: "",
-						phone: "",
-						eMail: "",
-						birthday: "",
-						hobby: "",
-						remark: ""
-					};
-					console.log(username.length);
-					//createContactTable(db);
-					InsertContact(db, Contact);//多个信息插入有线程安全的问题出现！！！！！！！
-					
-					//console.log(index);
-					//						}, function(e) {
-					//							console.log("查询错误");
-					//						}, {
-					//							filter: [{
-					//								logic: "and",
-					//								field: "id",
-					//								value: "336"
-					//							}],
-					//							multi: true
-					//						});
-					//
-					//					}, function(e) {
-					//						console.log("打开通讯录错误");
-					//					});
-					
+				for(var j = 0; j < username.length; j++) {
+					console.log(usernameIndex[j]);
+					plus.contacts.getAddressBook(plus.contacts.ADDRESSBOOK_PHONE, function(addressbook) { //获取通讯录信息
+						addressbook.find(null, function(contacts) {
+						for(var i = 0; i < contacts.length; i++) {
+
+							//var id = contacts[i].id;
+							var displayname = contacts[i].displayName;
+							var phone = "";
+							var emails = "";
+							var dates = "";
+							var remark = "";
+							if(contacts[i].phoneNumbers.length>0){
+								phone = contacts[i].phoneNumbers[0].value;
+							}else{
+								phone = contacts[i].phoneNumbers; 
+							} 
+							
+							if(contacts[i].emails.length>0){
+								emails = contacts[i].emails[0].value;
+							}else{
+								emails = contacts[i].emails;
+							}
+
+                            	var dateNum = new Date(contacts[i].birthday);
+                            dates = dateNum.getFullYear()+"."+(dateNum.getMonth()+1)+"."+dateNum.getDate();			
+                            remark = contacts[i].note;
+                            
+                            var getContact = {
+								contactName: displayname,
+								sex: "",
+								department: "",
+								positions: "",
+								tel: "",
+								phone: phone,
+								eMail: emails,
+								birthday: dates,
+								hobby: "",
+								remark: remark
+							};
+							
+							console.log(getContact.phone);
+						    //createContactTable(db);
+							//InsertContact(db, Contact); //多个信息插入有线程安全的问题出现！！！！！！！
+						}
+						//console.log(username.length);							
+						}, function(e) {
+							console.log("查询错误");
+						}, {
+							filter: [{
+								logic: "or",
+								field: "id",
+								value: usernameIndex[j]
+							}],
+							multi: false
+						});
+
+					}, function(e) {
+						console.log("打开通讯录错误");
+					});
+
 				}
-				for(var i = 0; i < username.length; i++) {
-					//自定义事件，回传用户名称数组和用户index数组到列表页面
-					var addContactView = plus.webview.getWebviewById("Contact.html");
-					mui.fire(addContactView, "SelectUser", {username:username[i]});
-				}      
-					
-					mui.back();
+//				for(var i = 0; i < username.length; i++) {
+//					//自定义事件，回传用户名称数组和用户index数组到列表页面
+//					var addContactView = plus.webview.getWebviewById("Contact.html");
+//					mui.fire(addContactView, "SelectUser", {
+//						username: username[i]
+//					});
+//				}
+//
+//				mui.back();
 			})
 
 		});
