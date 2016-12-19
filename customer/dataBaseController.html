@@ -56,6 +56,31 @@
 					})
 				});
 			});
+			
+			
+			$("#dropCus").click(function(){
+				db.transaction(function(tx){
+					tx.executeSql("drop table Pcustomer",[],function(tx,rs){
+						console.log("删除成功");
+					},function(){
+						console.log("删除失败");
+					})
+				});
+			});
+			
+			$("#selectAllCus").click(function(){
+				db.transaction(function(tx){
+					tx.executeSql("select * from Pcustomer",[],function(tx,rs){
+							for (var i = 0 ; i<rs.rows.length;i++) {
+								console.log(rs.rows.item(i).name);
+							}
+						
+					},function(){
+						console.log("获取失败");
+					})
+				});
+			});
+			
 		}
 	</script>
 	<body>
@@ -67,6 +92,8 @@
 		    <button id="searchId">查找id</button>
 		<button id="deleteAll">删除全部</button>
 		<button id="selectAll">获取全部信息</button>
+		<button id="dropCus">删除客户信息</button>
+		<button id="selectAllCus">获取客户信息</button>
 		</div>
 		
 	</body>

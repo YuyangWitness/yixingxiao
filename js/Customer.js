@@ -231,7 +231,7 @@ function getDB() {
 function createTable(dataBase) {
 	dataBase.transaction(function(tx) {
 		tx.executeSql(
-			"create table if not exists customer (id REAL UNIQUE, name TEXT)", [],
+			"create table if not exists customer (name TEXT)", [],
 			function(tx, result) {
 				console.log('创建customer表成功');
 			},
@@ -244,7 +244,7 @@ function createTable(dataBase) {
 function createPTable(dataBase) {
 	dataBase.transaction(function(tx) {
 		tx.executeSql(
-			"create table if not exists Pcustomer (id REAL UNIQUE, name TEXT)", [],
+			"create table if not exists Pcustomer (name TEXT)", [],
 			function(tx, result) {
 				console.log('创建Pcustomer表成功');
 			},
@@ -315,20 +315,11 @@ function addPCustomer(dataBase, Cusname) {
 		//		dataBase.transaction(function(tx){
 		//			tx.executeSql("DELETE from Pcustomer WHERE id = 1",[],function(tx,rs){},function(tx,error){});
 		//		});
-		//		localStorage.removeItem("sqlNum");
-		var sqlNUm = localStorage.getItem("sqlNum");
-		if(sqlNUm == null) {
-			sqlNUm = 1;
-		} else {
-			sqlNUm = parseInt(sqlNUm) + 1;
-		}
+		//		localStorage.removeItem("sqlNum");		
 		//alert(sqlNUm);
 		dataBase.transaction(function(tx) {
-			tx.executeSql("Insert into Pcustomer values (?,?)", [sqlNUm, Cusname], function(tx, rs) {
-				console.log("保存数据成功");
-				localStorage.setItem("sqlNum", sqlNUm);			
-				plus.webview.getWebviewById("AddCustomer").close();
-				plus.webview.getWebviewById("BasicInformation.html").close();
+			tx.executeSql("Insert into Pcustomer values (?)", [Cusname], function(tx, rs) {
+				console.log("保存数据成功");				
 
 			}, function(tx, error) {
 				console.log("error messages" + error.message);

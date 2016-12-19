@@ -128,3 +128,14 @@ function updateContact(db,Contact){
 			});
 	});
 }
+
+
+function DropContact(db){
+	db.transaction(function(tx){
+					tx.executeSql("drop table Contact",[],function(tx,rs){
+						console.log("删除成功");
+					},function(){
+						console.log("删除失败");
+					})
+				});
+}

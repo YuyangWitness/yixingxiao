@@ -60,6 +60,10 @@
 		<div id="nav">
 
 		</div>
+		
+		<!--
+       <button id="btn">打开本地数据库操控</button>
+        --> 
 	</body>
 	<script>
 		mui.init({
@@ -72,7 +76,7 @@
 
       mui.plusReady(function(){
 		var db = getDB();
-		if(!db) {
+		if(!db) { 
 			alert("该浏览器不支持html5本地数据库存储");
 		}
 		createPTable(db);
@@ -110,7 +114,7 @@
 			createPTable(db);
 			addPCustomer(db,cusName);
 			$(".mui-table-view li").remove();
-			$("#nav a").remove();
+			$("#nav a").remove(); 
 			getPcustomer(db);
 		});
 		window.addEventListener("PrefreshFromName",function(event){//查询的时候更换列表
@@ -123,6 +127,11 @@
 					mask: "none"
 				});
 		});
+		
+		
+		$("#btn").click(function(){
+				mui.openWindow("dataBaseController.html","database"); 
+			});
       });
 	</script>
 

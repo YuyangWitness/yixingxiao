@@ -84,7 +84,7 @@
 			plus.contacts.getAddressBook(plus.contacts.ADDRESSBOOK_PHONE, function(addressbook) { //获取通讯录信息
 				// 可通过addressbook进行通讯录操作
 				//alert("aaaa");
-				var contact = addressbook.find(null, function(contacts) {
+				addressbook.find(null, function(contacts) {
 					var username = new Array();
 					var LinkList = new LinkedList();
 					if(contacts.length > 0) { //获取当前通讯录里面所有人
