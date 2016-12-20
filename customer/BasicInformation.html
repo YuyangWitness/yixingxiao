@@ -1,11 +1,12 @@
 <!doctype html>
 <html>
+
 	<head>
 		<meta charset="UTF-8">
 		<title></title>
 		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
 		<link href="../css/mui.min.css" rel="stylesheet" />
-		<script type="text/javascript" src="../js/mui.js" ></script>
+		<script type="text/javascript" src="../js/mui.js"></script>
 		<script type="text/javascript" src="../js/jquery-3.1.0.min.js"></script>
 		<script type="text/javascript" src="../js/Customer.js"></script>
 		<link rel="stylesheet" href="../css/mui.picker.css" />
@@ -13,8 +14,11 @@
 		<script type="text/javascript" src="../js/mui.picker.js"></script>
 		<script type="text/javascript" src="../js/mui.poppicker.js"></script>
 		<script type="text/javascript" src="../js/pick.data.js"></script>
-	    <link rel="stylesheet" href="../css/Customer.css" />
+		<script type="text/javascript" src="../js/jquery.validate.js"></script>
+		<script type="text/javascript" src="../js/messages_zh.js"></script>
+		<link rel="stylesheet" href="../css/Customer.css" />
 	</head>
+
 	<body>
 		<script type="text/javascript">
 			mui.init()
@@ -22,7 +26,7 @@
 		<form class="mui-input-group form1">
 			<div class="mui-input-row">
 				<label>客户名称</label>
-				<input type="text"  id="customerName">
+				<input type="text" id="customerName" name="customerName">
 			</div>
 			<div class="mui-input-row" id="customerRoad">
 				<label>				
@@ -38,27 +42,27 @@
 			</div>
 			<div class="mui-input-row">
 				<label class="label1">年销售额</label>
-				<input class="input1" type="number"  id="NumberPeople">
+				<input class="input1" type="number" id="NumberPeople">
 				<label class="label2">万元</label>
 			</div>
 			<div class="mui-input-row">
 				<label class="label1">工资总额</label>
-				<input class="input1" type="number"  id="NumberPeople">
+				<input class="input1" type="number" id="NumberPeople">
 				<label class="label2">万元</label>
 			</div>
 			<div class="mui-input-row">
 				<label class="label1">企业人数</label>
-				<input class="input1" type="number"  id="NumberPeople">
+				<input class="input1" type="number" id="NumberPeople">
 				<label class="label2">人</label>
 			</div>
 			<div class="address">
 				<label>公司地址</label>
 				<div class="addressDiv">
 					<div class="mui-input-row">
-						<input style="text-align: left;" type="text" placeholder="请选择省市"  id="Address">
+						<input style="text-align: left;" type="text" placeholder="请选择省市" id="Address">
 					</div>
 					<div class="mui-input-row">
-						<input style="text-align: left;" type="text" placeholder="请输入地址"  id="deatilAddress">
+						<input style="text-align: left;" type="text" placeholder="请输入地址" id="deatilAddress">
 					</div>
 				</div>
 			</div>
@@ -80,7 +84,7 @@
 	</body>
 	<script>
 		mui.plusReady(function() {
-			window.addEventListener('addCustomerForChild', function(event) {//父页面调用的事件，“确定”以后传递客户数据到主页面
+			window.addEventListener('addCustomerForChild', function(event) { //父页面调用的事件，“确定”以后传递客户数据到主页面
 				var dataBase = getDB();
 				var cusName = $("#customerName").val()
 				if(dataBase != null) {
@@ -123,7 +127,7 @@
 			//省市选择
 			var address = document.getElementById("Address");
 			address.addEventListener("tap", function() {
-				document.activeElement.blur();//关闭软键盘
+				document.activeElement.blur(); //关闭软键盘
 				var addressPicker = new mui.PopPicker({
 					layer: 2
 				});
@@ -136,9 +140,9 @@
 			//客户渠道选择
 			var customerRoad = document.getElementById("customerRoad");
 			customerRoad.addEventListener("tap", function() {
-document.activeElement.blur();
-				var roadPick = new mui.PopPicker();//获取弹出列表组建，假如是二联则在括号里面加入{layer:2}
-				roadPick.setData([{//设置弹出列表的信息，假如是二联，还需要一个children属性
+				document.activeElement.blur();
+				var roadPick = new mui.PopPicker(); //获取弹出列表组建，假如是二联则在括号里面加入{layer:2}
+				roadPick.setData([{ //设置弹出列表的信息，假如是二联，还需要一个children属性
 					value: "1",
 					text: "直销"
 				}, {
@@ -146,7 +150,7 @@ document.activeElement.blur();
 					text: "传统寿销养"
 				}]);
 
-				roadPick.show(function(item) {//弹出列表并在里面写业务代码
+				roadPick.show(function(item) { //弹出列表并在里面写业务代码
 					if($("#customerRoad").children().is('span')) {
 						$("#customerRoad").children('span').remove();
 						$("#customerRoad").append("<span>" + item[0].text + "</span>");
@@ -174,14 +178,14 @@ document.activeElement.blur();
 					}
 				});
 			});
-			
+
 			//企业性质选择
 			var companyNature = document.getElementById("companyNature");
-			companyNature.addEventListener("tap",function(){
+			companyNature.addEventListener("tap", function() {
 				document.activeElement.blur();
 				var companyPick = new mui.PopPicker();
 				companyPick.setData(companyDate);
-				companyPick.show(function(item){
+				companyPick.show(function(item) {
 					if($("#companyNature").children().is('span')) {
 						$("#companyNature").children('span').remove();
 						$("#companyNature").append("<span>" + item[0].text + "</span>");
@@ -191,14 +195,36 @@ document.activeElement.blur();
 					}
 				});
 			});
-			
+
 			//代理选择
-//			var proxyAddress = document.getElementById("proxyAddress");
-//			proxyAddress.addEventListener("tap",function(){
-//				var proxyPick = new mui.PopPicker();
-//				
-//			});
-//			
+			//			var proxyAddress = document.getElementById("proxyAddress");
+			//			proxyAddress.addEventListener("tap",function(){
+			//				var proxyPick = new mui.PopPicker();
+			//				
+			//			});
+			//			
+
+			//自定义事件验证信息
+			window.addEventListener("validationBasic", function() {
+				console.log("aaaa");
+				$(".form1").validate({
+					submitHandler: function() {
+						alert("submitted!");
+					},
+					rules: {
+						customerName: {
+							required: true,
+							maxlength: 30
+						}
+					},
+					messages: {
+						customerName: {
+							required: "*请输入用户名",
+							maxlength: "*最大30个字符"
+						}
+					}
+				})
+			});
 		});
 	</script>
 

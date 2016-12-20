@@ -86,6 +86,16 @@
 				if(webview == activeView) {//假如所按的页面已经显示，跳出事件
 					return;
 				}
+				var index = $(this).index();
+				if(index==2 || index==4 ){
+				   console.log($(this).index());
+				  if(!detailPage) {
+					detailPage = plus.webview.getWebviewById('BasicInformation.html');
+				}
+				  mui.fire(detailPage,"validationBasic",{});
+				}
+				
+				
 				plus.webview.show(webview);//显示所点击的页面
 				plus.webview.hide(activeView);//隐藏原活跃的页面
 
