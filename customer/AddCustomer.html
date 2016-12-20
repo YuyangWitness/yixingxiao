@@ -8,7 +8,7 @@
 		<link href="../css/mui.min.css" rel="stylesheet" />
 		<link rel="stylesheet" href="../css/Customer.css" />
 		<script type="text/javascript" src="../js/Customer.js"></script>
-		<script type="text/javascript" src="../js/addContact.js" ></script>
+		<script type="text/javascript" src="../js/addContact.js"></script>
 		<script type="text/javascript" src="../js/jquery-3.1.0.min.js"></script>
 	</head>
 	<style>
@@ -67,58 +67,70 @@
 				top: "85px",
 				bottom: "0px"
 			}
-			for(var i = 0; i < subpages.length; i++) {//添加子页面
-				var webview = plus.webview.create(subpages[i], subpages[i], styles);
 
-				if(index != i) {//非“基本信息”页面隐藏
-					webview.hide();
+			for(var i = 0; i < subpages.length; i++) { //添加子页面
+				var newPage = plus.webview.getWebviewById(subpages[i]);
+				if(!newPage) {
+					var webview = plus.webview.create(subpages[i], subpages[i], styles);
+
+					if(index != i) { //非“基本信息”页面隐藏
+						webview.hide(); 
+					}
+					wb.append(webview);
 				}
 
-				wb.append(webview);
 			}
 
 			var activeView = "BasicInformation.html";
-			
+
 			//页面切换开始
 			mui("#addCustomer").on("tap", "div", function(e) {
 				var webview = $(this).next().attr("href");
 				//alert(webview);
-				if(webview == activeView) {//假如所按的页面已经显示，跳出事件
+				if(webview == activeView) { //假如所按的页面已经显示，跳出事件
 					return;
 				}
 				var index = $(this).index();
-				if(index==2 || index==4 ){
-				   console.log($(this).index());
-				  if(!detailPage) {
-					detailPage = plus.webview.getWebviewById('BasicInformation.html');
+				if(index == 2 || index == 4) {
+					localStorage.setItem("Validation", "false");
+					//console.log($(this).index());
+					if(!detailPage) {
+						detailPage = plus.webview.getWebviewById('BasicInformation.html');
+					}
+					mui.fire(detailPage, "validationBasic", {});
 				}
-				  mui.fire(detailPage,"validationBasic",{});
-				}
-				
-				
-				plus.webview.show(webview);//显示所点击的页面
-				plus.webview.hide(activeView);//隐藏原活跃的页面
+				var validateVal = null;
+				var _this = $(this);
+				setTimeout(function() {//因为线程问题，不得不使用延时来获取正确的localStorage的值
+					validateVal = localStorage.getItem("Validation");
+					//console.log(validateVal);
+					if(validateVal == "true") {
+						plus.webview.show(webview); //显示所点击的页面
+						plus.webview.hide(activeView); //隐藏原活跃的页面
 
-				if(webview == "Contact.html") { //显示添加联系人图标
-					$("#addContact").show();
-				} else {
-					$("#addContact").hide();
-				}
-				
-               //转换样式class，换成active
-				$(this).removeClass("Notactive");
-				$(this).addClass("active");
-				//alert($(this).attr("class"));
-				
-                //转换样式class，换成Notactive
-				$("a[href='" + activeView + "']").prev().removeClass("active");
-				$("a[href='" + activeView + "']").prev().addClass("Notactive");
-                 
-                 //更换活跃的webview
-				activeView = webview;
+						if(webview == "Contact.html") { //显示添加联系人图标
+							$("#addContact").show();
+						} else {
+							$("#addContact").hide();
+						}
+
+						//转换样式class，换成active
+						_this.removeClass("Notactive");
+						_this.addClass("active");
+						//alert($(this).attr("class"));
+
+						//转换样式class，换成Notactive
+						$("a[href='" + activeView + "']").prev().removeClass("active");
+						$("a[href='" + activeView + "']").prev().addClass("Notactive");
+
+						//更换活跃的webview
+						activeView = webview;
+					}
+				}, 100);
+
 			})
 
-               //“取消”按钮事件
+			//“取消”按钮事件
 			document.getElementById("cancle").addEventListener("tap", function() {
 				plus.nativeUI.confirm("放弃操作?", function(e) {
 					if(e.index == 1) {
@@ -129,7 +141,7 @@
 					}
 				}, "", ["否", "是"]);
 			});
-			
+
 			//“确定”按钮事件
 			document.getElementById("confirm").addEventListener("tap", function() {
 				if(!detailPage) {
@@ -145,7 +157,7 @@
 
 			//添加通讯录信息自定义事件
 			document.getElementById("addContact").addEventListener("tap", function() {
-				
+
 				var ContactView = plus.webview.getWebviewById("Contact.html");
 				mui.fire(ContactView, "addContact", {});
 			});

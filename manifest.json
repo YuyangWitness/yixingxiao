@@ -253,7 +253,8 @@
 					"fonts/iconfont.ttf",
 					"css/Customer.css",
 					"js/jquery-3.1.0.min.js",
-					"customer/SearchUser.html"
+					"customer/SearchUser.html",
+					"customer/SearchPUser.html"
 				],
 				"refer": [
 					"customer/User.html",
@@ -294,14 +295,66 @@
 					"js/mui.min.js",
 					"css/mui.min.css",
 					"js/jquery-3.1.0.min.js",
-					"css/Customer.css"
+					"css/Customer.css",
+					"js/addContact.js"
 				],
-				"refer": [],
+				"refer": [
+					"customer/BusinessIntention.html",
+					"customer/Contact.html"
+				],
 				"priority": 0
 			},
 			"customer/BasicInformation.html": {
 				"resources": [
-					"fonts/mui.ttf"
+					"fonts/mui.ttf",
+					"css/mui.poppicker.css",
+					"js/mui.js",
+					"css/mui.picker.css",
+					"js/pick.data.js",
+					"js/mui.picker.js",
+					"js/mui.poppicker.js",
+					"js/messages_zh.js",
+					"js/jquery.validate.js",
+					"js/Customer.js",
+					"css/mui.min.css",
+					"css/Customer.css",
+					"js/jquery-3.1.0.min.js",
+					"customer/BasicInformation.html",
+					"js/jquery-1.9.1.min.js"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"customer/BusinessIntention.html": {
+				"resources": [
+					"fonts/mui.ttf",
+					"js/pick.data.js",
+					"js/mui.picker.js",
+					"js/mui.poppicker.js",
+					"css/mui.poppicker.css",
+					"js/mui.js",
+					"css/mui.picker.css"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"customer/SearchPUser.html": {
+				"resources": [
+					"js/Customer.js"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"customer/Contact.html": {
+				"resources": [
+					"js/pinyin.js"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"customer/SearchUser.html": {
+				"resources": [
+					"js/Customer.js"
 				],
 				"refer": [],
 				"priority": 0
@@ -309,7 +362,6 @@
 		},
 		"idle": {
 			"resources": [
-				"js/mui.js",
 				"css/mui.css"
 			]
 		}
