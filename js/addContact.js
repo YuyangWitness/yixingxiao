@@ -47,14 +47,24 @@ function deleteContact(db, id) {
 function selectContactName(db) {
 	db.transaction(function(tx) {
 		tx.executeSql(
-			"select contactName,rowid from Contact", [],
+			"select contactName,rowid,phone from Contact", [],
 			function(tx, result) {
 				if(result.rows.length != 0) {
 					for(var i = 0; i < result.rows.length; i++) {
-                           var Inner = '<li class="mui-table-view-cell">' +
+						var Inner = "";
+						if(result.rows.item(i).phone.length>0){ 
+							Inner = '<li class="mui-table-view-cell">' +
+							'<div class="mui-slider-right mui-disabled">' +
+							'<a class="mui-btn mui-btn-red">删除</a></div>' +
+							'<div class="mui-slider-handle">' + result.rows.item(i).contactName + '<a class="mui-icon mui-icon-phone mui-pull-right"></a></div><label>' +  result.rows.item(i).rowid + '</label></li>';
+							
+						}else{
+							 Inner = '<li class="mui-table-view-cell">' +
 							'<div class="mui-slider-right mui-disabled">' +
 							'<a class="mui-btn mui-btn-red">删除</a></div>' +
 							'<div class="mui-slider-handle">' + result.rows.item(i).contactName + '</div><label>' +  result.rows.item(i).rowid + '</label></li>';
+						}
+                          
 						$("#ContactList").append(Inner);//把姓名显示在页面上
 					}
 				}

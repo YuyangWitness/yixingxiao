@@ -149,12 +149,49 @@
 	},
 	"customer/Contact.html": {
 		"resources": [
-			"js/pinyin.js"
+			"js/pinyin.js",
+			"js/Customer.js",
+			"js/mui.min.js",
+			"css/mui.min.css",
+			"js/addContact.js",
+			"js/jquery-3.1.0.min.js",
+			"css/Customer.css",
+			"fonts/mui.ttf"
+		],
+		"refer": [
+			"customer/getContact.html",
+			"customer/searchContact.html"
 		]
 	},
 	"customer/SearchUser.html": {
 		"resources": [
-			"js/Customer.js"
+			"js/Customer.js",
+			"js/mui.min.js",
+			"css/mui.min.css",
+			"js/jquery-3.1.0.min.js"
+		]
+	},
+	"customer/getContact.html": {
+		"resources": [
+			"js/Customer.js",
+			"js/mui.min.js",
+			"js/pinyin.js",
+			"fonts/mui.ttf",
+			"css/mui.min.css",
+			"js/addContact.js",
+			"css/Customer.css",
+			"js/jquery-3.1.0.min.js"
+		]
+	},
+	"customer/searchContact.html": {
+		"resources": [
+			"js/Customer.js",
+			"js/mui.min.js",
+			"fonts/mui.ttf",
+			"css/mui.min.css",
+			"js/addContact.js",
+			"js/jquery-3.1.0.min.js",
+			"css/Customer.css"
 		]
 	}
 }

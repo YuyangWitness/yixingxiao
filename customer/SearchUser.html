@@ -7,12 +7,14 @@
 		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
 		<link href="../css/mui.min.css" rel="stylesheet" />
 		<script type="text/javascript" src="../js/jquery-3.1.0.min.js"></script>
-		<script type="text/javascript" src="../js/Customer.js" ></script>
+		<script type="text/javascript" src="../js/Customer.js"></script>
 	</head>
 	<style>
-	*{
-		margin: 0;padding: 0;
-	}
+		* {
+			margin: 0;
+			padding: 0;
+		}
+		
 		#switch {
 			position: relative;
 			background: #8F8F94;
@@ -20,7 +22,6 @@
 			height: 30px;
 			border-radius: 5px;
 			float: right;
-
 		}
 		
 		#switch div {
@@ -29,7 +30,6 @@
 			text-align: center;
 			line-height: 30px;
 			color: white;
-			
 		}
 		
 		#check {
@@ -59,7 +59,11 @@
 	<body>
 		<script src="../js/mui.min.js"></script>
 		<script type="text/javascript">
-			mui.init()
+			mui.init({
+				gestureConfig: {
+					drag: true
+				}
+			});
 		</script>
 		<div id="searchForm">
 			<form style=" background:#F3F3F3; padding-bottom: 10px;">
@@ -84,79 +88,79 @@
 		</div>
 	</body>
 	<script>
-	mui.plusReady(function(){
-		var disx = 0;
-		var disy = 0;
-		var check = document.getElementById("check");
-		var Gswitch = document.getElementById("switch");
-		var AllWidth = Gswitch.offsetWidth;
-		var selectType=1;
-		mui("#switch").on("dragstart", "#check", function(ev) {
-			var e = ev.detail||event;
-			disx = e.touches[0].clientX - check.offsetLeft - Gswitch.offsetLeft;
-			disy = e.touches[0].clientY - check.offsetTop - Gswitch.offsetTop;
-			// console.log(disx+":"+disy);
+		mui.plusReady(function() {
+			var selectType = 1;
+			var disx = 0;
+			var disy = 0;
+			var check = document.getElementById("check");
+			var Gswitch = document.getElementById("switch");
+			var AllWidth = Gswitch.offsetWidth;
+			mui("#switch").on("dragstart", "#check", function(ev) {
+				var e = ev.detail || event;
+				disx = e.touches[0].clientX - check.offsetLeft - Gswitch.offsetLeft;
+				disy = e.touches[0].clientY - check.offsetTop - Gswitch.offsetTop;
+				console.log(disx + ":" + disy);
+
+				mui("#switch").on("drag", "#check", function(ev) {
+
+					var e = ev.detail || event;
+					var l = e.touches[0].clientX - disx - Gswitch.offsetLeft;
+					var t = e.touches[0].clientY - disy - Gswitch.offsetTop;
+					//console.log(l + ":" + t);
+
+					if(l < 0) {
+						l = 0;
+					} else if(l > Gswitch.offsetWidth - check.offsetWidth - 5) {
+						l = Gswitch.offsetWidth - check.offsetWidth - 5;
+					}
+
+					if(t < 0) {
+						t = 0;
+					} else if(t > Gswitch.offsetHeight - check.offsetHeight - 5) {
+						t = Gswitch.offsetHeight - check.offsetHeight - 5;
+					}
+
+					check.style.top = t + "px";
+					check.style.left = l + "px";
+
+					if(l >= 0 && l <= AllWidth / 6) {
+						$("#check").text("仅年金");
+					} else if(l > AllWidth / 6 && l < (AllWidth / 6) * 3) {
+						$("#check").text("全部");
+
+					} else /*if(l>=Math.floor(AllWidth/6)*3&&l<((AllWidth/6)*4))*/ {
+						$("#check").text("仅团险");
+					}
+					return false;
+				});
+
+				mui("#switch").on("dragend", "#check", function(ev) {
+
+					var Cleft = check.offsetLeft;
+					if(Cleft > 0 && Cleft <= AllWidth / 6) {
+						check.style.left = 0 + "px";
+						selectType = 1; //年金为1
+					} else if(Cleft > AllWidth / 6 && Cleft < (AllWidth / 6) * 3 + 2) {
+						check.style.left = AllWidth / 3 + "px";
+						selectType = 0; //全部为0
+					} else if(Cleft > (AllWidth / 6) * 3 && Cleft < ((AllWidth / 6) * 4)) {
+						check.style.left = AllWidth / 3 * 2 - 4 + "px";
+						selectType = 2; //团险为2
+					}
+				});
+			});
+
+			$("#search").click(function() {
+				var CustomerName = $("#CusNe").val();
+				var db = getDB();
+				var user = plus.webview.getWebviewById("User.html");
+				alert(selectType);
+				mui.fire(user, "PrefreshFromName", {
+					customerName: CustomerName
+				});
+				//SelectCusFromName(db,CustomerName);
+			});
 		});
-
-		mui("#switch").on("drag", "#check", function(ev) {
-
-			var e = ev.detail||event;
-			var l = e.touches[0].clientX - disx - Gswitch.offsetLeft;
-			var t = e.touches[0].clientY - disy - Gswitch.offsetTop;
-			//console.log(l + ":" + t);
-
-			if(l < 0) {
-				l = 0;
-			} else if(l > Gswitch.offsetWidth - check.offsetWidth - 5) {
-				l = Gswitch.offsetWidth - check.offsetWidth - 5;
-			}
-
-			if(t < 0) {
-				t = 0;
-			} else if(t > Gswitch.offsetHeight - check.offsetHeight - 5) {
-				t = Gswitch.offsetHeight - check.offsetHeight - 5;
-			}
-
-			check.style.top = t + "px";
-			check.style.left = l + "px";
-			
-			
-			if(l>=0 && l<= AllWidth/6){
-				$("#check").text("仅年金");
-			}else if(l>AllWidth/6 && l<(AllWidth/6)*3){
-				$("#check").text("全部");
-				
-			}else /*if(l>=Math.floor(AllWidth/6)*3&&l<((AllWidth/6)*4))*/{
-				$("#check").text("仅团险");
-			}
-			
-		});
-
-          mui("#switch").on("dragend", "#check", function(ev) {
-          	
-          	var Cleft = check.offsetLeft;          	
-          	if(Cleft>0&&Cleft<=AllWidth/6){          	
-			   check.style.left = 0 + "px";
-			   selectType = 1;//年金为1
-          	}else if(Cleft>AllWidth/6 && Cleft<(AllWidth/6)*3+2){
-				check.style.left = AllWidth/3 + "px";
-				selectType = 0;//全部为0
-			}else if(Cleft>(AllWidth/6)*3&&Cleft<((AllWidth/6)*4)){
-				check.style.left = AllWidth/3*2- 4 + "px";
-				selectType = 2;//团险为2
-			}
-          });
-              
-              $("#search").click(function(){
-              	var CustomerName = $("#CusNe").val();
-              	var db = getDB();
-                var user = plus.webview.getWebviewById("User.html");
-                alert(selectType);
-			    mui.fire(user,"PrefreshFromName",{customerName:CustomerName});
-              	//SelectCusFromName(db,CustomerName);
-              });
-		});	
-	
 	</script>
 
 </html>

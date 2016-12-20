@@ -89,7 +89,13 @@
 					var LinkList = new LinkedList();
 					if(contacts.length > 0) { //获取当前通讯录里面所有人
 						for(var i = 0; i < contacts.length; i++) {
-							username[i] = contacts[i].displayName + "-" + contacts[i].id; //连接id和username，为后面筛选最准备
+							//console.log(contacts[i].phoneNumbers[0].value);
+							if(contacts[i].phoneNumbers.length > 0) {
+									phone = contacts[i].phoneNumbers[0].value;
+								} else {
+									phone = "";
+								}
+							username[i] = contacts[i].displayName + "," + contacts[i].id+ "," +  phone; //连接id和username，为后面筛选最准备
 						}
 						//console.log(username.toString());
 						LinkList = sortPY(username); //把联系人数组分类
@@ -132,14 +138,16 @@
 			confirm.addEventListener("tap", function() {
 				var username = new Array();
 				var usernameIndex = new Array();
+				var phoneArray = new Array();
 				//筛选已经被选中的checkbox
 				$("input:checked").each(function() {
-					var index = $(this).parent().prev().children('label').text(); //获取id
+					var index = $(this).parent().prev().children('label'); //获取id
 					var name = $(this).parent().prev().children('p').text(); //获取姓名
 					username.push(name);
-					usernameIndex.push(index);
+					usernameIndex.push(index.get(0).textContent);
 					//console.log(name);
-					//console.log(index);
+					phoneArray.push(index.get(1).textContent);
+					//console.log(index.get(1).textContent);
 				});
 				//console.log(usernameIndex.toString());
 				//把信息保存到HTML5数据库中
@@ -186,7 +194,7 @@
 									remark: remark
 								};
 
-								console.log(getContact.phone);
+								//console.log(getContact.phone);
 								createContactTable(db);
 								InsertContact(db, getContact); //多个信息插入有线程安全的问题出现！！！！！！！
 							}
@@ -210,12 +218,13 @@
 					//自定义事件，回传用户名称数组和用户index数组到列表页面
 					var addContactView = plus.webview.getWebviewById("Contact.html");
 					mui.fire(addContactView, "SelectUser", {
-						username: username[i]
+						username: username[i],
+						phone : phoneArray[i]
 					});
 				}
 
 				mui.back();
-			})
+		});
 
 		});
 	</script>

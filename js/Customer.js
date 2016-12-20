@@ -339,10 +339,10 @@ function createLiCheckBox(linkList){
 		if(data.length != 0) {
 			$("#nav").append("<a>" + word[index] + "</a>")//侧栏导航代码，哪种字母有名字存在侧栏导航就需要有该字母
 			for(var zindex = 0; zindex < data.length; zindex++) {//遍历数组，把信息放到<li>标签
-				var split = data[zindex].split("-");//分割信息，获取用户名字和index
+				var split = data[zindex].split(",");//分割信息，获取用户名字和index
 				if(zindex == 0) {//如果是字母数组第一个名字，就加入class＝"firstBlood"，为以后导航做准备
 					$(".mui-table-view").append('<li class="mui-table-view-cell firstBlood">' +
-						'<div class="UserName"><p>' + split[0] + '</p><label>'+split[1]+'</label></div><div class="mui-pull-right mui-checkbox">' +
+						'<div class="UserName"><p>' + split[0] + '</p><label>'+split[1]+'</label><label>'+split[2]+'</label></div><div class="mui-pull-right mui-checkbox">' +
 						'<input type="checkbox" /></div></li>');
 				} else {
 					$(".mui-table-view").append('<li class="mui-table-view-cell">' +

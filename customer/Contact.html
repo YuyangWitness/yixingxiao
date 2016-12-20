@@ -34,8 +34,8 @@
 		<ul class="mui-table-view" id="ContactList">
 		</ul>
 		<!--
-      
-        -->  <button id="btn">打开本地数据库操控</button>
+       <button id="btn">打开本地数据库操控</button>
+        --> 
 
 	</body> 
 	<script>
@@ -67,15 +67,26 @@
            //通讯录传回事件
 			window.addEventListener("SelectUser", function(event) {
 				var username = event.detail.username;//获取上个一页面的username数组 
+				var phone = event.detail.phone;
 				//var usernameIndex = event.detail.usernameIndex;						
 						//console.log("Add");
+						console.log(phone);
 						var index = getIndex(); 
-						console.log(index);
-						var Inner = '<li class="mui-table-view-cell">' +
+						var Inner = "";
+						//console.log(index);
+						if(phone.length>0){
+						 Inner = '<li class="mui-table-view-cell">' +
+							'<div class="mui-slider-right mui-disabled">' +
+							'<a class="mui-btn mui-btn-red">删除</a></div>' +
+							'<div class="mui-slider-handle">' + username + '<label>' + index + '</label><a class="mui-icon mui-icon-phone mui-pull-right"></a></div></li>';
+						}else{
+							 Inner = '<li class="mui-table-view-cell">' +
 							'<div class="mui-slider-right mui-disabled">' +
 							'<a class="mui-btn mui-btn-red">删除</a></div>' +
 							'<div class="mui-slider-handle">' + username + '</div><label>' + index + '</label></li>';
-						 $("#ContactList").append(Inner);//把姓名显示在页面上  
+						}
+						
+						 $("#ContactList").append(Inner);//把姓名显示在页面上   
 				
 				var newIndex = parseInt(index)+1;  
 				localStorage.setItem("index",newIndex);                  
