@@ -135,7 +135,7 @@
 				plus.nativeUI.confirm("放弃操作?", function(e) {
 					if(e.index == 1) {
 						mui.back();
-						var db = getDB();
+						var db = getDB();						
 						localStorage.removeItem("index");
 						DropContact(db);
 					}

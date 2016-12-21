@@ -27,7 +27,7 @@
 			width: 5%;
 			position: fixed;
 			right: 0px;
-			top: 48px;
+			top: 48px                                                                                                                                                                                             ;
 			text-align: center;
 		}
 		
@@ -90,12 +90,14 @@
 					if(contacts.length > 0) { //获取当前通讯录里面所有人
 						for(var i = 0; i < contacts.length; i++) {
 							//console.log(contacts[i].phoneNumbers[0].value);
-							if(contacts[i].phoneNumbers.length > 0) {
+							if(contacts[i].phoneNumbers.length > 0 ) {
 									phone = contacts[i].phoneNumbers[0].value;
 								} else {
-									phone = "";
+									phone = contacts[i].phoneNumbers;
 								}
-							username[i] = contacts[i].displayName + "," + contacts[i].id+ "," +  phone; //连接id和username，为后面筛选最准备
+								//console.log(contacts[i].phoneNumbers.length);
+							username[i] = contacts[i].displayName + "," + contacts[i].id+ "," + phone; //连接id和username，为后面筛选最准备
+						     //console.log(username)
 						}
 						//console.log(username.toString());
 						LinkList = sortPY(username); //把联系人数组分类

@@ -10,6 +10,7 @@
 		<script type="text/javascript" src="../js/jquery-3.1.0.min.js"></script>
 		<script type="text/javascript" src="../js/Customer.js"></script>
 		<script type="text/javascript" src="../js/addContact.js"></script>
+
 	</head>
 	<style>
 		.mui-radio {
@@ -37,7 +38,7 @@
 			mui.init()
 		</script>
 		<header class="mui-bar mui-bar-nav" id="head">
-			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<a class="mui-icon mui-icon-left-nav mui-pull-left" id="back"></a>
 			<h1 class="mui-title">联系人详情</h1>
 			<a class="mui-pull-right mui-icon mui-icon-compose" id="modify"></a>
 		</header>
@@ -116,6 +117,16 @@
 		   window.addEventListener("reload",function(){
 		   	selectFromId(db, id);
 		   });
+		   
+		   var back = document.getElementById("back");
+		   back.addEventListener("tap",function(){
+		   	   var ContactView = plus.webview.getWebviewById("Contact.html");
+		   	   ContactView.reload();
+		   	   setTimeout(function(){//利用延时器防止瞬间返回的时候闪屏,不好的用户体验
+		   	   	  mui.back();
+		   	   },500)
+		   	 
+;		   })
 		});
 	</script>
 

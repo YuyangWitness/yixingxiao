@@ -10,6 +10,8 @@
 		<script type="text/javascript" src="../js/jquery-3.1.0.min.js"></script>
 		<script type="text/javascript" src="../js/Customer.js"></script>
 		<script type="text/javascript" src="../js/addContact.js"></script>
+		<script type="text/javascript" src="../js/jquery.validate.js" ></script>
+		<script type="text/javascript" src="../js/messages_zh.js" ></script>
 	</head>
 	<style>
 		.mui-radio {
@@ -19,6 +21,8 @@
 		#sex div {
 			float: left;
 			height: 40px;
+			width: 30%;
+			overflow: hidden;
 		}
 		
 		.group {
@@ -41,106 +45,163 @@
 			<a class="mui-pull-right" id="confirm">确定</a>
 		</header>
 		<div class="mui-content">
-			<div class="mui-input-group">
-				<div class="mui-input-row">
-					<label>姓名</label>
-					<input type="text" id="Username" />
-				</div>
-				<div class="mui-input-row mui-input-range" id="sex">
-					<label>性别</label>
-					<div>
-						<p class="mui-radio mui-left">
-							<label>男</label>
-							<input name="radio1" type="radio" value="1">
-						</p>
+			<form id="contactForm">
+				<div class="mui-input-group">
+					<div class="mui-input-row">
+						<label>姓名</label>
+						<input type="text" id="Username" name="Username" maxlength="10" required/>
 					</div>
-					<div>
-						<p class="mui-radio mui-left">
-							<label>女</label>
-							<input name="radio1" type="radio" value="2">
-						</p>
+					<div class="mui-input-row mui-input-range" id="sex">
+						<label>性别</label>
+						<div>
+							<p class="mui-radio mui-left">
+								<label>男</label>
+								<input name="radio1" type="radio" value="1">
+							</p>
+						</div>
+						<div>
+							<p class="mui-radio mui-left">
+								<label>女</label>
+								<input name="radio1" type="radio" value="2">
+							</p>
+						</div>
+					</div>
+					<div class="mui-input-row">
+						<label>部门</label>
+						<input type="text" id="department" name="department" maxlength="2" />
+					</div>
+					<div class="mui-input-row">
+						<label>职务</label>
+						<input type="text" id="positions" name="positions" maxlength="10" />
 					</div>
 				</div>
-				<div class="mui-input-row">
-					<label>部门</label>
-					<input type="text" id="department"/>
-				</div>
-				<div class="mui-input-row">
-					<label>职务</label>
-					<input type="text" id="positions"/>
-				</div>
-			</div>
 
-			<div class="mui-input-group group">
-				<div class="mui-input-row">
-					<label>手机</label>
-					<input type="number" id="tel"/>
+				<div class="mui-input-group group">
+					<div class="mui-input-row">
+						<label>手机</label>
+						<input type="text" id="tel" name="tel" maxlength="11" number="true" />
+					</div>
+					<div class="mui-input-row">
+						<label>电话</label>
+						<input type="text" id="phone" name="phone" maxlength="15" />
+					</div>
+					<div class="mui-input-row">
+						<label>邮箱</label>
+						<input type="text" id="eMail" name="eMail" email="true" />
+					</div>
 				</div>
-				<div class="mui-input-row">
-					<label>电话</label>
-					<input type="number" id="phone"/>
+				<div class="mui-input-group group">
+					<div class="mui-input-row">
+						<label>生日</label>
+						<input type="text" id="birthday" name="birthday" />
+					</div>
+					<div class="mui-input-row">
+						<label>爱好</label>
+						<input type="text" id="hobby" name="hobby" maxlength="20" />
+					</div>
+					<div class="mui-input-row">
+						<label>备注</label>
+						<input type="text" placeholder="请输入内容" id="remark" name="remark" maxlength="100" />
+					</div>
+					<input type="submit" id="submitContact" />
 				</div>
-				<div class="mui-input-row">
-					<label>邮箱</label>
-					<input type="text" id="eMail"/>
-				</div>
-			</div>
-			<div class="mui-input-group group">
-				<div class="mui-input-row">
-					<label>生日</label>
-					<input type="number" id="birthday"/>
-				</div>
-				<div class="mui-input-row">
-					<label>爱好</label>
-					<input type="number" id="hobby"/>
-				</div>
-				<div class="mui-input-row">
-					<label>备注</label>
-					<input type="text" placeholder="请输入内容" id="remark"/>
-				</div>
-			</div>
+			</form>
 		</div>
 	</body>
 	<script>
 		mui.plusReady(function() {
 			var confirm = document.getElementById("confirm");
 			var db = getDB();
-			confirm.addEventListener("tap", function() {
-				var username = $("#Username").val();
-				var sex = $("input:checked").attr("value");
-			    var department = $("#department").val();
-			    var positions = $("#positions").val();
-			    var tel = $("#tel").val();
-			    var phone = $("#phone").val();
-			    var eMail = $("#eMail").val();
-			    var birthday = $("#birthday").val();
-			    var hobby = $("#hobby").val();
-			    var remark = $("#remark").val();
-				if(username == "") {
-					plus.nativeUI.alert("请填写联系人姓名");
-				} else {
-					//把数据存储HTML5本地数据库中
-					var Contact = {
-						contactName: username, 
-						sex: sex,
-						department: department,
-						positions: positions,
-						tel: tel,
-						phone: phone,
-						eMail: eMail,
-						birthday: birthday,
-						hobby: hobby,
-						remark: remark
+			$("#contactForm").validate({
+					debug: true,
+					messages: {
+						Username: {
+							maxlength: "姓名最多输入10个汉字",
+							required: "姓名不能为空"
+						},
+						department: {
+							maxlength: "部门最多输入20个汉字"
+						},
+						positions: {
+							maxlength: "职位最多输入10个汉字"
+						},
+						tel: {
+							maxlength: "手机号码最多输入11位数字",
+							number: "手机号码请输入数字"
+						},
+						phone: {
+							maxlength: "电话号码最多输入15位数字"
+
+						},
+						eMail: {
+							email: "请输入正确的邮箱格式"
+						},
+						hobby: {
+							maxlength: "爱好最多输入20个汉字"
+						},
+						remark: {
+							maxlength: "备注最多输入100个汉字"
+						}
+
+					},
+					errorPlacement: function(error, element) {
+						element.after(error);
+					},
+					submitHandler: function() {
+							var username = $("#Username").val();
+						var sex = $("input:checked").attr("value");
+						var department = $("#department").val();
+						var positions = $("#positions").val();
+						var tel = $("#tel").val();
+						var phone = $("#phone").val();
+						var eMail = $("#eMail").val();
+						var birthday = $("#birthday").val();
+						var hobby = $("#hobby").val();
+						var remark = $("#remark").val();						
+							//把数据存储HTML5本地数据库中
+							var Contact = {
+								contactName: username,
+								sex: sex,
+								department: department,
+								positions: positions,
+								tel: tel,
+								phone: phone,
+								eMail: eMail,
+								birthday: birthday,
+								hobby: hobby,
+								remark: remark
+							}
+							createContactTable(db);
+							InsertContact(db, Contact);
+							var contactView = plus.webview.getWebviewById("Contact.html");
+							mui.fire(contactView, "NewContact", {
+								username: username,
+								phone: phone,
+								department: department,
+								positions: positions
+							});
+							plus.webview.currentWebview().close();			
 					}
-					createContactTable(db);
-					InsertContact(db,Contact);
-					var contactView = plus.webview.getWebviewById("Contact.html");
-					mui.fire(contactView, "NewContact", {
-						username: username
-					});
-					plus.webview.currentWebview().close();
-				}
+
 			});
+
+		confirm.addEventListener("tap", function() {
+			$("#submitContact").click();
+			//console.log(document.body.innerHTML);
+			var errorVal = document.getElementById("contactForm").getElementsByClassName("error");
+			for(var i = 0; i < errorVal.length; i++) {
+				//console.log(errorVal[i].tagName);
+				if(errorVal[i].tagName == "LABEL") {
+					if(errorVal[i].textContent != "") {
+						plus.nativeUI.toast(errorVal[i].textContent);
+						break;
+					}
+
+				}
+
+			}
+
+		});
 		});
 	</script>
 

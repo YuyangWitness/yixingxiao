@@ -7,7 +7,7 @@
 		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
 		<link href="../css/mui.min.css" rel="stylesheet" />
 		<script type="text/javascript" src="../js/mui.js"></script>
-		<script type="text/javascript" src="../js/jquery-1.9.1.min.js" ></script>
+		<script type="text/javascript" src="../js/jquery-3.1.0.min.js" ></script>
 		<script type="text/javascript" src="../js/Customer.js"></script>
 		<link rel="stylesheet" href="../css/mui.picker.css" />
 		<link rel="stylesheet" href="../css/mui.poppicker.css" />
@@ -47,12 +47,12 @@
 			</div>
 			<div class="mui-input-row">
 				<label class="label1">工资总额</label>
-				<input class="input1" type="number" id="Total" name="Total" maxlength="2" number="true">
+				<input class="input1" type="number" id="Total" name="Total" maxlength="20" number="true">
 				<label class="label2">万元</label>
 			</div>
 			<div class="mui-input-row">
 				<label class="label1">企业人数</label>
-				<input class="input1" type="number" id="NumberPeople" name="NumberPeople" maxlength="2" number="true">
+				<input class="input1" type="number" id="NumberPeople" name="NumberPeople" maxlength="20" number="true">
 				<label class="label2">人</label>
 			</div>
 			<div class="address">
@@ -120,7 +120,7 @@
 					debug:true,
 					errorPlacement:function(error,element){
 						error.appendTo(element.parent().after());
-						error.display = "none";
+						//error.style.display = "none";
 					}
 					
 				});
@@ -199,9 +199,15 @@
 					if($("#customerRoad").children().is('span')) {
 						$("#customerRoad").children('span').remove();
 						$("#customerRoad").append("<span>" + item[0].text + "</span>");
-
+                      
 					} else {
 						$("#customerRoad").append("<span>" + item[0].text + "</span>");
+					}
+					
+					if(item[0].value=="1"){
+						$("#proxyAddress").hide();
+					}else{
+						$("#proxyAddress").show();
 					}
 				});
 			});
@@ -266,6 +272,13 @@
 					}
 
 				}
+				var validation = localStorage.getItem("Validation");
+				if((!$("#customerRoad").children().is('span')) && validation == "true") {
+					console.log(!$("#customerRoad").children().is('span'));
+				       localStorage.setItem("Validation", "false");
+				       plus.nativeUI.toast("请选择客户渠道");
+					} 
+				
              
 			});
 		});

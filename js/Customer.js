@@ -346,7 +346,7 @@ function createLiCheckBox(linkList){
 						'<input type="checkbox" /></div></li>');
 				} else {
 					$(".mui-table-view").append('<li class="mui-table-view-cell">' +
-						'<div class="UserName"><p>' + split[0] + '</p><label>'+split[1]+'</label></div><div class="mui-pull-right mui-checkbox">' +
+						'<div class="UserName"><p>' + split[0] + '</p><label>'+split[1]+'</label><label>'+split[2]+'</label></div><div class="mui-pull-right mui-checkbox">' +
 						'<input type="checkbox" /></div></li>');
 				}
 
