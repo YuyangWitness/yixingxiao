@@ -149,3 +149,28 @@ function DropContact(db){
 					})
 				});
 }
+
+function getBirthdayDate(){
+	$("#birthday").focus(function(){
+			document.activeElement.blur();
+			var dDate = new Date();
+			
+			dDate.setFullYear(dDate.getFullYear(), dDate.getMonth(), dDate.getDate());
+			var minDate = new Date();
+			minDate.setFullYear(1920, 0, 1);
+			var maxDate = new Date();
+			maxDate.setFullYear(2100, 11, 31);
+				
+			plus.nativeUI.pickDate(function(e){
+				var d = e.date;
+				$("#birthday").val(d.getFullYear() + "-" + (d.getMonth() + 1) + "-" + d.getDate());
+			},function(e){
+				$("#birthday").val("");
+			},{
+				title: "请选择日期",
+					date: dDate,
+					minDate: minDate,
+					maxDate: maxDate
+			});
+		});
+}
