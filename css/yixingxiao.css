@@ -1,0 +1,18 @@
+#head {
+	background-color: dodgerblue;
+	margin: 0;
+}
+
+#head a {
+	color: white;
+}
+
+#head h1 {
+	color: white;
+	font-weight: bold;
+}
+
+.mui-content>.mui-table-view:first-child {
+	margin-top: 0;
+	background: #efeff4;
+}

@@ -1,0 +1,132 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" href="../css/yixingxiao.css" />
+		<link rel="stylesheet" href="../css/yDate.css" />
+		<script type="text/javascript" src="../js/yDate2.js" ></script>
+		<script type="text/javascript" src="../js/jquery-3.1.0.min.js" ></script>
+		<style>
+			#select-button{
+				width: 100%;
+				height: 31px;
+				background: red;
+				margin-top: 10px;
+			}
+			#select-button button{
+				width: 50%;
+				float: left;
+				border: 0;
+				border-radius: 0;
+				background: #EEEEEE;
+			}
+			#select-button .active{
+				background : dodgerblue;
+			}
+			#getLog{
+				width: 100%;
+				height: 30px;
+				margin-top: 10px;
+			}
+			#getLog div{
+				
+				float: left;
+				width: 50%;
+				text-align: center;
+			}
+		</style>
+	</head>
+
+	<body>
+		<script src="../js/mui.min.js"></script>
+		<script type="text/javascript">
+			mui.init()
+		</script>
+		<header class="mui-bar mui-bar-nav" id="head">
+		    <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+		    <h1 class="mui-title">日程</h1>
+		</header>
+		<div class="mui-content">
+		    <p id="Thead">
+				<a class="mui-icon mui-icon-arrowleft mui-pull-left" id="prev"></a>
+				<span id="title">title:</span>
+				<a class="mui-icon mui-icon-arrowright mui-pull-right" id="after"></a>
+			</p>
+			<table id="CalenderTable">
+				<thead>
+					<tr>
+						<td class="week">周日</td>
+						<td>周一</td>
+						<td>周二</td>
+						<td>周三</td>
+						<td>周四</td>
+						<td>周五</td>
+						<td class="week">周六</td>
+					</tr>
+				</thead>
+				<tbody>
+				</tbody>
+			</table>
+			<div id="select-button">
+				<button class="mui-btn mui-btn-blue active" id="log">日志</button>
+				<button class="mui-btn mui-btn-blue" id="comment">收到的点评</button>
+			</div>
+			<div id="getLog">
+				<div id="addLog"><a class="mui-icon mui-icon-plusempty"></a><span>新增</span></div>
+				<div><a class="mui-icon mui-icon-checkmarkempty"></a><span>上报</span></div>
+			</div>
+			<div id="getComment"></div>
+		</div>
+	</body>
+   <script>
+   	    mui.plusReady(function(){
+   	        //开启日历插件
+   	    	     var yDate = new DateControl();
+   	    	     var canlender = document.getElementById("CalenderTable");
+   	    	     var tBody = canlender.getElementsByTagName("tbody");
+   	    	     yDate.init({
+   	    	     	"tBody":tBody
+   	    	     });
+   	    	     
+   	    	     var prev = document.getElementById("prev");
+   	    	     var after = document.getElementById("after");
+   	    	     prev.addEventListener("tap",function(){//日历插件上个月
+   	    	     	yDate.prev();
+   	    	     });
+   	    	     after.addEventListener("tap",function(){//日历插件下个月
+   	    	     	yDate.next();
+   	    	     })
+   	    	     
+   	    	     //选择按钮切换
+   	    	     mui("#select-button").on("tap","button",function(){
+   	    	     	   
+   	    	     	   $("#select-button button").removeClass("active");
+   	    	     	   $(this).addClass("active");
+   	    	     	   if($(this).attr("id")==="comment"){
+   	    	     	   	   $("#getLog").hide();
+   	    	     	   	   $("#getComment").show();
+   	    	     	   }else{
+   	    	     	   	$("#getLog").show();
+   	    	     	   	 $("#getComment").hide()
+   	    	     	   }
+   	    	     	   
+   	    	     });
+   	    	     
+   	    	     //新增按钮打开页面
+   	    	     var addLog = document.getElementById("addLog");
+   	    	     addLog.addEventListener("tap",function(){
+   	    	     	mui.openWindow({
+   	    	     		url:"addSchedule.html",
+   	    	     		id:"addSchedule",
+   	    	     		extras:{
+   	    	     			getDate:""//把当前选定的日期传递进去
+   	    	     		}
+   	    	     	});
+   	    	     });
+   	    });
+   </script>
+</html>

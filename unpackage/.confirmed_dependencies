@@ -1,197 +1,197 @@
 {
-	"customer.html": {
-		"resources": [
-			"js/mui.min.js",
-			"fonts/mui.ttf",
-			"css/iconfont.css",
-			"css/mui.min.css",
-			"fonts/iconfont.ttf",
-			"css/Customer.css",
-			"User.html",
-			"js/jquery-3.1.0.min.js",
-			"PUser.html",
-			"test4.html",
-			"SearchUser.html"
-		],
-		"refer": [
-			"User.html",
-			"PUser.html",
-			"test4.html",
-			"SearchUser.html"
-		]
-	},
-	"User.html": {
-		"resources": [
-			"js/mui.min.js",
-			"css/mui.min.css",
-			"img/jian.png",
-			"css/Customer.css",
-			"js/jquery-3.1.0.min.js",
-			"js/pinyin.js",
-			"js/Customer.js"
-		],
-		"refer": []
-	},
-	"PUser.html": {
-		"resources": [
-			"js/Customer.js",
-			"js/mui.min.js",
-			"js/pinyin.js",
-			"css/mui.min.css",
-			"css/Customer.css",
-			"js/jquery-3.1.0.min.js",
-			"img/jian.png"
-		],
-		"refer": []
-	},
-	"test4.html": {
-		"resources": [
-			"js/mui.min.js",
-			"css/mui.min.css",
-			"js/jquery-3.1.0.min.js"
-		],
-		"refer": []
-	},
-	"customer/customer.html": {
-		"resources": [
-			"js/mui.min.js",
-			"fonts/mui.ttf",
-			"css/iconfont.css",
-			"css/mui.min.css",
-			"fonts/iconfont.ttf",
-			"css/Customer.css",
-			"js/jquery-3.1.0.min.js",
-			"customer/SearchUser.html",
-			"customer/SearchPUser.html"
-		],
-		"refer": [
-			"customer/SearchUser.html",
-			"customer/User.html",
-			"customer/PUser.html",
-			"customer/AddCustomer.html",
-			"customer/SearchPUser.html"
-		]
-	},
-	"customer/PUser.html": {
-		"resources": [
-			"js/Customer.js",
-			"js/pinyin.js",
-			"js/mui.min.js",
-			"css/mui.min.css",
-			"css/Customer.css",
-			"js/jquery-3.1.0.min.js",
-			"img/jian.png"
-		]
-	},
-	"customer/User.html": {
-		"resources": [
-			"js/Customer.js",
-			"js/pinyin.js",
-			"js/mui.min.js",
-			"css/mui.min.css",
-			"css/Customer.css",
-			"js/jquery-3.1.0.min.js"
-		]
-	},
-	"customer/AddCustomer.html": {
-		"resources": [
-			"customer/BasicInformation.html",
-			"js/Customer.js",
-			"js/mui.min.js",
-			"css/mui.min.css",
-			"js/jquery-3.1.0.min.js",
-			"css/Customer.css",
-			"js/addContact.js"
-		],
-		"refer": [
-			"customer/BasicInformation.html",
-			"customer/BusinessIntention.html",
-			"customer/Contact.html"
-		]
-	},
-	"customer/BasicInformation.html": {
-		"resources": [
-			"fonts/mui.ttf",
-			"css/mui.poppicker.css",
-			"js/mui.js",
-			"css/mui.picker.css",
-			"js/pick.data.js",
-			"js/mui.picker.js",
-			"js/mui.poppicker.js",
-			"js/messages_zh.js",
-			"js/jquery.validate.js",
-			"js/Customer.js",
-			"css/mui.min.css",
-			"css/Customer.css",
-			"js/jquery-3.1.0.min.js",
-			"customer/BasicInformation.html",
-			"js/jquery-1.9.1.min.js"
-		],
-		"refer": [
-			"customer/BasicInformation.html"
-		]
-	},
-	"customer/BusinessIntention.html": {
-		"resources": [
-			"fonts/mui.ttf",
-			"js/pick.data.js",
-			"js/mui.picker.js",
-			"js/mui.poppicker.js",
-			"css/mui.poppicker.css",
-			"js/mui.js",
-			"css/mui.picker.css"
-		]
-	},
-	"customer/SearchPUser.html": {
-		"resources": [
-			"js/Customer.js"
-		]
-	},
-	"customer/Contact.html": {
-		"resources": [
-			"js/pinyin.js",
-			"js/Customer.js",
-			"js/mui.min.js",
-			"css/mui.min.css",
-			"js/addContact.js",
-			"js/jquery-3.1.0.min.js",
-			"css/Customer.css",
-			"fonts/mui.ttf"
-		],
-		"refer": [
-			"customer/getContact.html",
-			"customer/searchContact.html"
-		]
-	},
-	"customer/SearchUser.html": {
-		"resources": [
-			"js/Customer.js",
-			"js/mui.min.js",
-			"css/mui.min.css",
-			"js/jquery-3.1.0.min.js"
-		]
-	},
-	"customer/getContact.html": {
-		"resources": [
-			"js/Customer.js",
-			"js/mui.min.js",
-			"js/pinyin.js",
-			"fonts/mui.ttf",
-			"css/mui.min.css",
-			"js/addContact.js",
-			"css/Customer.css",
-			"js/jquery-3.1.0.min.js"
-		]
-	},
-	"customer/searchContact.html": {
-		"resources": [
-			"js/Customer.js",
-			"js/mui.min.js",
-			"fonts/mui.ttf",
-			"css/mui.min.css",
-			"js/addContact.js",
-			"js/jquery-3.1.0.min.js",
-			"css/Customer.css"
-		]
-	}
+  "customer.html": {
+    "resources": [
+      "js/mui.min.js",
+      "fonts/mui.ttf",
+      "css/iconfont.css",
+      "css/mui.min.css",
+      "fonts/iconfont.ttf",
+      "css/Customer.css",
+      "User.html",
+      "js/jquery-3.1.0.min.js",
+      "PUser.html",
+      "test4.html",
+      "SearchUser.html"
+    ],
+    "refer": [
+      "User.html",
+      "PUser.html",
+      "test4.html",
+      "SearchUser.html"
+    ]
+  },
+  "User.html": {
+    "resources": [
+      "js/mui.min.js",
+      "css/mui.min.css",
+      "img/jian.png",
+      "css/Customer.css",
+      "js/jquery-3.1.0.min.js",
+      "js/pinyin.js",
+      "js/Customer.js"
+    ],
+    "refer": []
+  },
+  "PUser.html": {
+    "resources": [
+      "js/Customer.js",
+      "js/mui.min.js",
+      "js/pinyin.js",
+      "css/mui.min.css",
+      "css/Customer.css",
+      "js/jquery-3.1.0.min.js",
+      "img/jian.png"
+    ],
+    "refer": []
+  },
+  "test4.html": {
+    "resources": [
+      "js/mui.min.js",
+      "css/mui.min.css",
+      "js/jquery-3.1.0.min.js"
+    ],
+    "refer": []
+  },
+  "customer/customer.html": {
+    "resources": [
+      "js/mui.min.js",
+      "fonts/mui.ttf",
+      "css/iconfont.css",
+      "css/mui.min.css",
+      "fonts/iconfont.ttf",
+      "css/Customer.css",
+      "js/jquery-3.1.0.min.js",
+      "customer/SearchUser.html",
+      "customer/SearchPUser.html"
+    ],
+    "refer": [
+      "customer/SearchUser.html",
+      "customer/User.html",
+      "customer/PUser.html",
+      "customer/AddCustomer.html",
+      "customer/SearchPUser.html"
+    ]
+  },
+  "customer/PUser.html": {
+    "resources": [
+      "js/Customer.js",
+      "js/pinyin.js",
+      "js/mui.min.js",
+      "css/mui.min.css",
+      "css/Customer.css",
+      "js/jquery-3.1.0.min.js",
+      "img/jian.png"
+    ]
+  },
+  "customer/User.html": {
+    "resources": [
+      "js/Customer.js",
+      "js/pinyin.js",
+      "js/mui.min.js",
+      "css/mui.min.css",
+      "css/Customer.css",
+      "js/jquery-3.1.0.min.js"
+    ]
+  },
+  "customer/AddCustomer.html": {
+    "resources": [
+      "customer/BasicInformation.html",
+      "js/Customer.js",
+      "js/mui.min.js",
+      "css/mui.min.css",
+      "js/jquery-3.1.0.min.js",
+      "css/Customer.css",
+      "js/addContact.js"
+    ],
+    "refer": [
+      "customer/BasicInformation.html",
+      "customer/BusinessIntention.html",
+      "customer/Contact.html"
+    ]
+  },
+  "customer/BasicInformation.html": {
+    "resources": [
+      "fonts/mui.ttf",
+      "css/mui.poppicker.css",
+      "js/mui.js",
+      "css/mui.picker.css",
+      "js/pick.data.js",
+      "js/mui.picker.js",
+      "js/mui.poppicker.js",
+      "js/messages_zh.js",
+      "js/jquery.validate.js",
+      "js/Customer.js",
+      "css/mui.min.css",
+      "css/Customer.css",
+      "js/jquery-3.1.0.min.js",
+      "customer/BasicInformation.html",
+      "js/jquery-1.9.1.min.js"
+    ],
+    "refer": [
+      "customer/BasicInformation.html"
+    ]
+  },
+  "customer/BusinessIntention.html": {
+    "resources": [
+      "fonts/mui.ttf",
+      "js/pick.data.js",
+      "js/mui.picker.js",
+      "js/mui.poppicker.js",
+      "css/mui.poppicker.css",
+      "js/mui.js",
+      "css/mui.picker.css"
+    ]
+  },
+  "customer/SearchPUser.html": {
+    "resources": [
+      "js/Customer.js"
+    ]
+  },
+  "customer/Contact.html": {
+    "resources": [
+      "js/pinyin.js",
+      "js/Customer.js",
+      "js/mui.min.js",
+      "css/mui.min.css",
+      "js/addContact.js",
+      "js/jquery-3.1.0.min.js",
+      "css/Customer.css",
+      "fonts/mui.ttf"
+    ],
+    "refer": [
+      "customer/getContact.html",
+      "customer/searchContact.html"
+    ]
+  },
+  "customer/SearchUser.html": {
+    "resources": [
+      "js/Customer.js",
+      "js/mui.min.js",
+      "css/mui.min.css",
+      "js/jquery-3.1.0.min.js"
+    ]
+  },
+  "customer/getContact.html": {
+    "resources": [
+      "js/Customer.js",
+      "js/mui.min.js",
+      "js/pinyin.js",
+      "fonts/mui.ttf",
+      "css/mui.min.css",
+      "js/addContact.js",
+      "css/Customer.css",
+      "js/jquery-3.1.0.min.js"
+    ]
+  },
+  "customer/searchContact.html": {
+    "resources": [
+      "js/Customer.js",
+      "js/mui.min.js",
+      "fonts/mui.ttf",
+      "css/mui.min.css",
+      "js/addContact.js",
+      "js/jquery-3.1.0.min.js",
+      "css/Customer.css"
+    ]
+  }
 }
