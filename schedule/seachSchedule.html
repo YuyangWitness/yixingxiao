@@ -117,13 +117,18 @@
    	    	     });
    	    	     
    	    	     //新增按钮打开页面
-   	    	     var addLog = document.getElementById("addLog");
+   	    	     var addLog = document.getElementById("addLog"); 	    	     
    	    	     addLog.addEventListener("tap",function(){
+   	    	     	var nowDate = yDate.setting.nowDay;//获取当前显示的年月
+   	    	     	var activeDate = document.getElementsByClassName("now")[0];//获取当前选中的日
+   	    	     	//新建一个Date,把所有年月日信息放进入
+   	    	     	var getDate = new Date(nowDate.getFullYear(),nowDate.getMonth(),activeDate.textContent);
+   	    	     	//alert(getDate);
    	    	     	mui.openWindow({
    	    	     		url:"addSchedule.html",
    	    	     		id:"addSchedule",
    	    	     		extras:{
-   	    	     			getDate:""//把当前选定的日期传递进去
+   	    	     			getDate:getDate//把当前选定的日期传递进去
    	    	     		}
    	    	     	});
    	    	     });

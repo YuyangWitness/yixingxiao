@@ -6,6 +6,7 @@
 		<title></title>
 		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
 		<link href="../css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" href="../css/yixingxiao.css" />
 		<link rel="stylesheet" href="../css/Customer.css" />
 		<script src="../js/mui.min.js"></script>
 		<script type="text/javascript" src="../js/jquery-3.1.0.min.js"></script>
@@ -24,7 +25,8 @@
 			line-height: 40px;
 		}
 		
-		#sex div {
+		#sex p {
+			color: black;
 			float: left;
 			height: 40px;
 			width: 30%;
@@ -62,19 +64,15 @@
 						<input type="text" id="Username" name="Username" maxlength="10" required/>
 					</div>
 					<div class="mui-input-row mui-input-range" id="sex">
-						<label>性别</label>
-						<div>
+						<label>性别</label>						
 							<p class="mui-radio mui-left">
 								<label>男</label>
 								<input name="radio1" type="radio" value="1" required>
-							</p>
-						</div>
-						<div>
+							</p>											
 							<p class="mui-radio mui-left">
 								<label>女</label>
 								<input name="radio1" type="radio" value="2">
-							</p>
-						</div>
+							</p>						
 					</div>
 					<div class="mui-input-row">
 						<label>部门</label>

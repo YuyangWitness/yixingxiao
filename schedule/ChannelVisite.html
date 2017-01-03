@@ -1,0 +1,57 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" href="../css/yixingxiao.css" />
+		<style>
+		   #textAreaDiv{
+		   	 height: 100px;
+		   }
+			#textAreaDiv textarea{
+				height: 100px;
+			}
+		</style>
+	</head>
+
+	<body>
+		<script src="../js/mui.min.js"></script>
+		<script type="text/javascript">
+			mui.init()
+		</script>
+		<header class="mui-bar mui-bar-nav" id="head">
+			<p class="mui-pull-left" id="cancle">取消</p>
+			<h1 class="mui-title">新增渠道拜访</h1>
+			<p class="mui-pull-right" id="confirm">确定</p>
+		</header>
+		<div class="mui-content">
+		    <form class="mui-input-group">
+			   <div class="mui-input-row">
+			   	<label>日期</label>
+			   </div>
+			   <div class="mui-input-row">
+			   	<label><a class="mui-navigate-right">渠道名称</a></label>	
+			   </div>
+			   <div class="mui-input-row">
+			   	<label><a class="mui-navigate-right">拜访事项</a></label>
+			   </div>
+			   <div class="mui-input-row">
+			   	 <label><a class="mui-navigate-right"></a></label>
+			   </div>
+			   <div class="mui-input-row">
+			   	<label>接待人</label>
+			   	<input type="text" />
+			   </div>
+			   <div class="mui-input-row" id="textAreaDiv">
+			   	<label>备注</label>
+			   	<textarea placeholder="请输入内容"></textarea>
+			   </div>
+		    </form>
+		</div>
+		
+	</body>
+
+</html>

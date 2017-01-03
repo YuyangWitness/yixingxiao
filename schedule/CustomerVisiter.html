@@ -1,0 +1,81 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" href="../css/yixingxiao.css" />
+		<style>
+			#FollowVisiter label {
+				width: 48%;
+			}
+			
+			#FollowVisiter p {
+				width: 26%;
+				float: left;
+				color: black;
+			}
+			.iconPlus{
+				line-height: 40px;
+				margin-right: 10px;
+			}
+			.SpecialRow{
+				background:#AAAAAA;
+				color: white;
+			}
+		</style>
+	</head>
+
+	<body>
+		<script src="../js/mui.min.js"></script>
+		<script type="text/javascript">
+			mui.init()
+		</script>
+		<header class="mui-bar mui-bar-nav" id="head">
+			<p class="mui-pull-left" id="cancle">取消</p>
+			<h1 class="mui-title">新增客户拜访</h1>
+			<p class="mui-pull-right" id="confirm">确定</p>
+		</header>
+		<div class="mui-content">
+			<form class="mui-input-group">
+				<div class="mui-input-row">
+					<label><a class="mui-navigate-right">客户名称</a></label>
+				</div>
+				<div class="mui-input-row">
+					<label><a class="mui-navigate-right">拜访事项</a></label>
+				</div>
+				<div class="mui-input-row" id="FollowVisiter">
+					<label>是否有主管陪访</label>
+					<p class="mui-radio mui-left">
+						<label>是</label>
+						<input type="radio" name="visiter" value="1" />
+					</p>
+					<p class="mui-radio mui-left">
+						<label>否</label>
+						<input type="radio" name="visiter" value="0" />
+					</p>
+
+				</div>
+				<div class="mui-input-row">
+					<label>接待人</label>
+					<input type="text" />
+				</div>
+				<div class="mui-input-row SpecialRow">
+					<label>业务意向</label>
+					<a class="mui-icon mui-icon-plus iconPlus mui-pull-right"></a>
+				</div>
+				<div class="mui-input-row SpecialRow">
+					<label>联系人</label>
+					<a class="mui-icon mui-icon-plus iconPlus mui-pull-right"></a>
+				</div>
+				<!--
+                mui自带的mui-input-row设定了最后一个背景为官方设定的，无法用class改变，所以最后一行添加一个mui-input-row
+                -->
+				<div class="mui-input-row" style="display: none;"></div>
+			</form>
+		</div>
+	</body>
+
+</html>

@@ -105,8 +105,8 @@ function DateControl() {
 		var monthAllDay = new Date(year, month + 1, 0);
 		var monthStart = new Date(year, month, 1);
 		var isOtherMonth = false;
-		//六列信息自动增长
-		for(var j = 0; j < 5; j++) { //日历每个界面总共有6行
+		//七列信息自动增长
+		for(var j = 0; j < 6; j++) { //日历每个界面总共有6行
 			//一行信息自动增长
 			var innerHtml = "";
 			var tr = document.createElement("tr");
