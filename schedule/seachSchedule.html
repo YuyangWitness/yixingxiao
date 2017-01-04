@@ -8,36 +8,40 @@
 		<link href="../css/mui.min.css" rel="stylesheet" />
 		<link rel="stylesheet" href="../css/yixingxiao.css" />
 		<link rel="stylesheet" href="../css/yDate.css" />
-		<script type="text/javascript" src="../js/yDate2.js" ></script>
-		<script type="text/javascript" src="../js/jquery-3.1.0.min.js" ></script>
+		<script type="text/javascript" src="../js/yDate2.js"></script>
+		<script type="text/javascript" src="../js/jquery-3.1.0.min.js"></script>
 		<style>
-			#select-button{
+			#select-button {
 				width: 100%;
 				height: 31px;
 				background: red;
 				margin-top: 10px;
 			}
-			#select-button button{
+			
+			#select-button button {
 				width: 50%;
 				float: left;
 				border: 0;
 				border-radius: 0;
 				background: #EEEEEE;
 			}
-			#select-button .active{
-				background : dodgerblue;
+			
+			#select-button .active {
+				background: dodgerblue;
 			}
-			#getLog{
+			
+			#getLog {
 				width: 100%;
 				height: 30px;
 				margin-top: 10px;
 			}
-			#getLog div{
-				
+			
+			#getLog div {
 				float: left;
 				width: 50%;
 				text-align: center;
 			}
+			
 		</style>
 	</head>
 
@@ -47,11 +51,11 @@
 			mui.init()
 		</script>
 		<header class="mui-bar mui-bar-nav" id="head">
-		    <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
-		    <h1 class="mui-title">日程</h1>
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<h1 class="mui-title">日程</h1>
 		</header>
 		<div class="mui-content">
-		    <p id="Thead">
+			<p id="Thead">
 				<a class="mui-icon mui-icon-arrowleft mui-pull-left" id="prev"></a>
 				<span id="title">title:</span>
 				<a class="mui-icon mui-icon-arrowright mui-pull-right" id="after"></a>
@@ -71,67 +75,87 @@
 				<tbody>
 				</tbody>
 			</table>
+			
 			<div id="select-button">
 				<button class="mui-btn mui-btn-blue active" id="log">日志</button>
 				<button class="mui-btn mui-btn-blue" id="comment">收到的点评</button>
 			</div>
 			<div id="getLog">
-				<div id="addLog"><a class="mui-icon mui-icon-plusempty"></a><span>新增</span></div>
-				<div><a class="mui-icon mui-icon-checkmarkempty"></a><span>上报</span></div>
+				<div id="addLog">
+					<a class="mui-icon mui-icon-plusempty"></a><span>新增</span></div>
+				<div>
+					<a class="mui-icon mui-icon-checkmarkempty"></a><span>上报</span></div>
 			</div>
 			<div id="getComment"></div>
 		</div>
 	</body>
-   <script>
-   	    mui.plusReady(function(){
-   	        //开启日历插件
-   	    	     var yDate = new DateControl();
-   	    	     var canlender = document.getElementById("CalenderTable");
-   	    	     var tBody = canlender.getElementsByTagName("tbody");
-   	    	     yDate.init({
-   	    	     	"tBody":tBody
-   	    	     });
-   	    	     
-   	    	     var prev = document.getElementById("prev");
-   	    	     var after = document.getElementById("after");
-   	    	     prev.addEventListener("tap",function(){//日历插件上个月
-   	    	     	yDate.prev();
-   	    	     });
-   	    	     after.addEventListener("tap",function(){//日历插件下个月
-   	    	     	yDate.next();
-   	    	     })
-   	    	     
-   	    	     //选择按钮切换
-   	    	     mui("#select-button").on("tap","button",function(){
-   	    	     	   
-   	    	     	   $("#select-button button").removeClass("active");
-   	    	     	   $(this).addClass("active");
-   	    	     	   if($(this).attr("id")==="comment"){
-   	    	     	   	   $("#getLog").hide();
-   	    	     	   	   $("#getComment").show();
-   	    	     	   }else{
-   	    	     	   	$("#getLog").show();
-   	    	     	   	 $("#getComment").hide()
-   	    	     	   }
-   	    	     	   
-   	    	     });
-   	    	     
-   	    	     //新增按钮打开页面
-   	    	     var addLog = document.getElementById("addLog"); 	    	     
-   	    	     addLog.addEventListener("tap",function(){
-   	    	     	var nowDate = yDate.setting.nowDay;//获取当前显示的年月
-   	    	     	var activeDate = document.getElementsByClassName("now")[0];//获取当前选中的日
-   	    	     	//新建一个Date,把所有年月日信息放进入
-   	    	     	var getDate = new Date(nowDate.getFullYear(),nowDate.getMonth(),activeDate.textContent);
-   	    	     	//alert(getDate);
-   	    	     	mui.openWindow({
-   	    	     		url:"addSchedule.html",
-   	    	     		id:"addSchedule",
-   	    	     		extras:{
-   	    	     			getDate:getDate//把当前选定的日期传递进去
-   	    	     		}
-   	    	     	});
-   	    	     });
-   	    });
-   </script>
+	<script>
+		mui.plusReady(function() {
+			//日期必须是排序的传入，可以减少内部循环事件
+			var getDateFromSql = ["2017-1-3", "2017-1-3", "2017-2-5", "2017-2-8"];
+			var i = 0,
+				getDateFromSqlLen = getDateFromSql.length;
+			var YearArray = new Array();
+			var MonthArray = new Array();
+			var DayArray = new Array();
+			for(; i < getDateFromSqlLen; i++) {
+				var tempArray = getDateFromSql[i].split("-");
+				YearArray.push(tempArray[0]);
+				MonthArray.push(tempArray[1]);
+				DayArray.push(tempArray[2]);
+			}
+			//开启日历插件
+			var yDate = new DateControl();
+			var canlender = document.getElementById("CalenderTable");
+			var tBody = canlender.getElementsByTagName("tbody");
+			yDate.init({
+				"tBody": tBody,
+				"YearArray": YearArray,
+				"MonthArray": MonthArray,
+				"DayArray": DayArray
+			});
+
+			var prev = document.getElementById("prev");
+			var after = document.getElementById("after");
+			prev.addEventListener("tap", function() { //日历插件上个月
+				yDate.prev();
+			});
+			after.addEventListener("tap", function() { //日历插件下个月
+				yDate.next();
+			})
+
+			//选择按钮切换
+			mui("#select-button").on("tap", "button", function() {
+
+				$("#select-button button").removeClass("active");
+				$(this).addClass("active");
+				if($(this).attr("id") === "comment") {
+					$("#getLog").hide();
+					$("#getComment").show();
+				} else {
+					$("#getLog").show();
+					$("#getComment").hide()
+				}
+
+			});
+
+			//新增按钮打开页面
+			var addLog = document.getElementById("addLog");
+			addLog.addEventListener("tap", function() {
+				var nowDate = yDate.setting.nowDay; //获取当前显示的年月
+				var activeDate = document.getElementsByClassName("now")[0]; //获取当前选中的日
+				//新建一个Date,把所有年月日信息放进入
+				var getDate = new Date(nowDate.getFullYear(), nowDate.getMonth(), activeDate.textContent);
+				alert(getDate);
+				mui.openWindow({
+					url: "addSchedule.html",
+					id: "addSchedule",
+					extras: {
+						getDate: getDate //把当前选定的日期传递进去
+					}
+				});
+			});
+		});
+	</script>
+
 </html>

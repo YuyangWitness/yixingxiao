@@ -1,50 +1,64 @@
-#Thead{
+#Thead {
 	margin-top: 10px;
 	width: 100%;
 	text-align: center;
 }
-#Thead span{
+
+#Thead span {
 	margin: 0 20%;
 }
- #CalenderTable {
- 	width: 100%;
- 	text-align: center;
- }
- 
- #CalenderTable td {
- 	padding: 6px;
- 	border: 1px solid #ccc;
- }
- 
- #CalenderTable thead {
- 	font-size: 10px;
- 	color:#000000;
- }
- 
- #CalenderTable thead .week {
- 	color: #007AFF;
- }
- #CalenderTable tbody{
- 	font-size: 14px;
- }
- #CalenderTable .week {
- 	background: #DDDDDD;
- }
- 
- #CalenderTable .now {
- 	background: #DDDDDD;
- 	box-shadow: inset 0px 0px 1px #000000;
- 	-moz-box-shadow: inset 0px 0px 1px #000000;
- 	-webkit-box-shadow: inset 0px 0px 1px #000000;
- 	border: 0;
- }
- 
- .otherMonth {
- 	color: #999999;
- }
- 
- 
- #title {
- 	color: #000000;
- 	font-size: 20px;
- }
+
+#CalenderTable {
+	width: 100%;
+	text-align: center;
+}
+
+#CalenderTable td {
+	padding: 6px;
+	border: 1px solid #ccc;
+	position: relative;
+}
+
+#CalenderTable thead {
+	font-size: 10px;
+	color: #000000;
+}
+
+#CalenderTable thead .week {
+	color: #007AFF;
+}
+
+#CalenderTable tbody {
+	font-size: 14px;
+}
+
+#CalenderTable .week {
+	background: #DDDDDD;
+}
+
+#CalenderTable .now {
+	background: #DDDDDD;
+	box-shadow: inset 0px 0px 1px #000000;
+	-moz-box-shadow: inset 0px 0px 1px #000000;
+	-webkit-box-shadow: inset 0px 0px 1px #000000;
+	border: 0;
+}
+
+.otherMonth {
+	color: #999999;
+}
+
+#title {
+	color: #000000;
+	font-size: 20px;
+}
+
+#CalenderTable .haveDay {
+	position: absolute;
+	width: 5px;
+	height: 5px;
+	border-radius: 45px;
+	background: red;
+	right: 5px;
+	top: 5px;
+}
