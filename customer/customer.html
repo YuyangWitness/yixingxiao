@@ -45,6 +45,7 @@
 	</body>
 	<script>
 		mui.plusReady(function() {
+			
 			var subpage = ["PUser.html", "User.html"];
 			var wb = plus.webview.currentWebview();
 			var styles = {
@@ -59,7 +60,7 @@
 			});
 			var webviewF =  plus.webview.create("SearchPUser.html", "SearchPUser", {
 				top: "43px",
-				height: "120px"
+				height: "130px"
 
 			});
 			wb.append(webviewF);
@@ -156,7 +157,8 @@
 				mui.openWindow("AddCustomer.html", "AddCustomer", {
 					show: {
 						autoShow: true, //页面loaded事件发生后自动显示，默认为true
-						aniShow: "zoom-fade-out", //页面显示动画，默认为”slide-in-right“；						
+						aniShow: "zoom-fade-out", //页面显示动画，默认为”slide-in-right“；	
+						
 					}
 				})
 			});

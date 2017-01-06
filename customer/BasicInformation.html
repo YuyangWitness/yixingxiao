@@ -8,7 +8,7 @@
 		<link href="../css/mui.min.css" rel="stylesheet" />
 		<link rel="stylesheet" href="../css/yixingxiao.css" />
 		<script type="text/javascript" src="../js/mui.js"></script>
-		<script type="text/javascript" src="../js/jquery-3.1.0.min.js" ></script>
+		<script type="text/javascript" src="../js/jquery-3.1.0.min.js"></script>
 		<script type="text/javascript" src="../js/Customer.js"></script>
 		<link rel="stylesheet" href="../css/mui.picker.css" />
 		<link rel="stylesheet" href="../css/mui.poppicker.css" />
@@ -43,7 +43,7 @@
 			</div>
 			<div class="mui-input-row">
 				<label class="label1">年销售额</label>
-				<input class="input1" type="number" id="Revenue" name="Revenue" maxlength="20" number="true">
+				<input class="input1" type="number" id="Revenue" name="Revenue" maxlength="2" number="true">
 				<label class="label2">万元</label>
 			</div>
 			<div class="mui-input-row">
@@ -85,48 +85,47 @@
 	</body>
 	<script>
 		mui.plusReady(function() {
-		$("#BasicForm").validate({
-					submitHandler: function() {				
-					localStorage.setItem("Validation","true");
+			$("#BasicForm").validate({
+				submitHandler: function() {
+					localStorage.setItem("Validation", "true");
 					//console.log(localStorage.getItem("Validation"));
 				},
-					messages: {
-						customerName: {
-							required: "客户名称不能为空",
-							maxlength:"客户名称最多30个汉字"
-						},
-						Revenue : {
-							maxlength:"年销售额最多输入20个数字",
-							number:"年销售额只能输入数字"
-						},
-						Total :{
-							maxlength:"工资总额最多输入20个数字",
-							number:"工资总额只能输入数字"
-						},
-						NumberPeople :{
-							maxlength:"企业人数最多输入20个数字",
-							number:"企业人数只能输入数字"
-						},
-						deatilAddress : {
-							maxlength:"企业地址最多输入50个汉字"
-						},
-						plan : {
-							maxlength:"福利计划最多输入50个汉字"
-						},
-						company :{
-							maxlength:"保险公司最多输入50个汉字"
-						}
-					
+				messages: {
+					customerName: {
+						required: "客户名称不能为空",
+						maxlength: "客户名称最多30个汉字"
 					},
-					debug:true,
-					errorPlacement:function(error,element){
-						error.appendTo(element.parent().after());
-						//error.style.display = "none";
+					Revenue: {
+						maxlength: "年销售额最多输入20个数字",
+						number: "年销售额只能输入数字"
+					},
+					Total: {
+						maxlength: "工资总额最多输入20个数字",
+						number: "工资总额只能输入数字"
+					},
+					NumberPeople: {
+						maxlength: "企业人数最多输入20个数字",
+						number: "企业人数只能输入数字"
+					},
+					deatilAddress: {
+						maxlength: "企业地址最多输入50个汉字"
+					},
+					plan: {
+						maxlength: "福利计划最多输入50个汉字"
+					},
+					company: {
+						maxlength: "保险公司最多输入50个汉字"
 					}
-					
-				});
-				
-				
+
+				},
+				debug: true,
+				errorPlacement: function(error, element) {
+					error.appendTo(element.parent().after());
+					//error.style.display = "none";
+				}
+
+			});
+
 			window.addEventListener('addCustomerForChild', function(event) { //父页面调用的事件，“确定”以后传递客户数据到主页面
 				var dataBase = getDB();
 				var cusName = $("#customerName").val()
@@ -152,7 +151,7 @@
 
 			var numb = 1;
 			$("#Plan").click(function() {
-				if(numb>5){
+				if(numb > 5) {
 					return;
 				}
 				var now = $(this);
@@ -173,6 +172,8 @@
 			//省市选择
 			var address = document.getElementById("Address");
 			address.addEventListener("tap", function() {
+
+				//AddcustomerMask();
 				document.activeElement.blur(); //关闭软键盘
 				var addressPicker = new mui.PopPicker({
 					layer: 2
@@ -200,14 +201,14 @@
 					if($("#customerRoad").children().is('span')) {
 						$("#customerRoad").children('span').remove();
 						$("#customerRoad").append("<span>" + item[0].text + "</span>");
-                      
+
 					} else {
 						$("#customerRoad").append("<span>" + item[0].text + "</span>");
 					}
-					
-					if(item[0].value=="1"){
+
+					if(item[0].value == "1") {
 						$("#proxyAddress").hide();
-					}else{
+					} else {
 						$("#proxyAddress").show();
 					}
 				});
@@ -276,12 +277,38 @@
 				var validation = localStorage.getItem("Validation");
 				if((!$("#customerRoad").children().is('span')) && validation == "true") {
 					console.log(!$("#customerRoad").children().is('span'));
-				       localStorage.setItem("Validation", "false");
-				       plus.nativeUI.toast("请选择客户渠道");
-					} 
-				
-             
+					localStorage.setItem("Validation", "false");
+					plus.nativeUI.toast("请选择客户渠道");
+				}
+
 			});
+
+			var Revenue = document.getElementById("Revenue");
+			Revenue.addEventListener("blur", function() {
+				var str = Revenue.value;
+				var match = regNum(str);
+				if(match) {
+					console.log(parseFloat(match[0]));
+				} else {
+					Revenue.value = ""; 
+					plus.nativeUI.toast("请输入正确的年销售额，可精确到后两位");
+				}
+              
+			});
+			
+			var Total = document.getElementById("Total");
+			Total.addEventListener("blur",function(){
+				var str = Total.value;
+				var match = regNum(str);
+				if(match) {
+					console.log(parseFloat(match[0]));
+				} else {
+					Total.value = ""; 
+					plus.nativeUI.toast("请输入正确的工资总额，可精确到后两位");
+				}
+			});
+			
+			
 		});
 	</script>
 

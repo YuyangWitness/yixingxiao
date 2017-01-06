@@ -55,7 +55,7 @@
 			self.ok = self.panel.querySelector('.mui-poppicker-btn-ok');
 			self.cancel = self.panel.querySelector('.mui-poppicker-btn-cancel');
 			self.body = self.panel.querySelector('.mui-poppicker-body');
-			self.mask = $.createMask();
+		    self.mask = $.createMask();
 			self.cancel.innerText = self.options.buttons[0];
 			self.ok.innerText = self.options.buttons[1];
 			self.cancel.addEventListener('tap', function(event) {

@@ -132,11 +132,13 @@ function DateControl() {
 		for(; x < haveDayLen; x++) {
 			if(this.setting.day.toString() === haveDate[x]) {
 				getHtml = haveInnerHtml;
+				
 				var newElem = document.createElement("div");
 				newElem.id = this.setting.day.toString();
 				newElem.className = "Allhave";
 				newElem.style.display = 'none';
 				selectButton.previousElementSibling.insertAdjacentElement("afterend", newElem);
+				
 				var newElemP = document.createElement("p");
 				newElemP.textContent = "这是一个客户拜访"+x
 				newElem.appendChild(newElemP);
@@ -187,13 +189,14 @@ function DateControl() {
 		//alert(this.setting.MonthArray);
 		//alert(haveDate);
 		//七列信息自动增长
-		for(var j = 0; j < 6; j++) { //日历每个界面总共有6行
+		var j = 0, i = 0;
+		for(; j < 6; j++) { //日历每个界面总共有6行
 			//一行信息自动增长
 			var innerHtml = "";
 			var tr = document.createElement("tr");
 			var flage = "";
 			//console.log(getDay)
-			for(var i = 0; i < 7; i++) { //日历每个界面总共有七列
+			for(; i < 7; i++) { //日历每个界面总共有七列
 				if(this.setting.getDayFlage < monthStart.getDay()) { //判断是否上个月
 					if(i == 0 || i == 6) { //是否为周末
 						innerHtml = '<td class="week otherMonth">' + new Date(year, month, this.setting.getDayFlage - monthStart.getDay() + 1).getDate() + '</td>';

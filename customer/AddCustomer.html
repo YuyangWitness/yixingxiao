@@ -54,6 +54,8 @@
 	</body>
 	<script>
 		mui.plusReady(function() {
+			//var nwaiting = plus.nativeUI.showWaiting();//显示原生等待框
+			//AddcustomerMaskNone();
 			var subpages = ['BasicInformation.html', 'BusinessIntention.html', 'Contact.html'];
 			var wb = plus.webview.currentWebview();
 			var detailPage = null;
@@ -67,13 +69,13 @@
 				var newPage = plus.webview.getWebviewById(subpages[i]);
 				if(!newPage) {
 					var webview = plus.webview.create(subpages[i], subpages[i], styles);
-
+                  
 					if(index != i) { //非“基本信息”页面隐藏
 						webview.hide(); 
 					}
 					wb.append(webview);
 				}
-
+             // nwaiting.close();
 			}
 
 			var activeView = "BasicInformation.html";
@@ -122,8 +124,8 @@
 						activeView = webview;
 					}
 				}, 100);
-
-			})
+              
+			});
 
 			//“取消”按钮事件
 			document.getElementById("cancle").addEventListener("tap", function() {
@@ -156,6 +158,8 @@
 				var ContactView = plus.webview.getWebviewById("Contact.html");
 				mui.fire(ContactView, "addContact", {});
 			});
+			
+		
 
 		});
 	</script>
