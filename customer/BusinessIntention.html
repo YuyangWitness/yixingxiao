@@ -125,7 +125,7 @@
 			//客户评判选择器
 			var customerJudge = document.getElementById("customerJudge");
 			customerJudge.addEventListener("tap", function() {
-				document.activeElement.blur();
+				document.activeElement.blur(); 
 				var judgePick = new mui.PopPicker();
 				judgePick.setData(judgeData);
 				judgePick.show(function(item) {

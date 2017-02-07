@@ -228,18 +228,6 @@ function getDB() {
 
 }
 
-function createTable(dataBase) {
-	dataBase.transaction(function(tx) {
-		tx.executeSql(
-			"create table if not exists customer (name TEXT)", [],
-			function(tx, result) {
-				console.log('创建customer表成功');
-			},
-			function(tx, error) {
-				console.log('创建customer表失败:' + error.message);
-			});
-	});
-}
 
 function createPTable(dataBase) {
 	dataBase.transaction(function(tx) {
@@ -252,35 +240,6 @@ function createPTable(dataBase) {
 				console.log('创建Pcustomer表失败:' + error.message);
 			});
 	});
-}
-
-function getCustomer(dataBase) {
-	dataBase.transaction(function(tx) {
-		tx.executeSql("select * from customer", [],
-			function(tx, result) {
-				//var username = ["赵丽颖", "李易峰", "陈伟霆", "王者荣耀", "Angularjs", "beats", "成昆", "赵小刀", "1111风云", "Lol", "helloworld", "五杀", "团灭", "发型",
-				//	"姓名大全", "分类", "一亿个多", "勇士", "惨淡", "请于", "终于", "重于", "人生", "编程", "Google", "Claire", "hellow", "卢兰", "牛腩", "陆运", "丰田", "北京", "上海", "太平", "跳转", "运行", "工具", "面试", "帮助", "试图", "开发", "赣州", "上官云", "临客", "天下大同", "不屈不挠", "勇往直前", "电灯", "手机", "iphone", "323", "123ddd", "444", "1233aa", "1233xxx", "444fff", "baby", "文件"
-				//];
-				var username = new Array();
-				var LinkList = new LinkedList();
-				if(result.rows.length != 0) {
-					for(var index = 0; index < result.rows.length; index++) {
-						username[index] = result.rows.item(index).name;
-						//console.log(result.rows.item(index));		
-					}
-				} else {
-					console.log("没有任何客户资料");
-				}
-				LinkList = sortPY(username);
-				//LinkList.show();
-				createLi(LinkList);
-			},
-			function() {
-				console.log("查询失败")
-			}
-
-		);
-	})
 }
 
 function getPcustomer(dataBase) {

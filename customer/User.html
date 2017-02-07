@@ -16,6 +16,7 @@
 		<script type="text/javascript" src="../js/Customer.js"></script>
 		<script type="text/javascript" src="../js/pinyin.js"></script>
 		<link rel="stylesheet" href="../css/Customer.css" />
+		<script type="text/javascript" src="../js/des3.js" ></script>
 
 	</head>
 	<style>
@@ -71,16 +72,90 @@
 			}
 		});
 
-		window.onload = function() {
+		mui.plusReady(function() {
 			var db = getDB();
 			if(!db) {
 				alert("该浏览器不支持html5本地数据库存储");
 			}
-			createTable(db);
-			getCustomer(db);
+			//createTable(db); 
+			//getCustomer(db);
 			//var linkList = new LinkedList();
 			//linkList = sortPY(username);
 			//linkList.show();
+			//ajax请求获取信息
+			var _LOGIN_EMPID = DES3.encrypt({
+				alg: 'des-ede3-cbc', //3des-cbc  
+				autoPad: true,
+				key: 'cntaipingcomcn@lx100$#36',
+				plaintext: '1249603',
+				iv: '74756231'
+			});
+
+			var _LOGIN_SALES_CODE = DES3.encrypt({
+				alg: 'des-ede3-cbc', //3des-cbc  
+				autoPad: true,
+				key: 'cntaipingcomcn@lx100$#36',
+				plaintext: '00001214601',
+				iv: '74756231'
+			});
+			var reqHeader = {
+				//所有请求必传字段
+				"PLANT_ID": "xszcUat",
+				"OS_TYPE": "2",
+				"DEVICE_TYPE": "1",
+				"DEVICE_CODE": "DFFEB1F1-AE6C-4CB9-80D7-275BC547C810",
+				"RELEASE_TYPE": "0",
+				"APP_TYPE": "1",
+				"VERSION_ID": "2.1.9",
+				"UP_FLAG": "cancel",
+				//insForward
+				"INS_TYPE": "insForward",
+				//session的请求头
+				"INTSERV_TOKEN": "ST-4940-SCRXY6B3xbemU7RKnWdL",
+				"_LOGIN_USER_NAME": "huanggr0628",
+				"_LOGIN_EMPID": _LOGIN_EMPID,
+				"_LOGIN_SALES_CODE": _LOGIN_SALES_CODE,
+			};
+			var reqData = {
+				//接口方法名
+				"methodName": "queryCustomers",
+				//接口参数，各参数的json串用&&按序拼接
+				"args": "{'admin':false,'empId':'1249603','salesCode':'00001214601'}&&{}&&{}&&{}"
+
+			};
+			mui.ajax("http://10.1.14.93:7001/tpp_entry/jsonforward", {
+				headers: reqHeader,
+				type: 'post',
+				dataType: "json",
+				data: reqData,
+				success: function(data) {
+
+					if(data !== null){
+						if(data.customers.length !==0){
+							var i = 0
+							var username = [];
+							for (; i < data.customers.length; i++) {
+								
+								username[i] = data.customers[i].organization.orgName;
+							}
+							 alert(JSON.stringify(data));
+							LinkList = sortPY(username);
+							
+				            createLi(LinkList);
+						}
+					}
+
+				},
+				error: function(xhr, type, errorThrown) {
+					//异常处理；
+					console.log(xhr.statusText);
+					plus.nativeUI.toast("fail");
+				}
+
+			});
+
+
+
 			var navP = $("#nav").children("a");
 
 			mui("#nav").on("hold", "a", function() {
@@ -116,7 +191,7 @@
 					mask: "none"
 				});
 			});
-		}
+		});
 	</script>
 
 </html>

@@ -43,7 +43,7 @@
 			</div>
 			<div class="mui-input-row">
 				<label class="label1">年销售额</label>
-				<input class="input1" type="number" id="Revenue" name="Revenue" maxlength="2" number="true">
+				<input class="input1" type="number" id="Revenue" name="Revenue" maxlength="20" number="true">
 				<label class="label2">万元</label>
 			</div>
 			<div class="mui-input-row">
@@ -90,6 +90,17 @@
 					localStorage.setItem("Validation", "true");
 					//console.log(localStorage.getItem("Validation"));
 				},
+				rules : {
+					NumberPeople : {
+						digits:true
+					},
+					Revenue :{
+						positiveFloat:true
+					},
+					Total : {
+						positiveFloat:true
+					}
+				},
 				messages: {
 					customerName: {
 						required: "客户名称不能为空",
@@ -97,15 +108,19 @@
 					},
 					Revenue: {
 						maxlength: "年销售额最多输入20个数字",
-						number: "年销售额只能输入数字"
+						number: "年销售额只能输入数字",
+						positiveFloat : "年销售额只能精确到两位数"
 					},
 					Total: {
 						maxlength: "工资总额最多输入20个数字",
-						number: "工资总额只能输入数字"
+						number: "工资总额只能输入数字",	
+						positiveFloat : "工资总额只能精确到两位数"
 					},
 					NumberPeople: {
 						maxlength: "企业人数最多输入20个数字",
-						number: "企业人数只能输入数字"
+						digits: "企业人数只能输入正整数",
+						number: "企业人数只能输入数字",
+						
 					},
 					deatilAddress: {
 						maxlength: "企业地址最多输入50个汉字"
@@ -120,11 +135,30 @@
 				},
 				debug: true,
 				errorPlacement: function(error, element) {
+					
 					error.appendTo(element.parent().after());
 					//error.style.display = "none";
+					
 				}
+				
 
 			});
+			
+			jQuery.validator.addMethod("positiveFloat",function(value,elem){
+				
+				 if(value.indexOf(".") !== -1){
+				    var temp = value.indexOf(".");
+				    if(value.length - temp < 4){
+				    	  return true;
+				    }else{
+				    	   return false;
+				    }
+				}
+				 
+				 return true;
+                    
+			},"精确到后两位");
+			
 
 			window.addEventListener('addCustomerForChild', function(event) { //父页面调用的事件，“确定”以后传递客户数据到主页面
 				var dataBase = getDB();
@@ -283,30 +317,7 @@
 
 			});
 
-			var Revenue = document.getElementById("Revenue");
-			Revenue.addEventListener("blur", function() {
-				var str = Revenue.value;
-				var match = regNum(str);
-				if(match) {
-					console.log(parseFloat(match[0]));
-				} else {
-					Revenue.value = ""; 
-					plus.nativeUI.toast("请输入正确的年销售额，可精确到后两位");
-				}
-              
-			});
 			
-			var Total = document.getElementById("Total");
-			Total.addEventListener("blur",function(){
-				var str = Total.value;
-				var match = regNum(str);
-				if(match) {
-					console.log(parseFloat(match[0]));
-				} else {
-					Total.value = ""; 
-					plus.nativeUI.toast("请输入正确的工资总额，可精确到后两位");
-				}
-			});
 			
 			
 		});
