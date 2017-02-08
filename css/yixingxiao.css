@@ -1,5 +1,5 @@
 #head {
-	background-color: dodgerblue;
+	background-color:  #6495ED;
 	margin: 0;
 }
 
@@ -10,6 +10,10 @@
 }
 
 #head a {
+	color: white;
+}
+
+#head span {
 	color: white;
 }
 

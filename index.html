@@ -1,0 +1,278 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" href="css/index.css" />
+		<link rel="stylesheet" href="css/yixingxiao.css" />
+		<style>
+		/*whole css*/
+		   body{
+		   	font-size: 1em;
+		   }
+		   /*main css*/
+			.List {
+				width: 100%;
+				background: white;
+				overflow: hidden;
+				padding: 0;
+				
+			}
+			
+			.List .title {
+				width: 10%;
+				padding-left: 10px;
+				line-height: 28px;
+			}
+			
+			.List .iconfont {
+				font-size: 150%;
+				width: 70%;
+				padding: 10px 0;
+				border-radius: 30px;
+				color: white;
+				font-weight: 800;
+			}
+			
+			.List .iconfont-sky {
+				background: deepskyblue;
+			}
+			
+			.List .iconfont-deepSky {
+				background: cornflowerblue;
+			}
+			
+			.List li {
+				width: 30%;
+				padding-top: 20px;
+				text-align: center;
+				list-style: none;
+				float: left;
+				background: white;
+			}
+			
+			.List p {
+				color: black;
+				font-size: 1em;
+				margin-top: 3%;
+			}
+			
+			.active-list {
+				border-left: 4px solid cornflowerblue;
+			}
+			
+			.ditch-list {
+				border-left: 4px solid deepskyblue;
+			}
+			
+			/*aside css*/
+			.mui-scroll .mui-bar-nav~.mui-content {
+               padding-top: 0px;
+             }    
+			.content{
+				background-color: #666666;
+				margin-top: 70px;
+			}
+			.mui-off-canvas-left{
+				width: 60%;
+			}
+			.aside-head{
+				background-color: #666666;
+				height: 30px;
+			}
+		  .aside-head span{
+				margin-top: 12px;
+				color: white;
+			}
+			.aside-head a{
+				color: #333333;
+			}
+			.aside-list{
+				padding: 0;
+				padding-left: 5%;
+				width: 80%;
+				
+				list-style: none;
+			}
+			.aside-list .aside-icon{
+				font-size: 200%;
+			}
+			.aside-list li{
+				width: 100%;
+			    padding: 5px 0;
+				background: linear-gradient(30deg,transparent,black,transparent) no-repeat;
+				background-size: 100% 1px;
+				background-position:0 bottom ;
+				
+			}
+			.aside-list li span{
+				margin-left: 20px;
+				font-size: 1em;
+			}
+			.aside-list .icon-font{
+				color: white;
+			}
+		</style>
+	</head>
+
+	<body>
+		<script src="js/mui.min.js"></script>
+		<script type="text/javascript">
+			mui.init()
+		</script>
+		<!-- 侧滑导航根容器 -->
+		<div class="mui-off-canvas-wrap mui-draggable">
+			<!-- 菜单容器 -->
+			<aside class="mui-off-canvas-left">
+				<div class="mui-scroll-wrapper">
+					<div class="mui-scroll">
+						<header class="mui-bar mui-bar-nav aside-head">
+						    <span class="mui-pull-left">2017年</span>
+						    <a class="mui-icon  mui-icon-gear mui-pull-right"></a>
+						</header>
+						<div class="mui-content content">
+						    <ul class="aside-list">
+						    	  <li><span class="mui-icon iconfont icon-shouyeshouye aside-icon"></span><span class="icon-font">首页</span></li>
+						    	  <li><span class="mui-icon iconfont icon-kehu aside-icon"></span><span class="icon-font">客户</span></li>
+						    	  <li><span class="mui-icon iconfont icon-jihua aside-icon"></span><span class="icon-font">计划</span></li>
+						    	  <li><span class="mui-icon iconfont icon-richeng aside-icon"></span><span class="icon-font">日程</span></li>
+						    	  <li><span class="mui-icon iconfont icon-yinxing aside-icon"></span><span class="icon-font">银行</span></li>
+						    	  <li><span class="mui-icon iconfont icon-20140609102112349easyiconnet aside-icon"></span><span class="icon-font">中介</span></li>
+						    	  <li><span class="mui-icon iconfont icon-e617 aside-icon"></span><span class="icon-font">综拓</span></li>
+						    	  <li><span class="mui-icon iconfont icon-baoquancaiwu aside-icon"></span><span class="icon-font">保全</span></li>
+						    	  <li><span class="mui-icon iconfont icon-lipeiguanli aside-icon"></span><span class="icon-font">理赔</span></li>
+						    	  <li><span class="mui-icon iconfont icon-baojiakaidan aside-icon"></span><span class="icon-font">报价</span></li>
+						    	  <li><span class="mui-icon iconfont icon-xinfengpsd aside-icon"></span><span class="icon-font">通知</span></li>
+						    	  <li><span class="mui-icon iconfont icon-gongju aside-icon"></span><span class="icon-font">工具</span></li>
+						    </ul>
+						</div>
+					</div>
+				</div>
+			</aside>
+			<!-- 主页面容器 -->
+			<div class="mui-inner-wrap">`
+				<!-- 主页面标题 -->
+				<header class="mui-bar mui-bar-nav" id="head">
+					<a class="mui-icon mui-action-menu mui-icon-bars mui-pull-left"></a>
+					<h1 class="mui-title">易行销</h1>
+					<a class="mui-icon icon-kaiguan iconfont mui-pull-right"></a>
+				</header>
+				<div class="mui-content mui-scroll-wrapper">
+					<div class="mui-scroll">
+						<!-- 主界面具体展示内容 -->
+						<ul class="List active-list">
+							<li class="title">
+								<p>活<br />动</p>
+							</li>
+							<li>
+								<span class="mui-icon icon-kehu iconfont iconfont-sky"></span>
+								<p>客户</p>
+							</li>
+							<li>
+								<span class="mui-icon icon-jihua iconfont iconfont-deepSky"></span>
+								<p>计划</p>
+							</li>
+							<li>
+								<span class="mui-icon icon-richeng iconfont iconfont-sky"></span>
+								<p>日程</p>
+							</li>
+						</ul>
+
+						<ul class="List ditch-list">
+							<li class="title">
+								<p>渠<br />道</p>
+							</li>
+							<li>
+								<span class="mui-icon icon-yinxing iconfont iconfont-sky"></span>
+								<p>银行</p>
+							</li>
+							<li>
+								<span class="mui-icon icon-20140609102112349easyiconnet iconfont iconfont-deepSky"></span>
+								<p>中介</p>
+							</li>
+							<li>
+								<span class="mui-icon icon-e617 iconfont iconfont-sky"></span>
+								<p>宗拓</p>
+							</li>
+						</ul>
+
+						<ul class="List active-list">
+							<li class="title">
+								<p>自<br />助</p>
+							</li>
+							<li>
+								<span class="mui-icon icon-baoquancaiwu iconfont iconfont-sky"></span>
+								<p>保全</p>
+							</li>
+							<li>
+								<span class="mui-icon icon-lipeiguanli iconfont iconfont-deepSky"></span>
+								<p>理赔</p>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!--<header class="mui-bar mui-bar-nav" id="head">
+			<span class="mui-icon icon-sanheng iconfont mui-pull-left"></span>
+			<h1 class="mui-title">易行销</h1>
+			<span class="mui-icon icon-kaiguan iconfont mui-pull-right"></span>
+		</header>
+		<div class="mui-content">
+			<ul class="List active-list">
+				<li class="title">
+					<p>活<br />动</p>
+				</li>
+				<li>
+					<span class="mui-icon icon-kehu iconfont iconfont-sky"></span>
+					<p>客户</p>
+				</li>
+				<li>
+					<span class="mui-icon icon-jihua iconfont iconfont-deepSky"></span>
+					<p>计划</p>
+				</li>
+				<li>
+					<span class="mui-icon icon-richeng iconfont iconfont-sky"></span>
+					<p>日程</p>
+				</li>
+			</ul>
+
+			<ul class="List ditch-list">
+				<li class="title">
+					<p>渠<br />道</p>
+				</li>
+				<li>
+					<span class="mui-icon icon-yinxing iconfont iconfont-sky"></span>
+					<p>银行</p>
+				</li>
+				<li>
+					<span class="mui-icon icon-20140609102112349easyiconnet iconfont iconfont-deepSky"></span>
+					<p>中介</p>
+				</li>
+				<li>
+					<span class="mui-icon icon-e617 iconfont iconfont-sky"></span>
+					<p>宗拓</p>
+				</li>
+			</ul>
+
+			<ul class="List active-list">
+				<li class="title">
+					<p>自<br />助</p>
+				</li>
+				<li>
+					<span class="mui-icon icon-baoquancaiwu iconfont iconfont-sky"></span>
+					<p>保全</p>
+				</li>
+				<li>
+					<span class="mui-icon icon-lipeiguanli iconfont iconfont-deepSky"></span>
+					<p>理赔</p>
+				</li>
+			</ul>
+		</div>-->
+
+	</body>
+
+</html>
