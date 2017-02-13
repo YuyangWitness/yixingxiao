@@ -11,10 +11,16 @@
 
 #head a {
 	color: white;
+	line-height: 45px;
+}
+
+#head .Aicon{
+	line-height: 25px;
 }
 
 #head span {
 	color: white;
+	line-height: 45px;
 }
 
 #head h1 {
@@ -32,4 +38,21 @@
 }
 .mui-input-group a{
 	color: #000000;
+}
+
+.mui-input-row label{
+	font-size: 0.8em;
+}
+
+.Detail{
+	width: 45%;
+	height: 40px;
+	text-align: right;
+	display: block;
+	padding: 0 15px;
+	font-size: 0.8em;
+	line-height: 40px;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	overflow: hidden;
 }

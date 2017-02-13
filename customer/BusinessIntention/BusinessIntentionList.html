@@ -1,0 +1,78 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../../css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" href="../../css/yixingxiao.css" />
+		<script type="text/javascript" src="../../js/yixingxiao.js"></script>
+		<style>
+			#BusinessIntentionList li span {
+				width: 33%;
+				height: 21px;
+				text-align: center;
+				display: block;
+				float: left;
+				white-space: nowrap;
+				overflow: hidden;
+				text-overflow: ellipsis;
+			}
+		</style>
+	</head>
+
+	<body>
+		<script src="../../js/mui.min.js"></script>
+		<script type="text/javascript">
+			mui.init()
+		</script>
+		<header class="mui-bar mui-bar-nav" id="head">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left Aicon"></a>
+			<h1 class="mui-title">业务意向</h1>
+			<a class="mui-icon mui-icon-plus mui-pull-right Aicon"></a>
+		</header>
+		<div class="mui-content">
+			<ul class="mui-table-view" id="BusinessIntentionList">
+				<li class="mui-table-view-cell">
+					<div class="mui-slider-right mui-disabled">
+						<a class="mui-btn mui-btn-primary">修改</a>
+						<a class="mui-btn mui-btn-red delete">删除</a>
+					</div>
+					<div class="mui-slider-handle">
+						<span>业务意向业务意向业务意向</span><span>业务类型</span><span>进展阶段</span>
+					</div>
+				</li>
+				<li class="mui-table-view-cell">
+					<div class="mui-slider-right mui-disabled">
+						<a class="mui-btn mui-btn-primary">修改</a>
+						<a class="mui-btn mui-btn-red delete">删除</a>
+					</div>
+					<div class="mui-slider-handle">
+						<span>业务意向业务意向业务意向</span><span>业务类型</span><span>进展阶段</span>
+					</div>
+				</li>
+				<li class="mui-table-view-cell">
+					<div class="mui-slider-right mui-disabled">
+						<a class="mui-btn mui-btn-primary">修改</a>
+						<a class="mui-btn mui-btn-red delete">删除</a>
+					</div>
+					<div class="mui-slider-handle">
+						<span>业务意向业务意向业务意向</span><span>业务类型</span><span>进展阶段</span>
+					</div>
+				</li>
+			</ul>
+		</div>
+	</body>
+	<script>
+		window.onload = function() {
+			var Delete = document.getElementsByClassName("delete");
+			var List = document.getElementById("BusinessIntentionList");
+			eventLive(List,"delete","click",function(src){
+				src.parentElement.parentElement.remove();
+			});
+
+		}
+	</script>
+
+</html>

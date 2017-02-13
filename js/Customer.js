@@ -392,23 +392,7 @@ function SelectCusFromName(dataBase, name) {
 	});
 }
 
-//function AddcustomerMask(){
-//	var addcustomerView = plus.webview.getWebviewById("AddCustomer");
-//	addcustomerView.setStyle({
-//		mask: "rgba(0,0,0,0.5)",
-//		zindex: 99
-//		
-//	});
-//}
-//
-//function AddcustomerMaskNone(){
-//	var addcustomerView = plus.webview.getWebviewById("AddCustomer");
-//	addcustomerView.addEventListener("maskClick", function() {
-//				addcustomerView.setStyle({
-//					mask: "none"
-//				});				
-//			});
-//}
+
 
 function regNum(str) {
 	//匹配小数点后两位的数,小数点前小于等于20

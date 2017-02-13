@@ -1,42 +1,190 @@
-
-@font-face {font-family: "iconfont";
-
-  src:url('../fonts/index.ttf') format('truetype');/* chrome, firefox, opera, Safari, Android, iOS 4.2+*/
+@font-face {
+	font-family: "iconfont";
+	src: url('../fonts/index.ttf') format('truetype');
+	/* chrome, firefox, opera, Safari, Android, iOS 4.2+*/
 }
 
 .iconfont {
-  font-family:"iconfont" !important;
-  font-size:16px;
-  font-style:normal;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+	font-family: "iconfont" !important;
+	font-size: 16px;
+	font-style: normal;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
 }
 
-.icon-20140609102112349easyiconnet:before { content: "\e602"; }
+.icon-20140609102112349easyiconnet:before {
+	content: "\e602";
+}
 
-.icon-e617:before { content: "\e600"; }
+.icon-e617:before {
+	content: "\e600";
+}
 
-.icon-shouyeshouye:before { content: "\e60a"; }
+.icon-shouyeshouye:before {
+	content: "\e60a";
+}
 
-.icon-kaiguan:before { content: "\e61e"; }
+.icon-kaiguan:before {
+	content: "\e61e";
+}
 
-.icon-xinfengpsd:before { content: "\e630"; }
+.icon-xinfengpsd:before {
+	content: "\e630";
+}
 
-.icon-jihua:before { content: "\e639"; }
+.icon-jihua:before {
+	content: "\e639";
+}
 
-.icon-richeng:before { content: "\e601"; }
+.icon-richeng:before {
+	content: "\e601";
+}
 
-.icon-gongju:before { content: "\e63a"; }
+.icon-gongju:before {
+	content: "\e63a";
+}
 
-.icon-yinxing:before { content: "\e64d"; }
+.icon-yinxing:before {
+	content: "\e64d";
+}
 
-.icon-baoquancaiwu:before { content: "\e632"; }
+.icon-baoquancaiwu:before {
+	content: "\e632";
+}
 
-.icon-lipeiguanli:before { content: "\e6e9"; }
+.icon-lipeiguanli:before {
+	content: "\e6e9";
+}
 
-.icon-baojiakaidan:before { content: "\e623"; }
+.icon-baojiakaidan:before {
+	content: "\e623";
+}
 
-.icon-sanheng:before { content: "\e675"; }
+.icon-sanheng:before {
+	content: "\e675";
+}
 
-.icon-kehu:before { content: "\e6f3"; }
+.icon-kehu:before {
+	content: "\e6f3";
+}
 
+
+/*whole css*/
+
+body {
+	font-size: 1em;
+}
+
+
+/*main css*/
+
+.List {
+	width: 100%;
+	background: white;
+	overflow: hidden;
+	padding: 0;
+}
+
+.List .title {
+	width: 10%;
+	padding-left: 10px;
+	line-height: 28px;
+}
+
+.List .iconfont {
+	font-size: 150%;
+	width: 70%;
+	padding: 10px 0;
+	border-radius: 30px;
+	color: white;
+	font-weight: 800;
+}
+
+.List .iconfont-sky {
+	background: deepskyblue;
+}
+
+.List .iconfont-deepSky {
+	background: cornflowerblue;
+}
+
+.List li {
+	width: 30%;
+	padding-top: 20px;
+	text-align: center;
+	list-style: none;
+	float: left;
+	background: white;
+}
+
+.List p {
+	color: black;
+	font-size: 1em;
+	margin-top: 3%;
+}
+
+.active-list {
+	border-left: 4px solid cornflowerblue;
+}
+
+.ditch-list {
+	border-left: 4px solid deepskyblue;
+}
+
+
+/*aside css*/
+
+.mui-scroll .mui-bar-nav~.mui-content {
+	padding-top: 0px;
+}
+
+.content {
+	background-color: #666666;
+	margin-top: 70px;
+}
+
+.mui-off-canvas-left {
+	width: 60%;
+}
+
+.aside-head {
+	background-color: #666666;
+	height: 30px;
+}
+
+.aside-head span {
+	margin-top: 12px;
+	color: white;
+}
+
+.aside-head a {
+	color: #333333;
+}
+
+.aside-list {
+	padding: 0;
+	padding-left: 5%;
+	width: 80%;
+	list-style: none;
+}
+
+.aside-list .aside-icon {
+	font-size: 200%;
+}
+
+.aside-list li {
+	width: 100%;
+	padding: 5px 0;
+	background: linear-gradient(30deg, transparent, black, transparent) no-repeat;
+	background-size: 100% 1px;
+	background-position: 0 bottom;
+}
+
+.aside-list li span {
+	margin-left: 20px;
+	font-size: 1em;
+}
+
+.aside-list .icon-font {
+	color: white;
+}
