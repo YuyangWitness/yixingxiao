@@ -47,7 +47,7 @@
 				<div class="Notactive">业务意向</div>
 				<a href="BusinessIntention.html"></a>
 				<div class="SelectNoActive Notactive">联系人</div>
-				<a href="Contact.html"></a>
+				<a href="Contact/Contact.html"></a>
 			</div>
 			<a class="mui-icon mui-icon-plus" id="addContact"></a>
 		</div>
@@ -56,7 +56,7 @@
 		mui.plusReady(function() {
 			//var nwaiting = plus.nativeUI.showWaiting();//显示原生等待框
 			//AddcustomerMaskNone();
-			var subpages = ['BasicInformation.html', 'BusinessIntention.html', 'Contact.html'];
+			var subpages = ['BasicInformation.html', 'BusinessIntention.html', 'Contact/Contact.html'];
 			var wb = plus.webview.currentWebview();
 			var detailPage = null;
 			var index = 0;
@@ -106,7 +106,7 @@
 						plus.webview.show(webview); //显示所点击的页面
 						plus.webview.hide(activeView); //隐藏原活跃的页面
 
-						if(webview == "Contact.html") { //显示添加联系人图标
+						if(webview == "Contact/Contact.html") { //显示添加联系人图标
 							$("#addContact").show();
 						} else {
 							$("#addContact").hide();
@@ -156,7 +156,7 @@
 			//添加通讯录信息自定义事件
 			document.getElementById("addContact").addEventListener("tap", function() {
 
-				var ContactView = plus.webview.getWebviewById("Contact.html");
+				var ContactView = plus.webview.getWebviewById("Contact/Contact.html");
 				mui.fire(ContactView, "addContact", {});
 			});
 			

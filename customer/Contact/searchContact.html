@@ -5,11 +5,12 @@
 		<meta charset="UTF-8">
 		<title></title>
 		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
-		<link href="../css/mui.min.css" rel="stylesheet" />
-		<link rel="stylesheet" href="../css/Customer.css" />
-		<script type="text/javascript" src="../js/jquery-3.1.0.min.js"></script>
-		<script type="text/javascript" src="../js/Customer.js"></script>
-		<script type="text/javascript" src="../js/addContact.js"></script>
+		<link href="../../css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" href="../../css/Customer.css" />
+		<link rel="stylesheet" href="../../css/yixingxiao.css" />
+		<script type="text/javascript" src="../../js/jquery-3.1.0.min.js"></script>
+		<script type="text/javascript" src="../../js/Customer.js"></script>
+		<script type="text/javascript" src="../../js/addContact.js"></script>
 
 	</head>
 	<style>
@@ -33,14 +34,14 @@
 	</style>
 
 	<body>
-		<script src="../js/mui.min.js"></script>
+		<script src="../../js/mui.min.js"></script>
 		<script type="text/javascript">
 			mui.init()
 		</script>
 		<header class="mui-bar mui-bar-nav" id="head">
-			<a class="mui-icon mui-icon-left-nav mui-pull-left" id="back"></a>
+			<a class="mui-icon mui-icon-left-nav mui-pull-left Aicon" id="back"></a>
 			<h1 class="mui-title">联系人详情</h1>
-			<a class="mui-pull-right mui-icon mui-icon-compose" id="modify"></a>
+			<a class="mui-pull-right mui-icon mui-icon-compose Aicon" id="modify"></a>
 		</header>
 		<div class="mui-content">
 			<div class="mui-input-group">
@@ -120,7 +121,7 @@
 		   
 		   var back = document.getElementById("back");
 		   back.addEventListener("tap",function(){
-		   	   var ContactView = plus.webview.getWebviewById("Contact.html");
+		   	   var ContactView = plus.webview.getWebviewById("Contact/Contact.html");
 		   	   ContactView.reload();
 		   	   setTimeout(function(){//利用延时器防止瞬间返回的时候闪屏,不好的用户体验
 		   	   	  mui.back();

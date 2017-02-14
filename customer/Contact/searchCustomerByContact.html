@@ -1,0 +1,43 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../../css/mui.min.css" rel="stylesheet" />
+		<link href="../../css/yixingxiao.css" rel="stylesheet" />
+		<script type="text/javascript" src="../../js/yixingxiao.js" ></script>
+	</head>
+
+	<body>
+		<script src="../../js/mui.min.js"></script>
+		<script type="text/javascript">
+			mui.init({
+				subpages : [
+				  {
+				  	url : 'Contact.html',
+				  	id  : 'Contact/Contact.html',
+				  	styles : {
+				  		top : '45px'
+				  	}
+				  }
+				]
+			})
+		</script>
+		<header class="mui-bar mui-bar-nav" id="head">
+		    <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left Aicon"></a>
+		    <h1 class="mui-title">联系人</h1>
+		    <a class="mui-icon mui-icon-plus Aicon mui-pull-right" id="addContact"></a>
+		</header>
+	</body>
+    <script>
+    	  window.onload = function(){
+    	  	  var addContact = document.getElementById("addContact");
+    	  	  setEvent(addContact,"click",function(){
+    	  	  	  var ContactView = plus.webview.getWebviewById("Contact/Contact.html");
+				mui.fire(ContactView, "addContact", {});
+    	  	  })
+    	  }
+    </script>
+</html>
