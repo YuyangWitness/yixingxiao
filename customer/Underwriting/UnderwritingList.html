@@ -1,0 +1,56 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<script src="../../js/mui.min.js"></script>
+		<link href="../../css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" href="../../css/yixingxiao.css" />
+		<link rel="stylesheet" href="../../css/drag.css" />
+		<script type="text/javascript" src="../../js/dragComponent.js"></script>
+	</head>
+
+	<body>
+		<script type="text/javascript">
+			mui.init()
+		</script>
+		<header class="mui-bar mui-bar-nav" id="head">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left Aicon"></a>
+			<h1 class="mui-title">核保报价</h1>
+			<a class="mui-icon mui-icon-search Aicon mui-pull-right"></a>
+		</header>
+		<div class="mui-content">
+			<form id="selectWriting">
+				<div class="table-view">
+					<input type="text" placeholder="请选择申请日期" />
+				</div>
+				<div class="table-view">
+					<label>申请状态</label>
+					<div class="stage">
+						<div class="drag"></div>
+					</div>
+				</div>
+				<div class="table-view">
+					<a class="table-btn">查&nbsp;&nbsp;&nbsp;询</a>
+				</div>
+		</div>
+		</form>
+		</div>
+
+	</body>
+	<script>
+		window.onload = function() {
+			var stage = document.getElementsByClassName("stage")[0];
+			var dragComponent = new Drag({
+				data: ['全部', '处理中', '已批复', '已撤销'], 
+				index: [1, 2, 3, 4],
+				stageEle: stage
+			});
+			var dragDiv = document.getElementsByClassName("drag")[0];
+			dragComponent.drag(dragDiv);
+		}
+	</script>
+
+</html>
