@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script type="text/javascript" src="../js/yixingxiao.js" ></script>
+	</head>
+	<style>
+		.div1{
+			background: red;
+		}
+		.div2{
+			width: 100px;
+			height: 100px;
+		}
+		.div3{
+			color: blue;
+		}
+	</style>
+	<body>
+		<div class=" div1 div2 " id="Div">asdfasdf</div>
+	</body>
+	<script>
+		window.onload = function(){
+			var Div = document.getElementById("Div");
+			addClass(Div,'  div3');
+			
+			removeClass(Div,' div1');
+		}
+	</script>
+</html>

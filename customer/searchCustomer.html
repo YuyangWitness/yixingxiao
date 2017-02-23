@@ -8,6 +8,7 @@
 		<link href="../css/mui.min.css" rel="stylesheet" />
 		<link rel="stylesheet" href="../css/yixingxiao.css" />
 		<link rel="stylesheet" href="../css/searchCustomer.css" />
+		<script type="text/javascript" src="../js/yixingxiao.js" ></script>
 		<style>
 			footer{
 				position: absolute;
@@ -49,7 +50,7 @@
 		<header class="mui-bar mui-bar-nav Aicon" id="head">
 			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left Aicon"></a>
 			<h1 class="mui-title">客户名称</h1>
-			<a class="mui-icon  mui-icon-compose mui-pull-right Aicon"></a>
+			<a class="mui-icon  mui-icon-compose mui-pull-right Aicon" id="modify"></a>
 		</header>
 		<div class="mui-content">
 			<form class="mui-input-group" id="CustomerInfo">
@@ -85,19 +86,19 @@
 		</div>
 		<footer>
 			<ul id="customerMnue">
-				<li>
+				<li id="businessIntention">
 					<span class="mui-icon iconfont icon-bao"></span>
 					<p>业务意向</p>
 				</li>		
-				<li>
+				<li id="contact">
 					<span class="mui-icon iconfont icon-lianxiren"></span>
 					<p>联系人</p>
 				</li>				
-				<li>
+				<li id="underWriting">
 					<span class="mui-icon iconfont icon-baojiakaidan"></span>
 					<p>核保报价</p>
 				</li>
-				<li>
+				<li id="groupInsurance">
 					<span class="mui-icon iconfont icon-lianxiren1"></span>
 					<p>团险</p>
 				</li>	
@@ -108,6 +109,35 @@
 			</ul>	
 		</footer>
 	</body>
-	<script></script>
+	<script>
+		mui.plusReady(function(){
+			var businessIntention = document.getElementById("businessIntention");
+			var contact = document.getElementById("contact");
+			var underWriting = document.getElementById("underWriting");
+			var groupInsurance = document.getElementById('groupInsurance');
+			var modify = document.getElementById("modify");
+			
+			setEvent(modify,'tap',function(){
+				mui.openWindow('modifyCustomer.html','modifyCustomer');
+			});
+			
+			businessIntention.addEventListener('tap',function(){
+				mui.openWindow('BusinessIntention/BusinessIntentionList.html','BusinessIntentionList');
+				
+			});
+			
+			contact.addEventListener('tap',function(){
+				mui.openWindow('Contact/searchCustomerByContact.html','searchCustomerByContact');
+			});
+			
+			underWriting.addEventListener('tap',function(){
+				mui.openWindow('Underwriting/UnderwritingList.html','UnderwritingList');
+			});
+			
+			groupInsurance.addEventListener('tap',function(){
+				mui.openWindow('groupInsurance/groupInsuranceList.html','groupInsuranceList');
+			});
+		});
+	</script>
 
 </html>

@@ -1,0 +1,71 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../../css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" href="../../css/Customer.css" />
+		<script type="text/javascript" src="../../js/yixingxiao.js" ></script>
+		<style>
+			.Select {
+			width: 55%;
+			margin: 0 auto;
+			}
+			
+			.Select div {
+				width: 50%;
+			}
+		</style>
+	</head>
+
+	<body>
+		<script src="../../js/mui.min.js"></script>
+		<script type="text/javascript">
+			mui.init()
+		</script>
+		<div class="mui-content">
+		    <div id="preSelect" class="Select">
+		    		<div data-id="PreReceivable.html" class="SelectActive active">应收未收</div>
+		    		<div data-id="PreDetail.html" class="SelectNoActive">明细查询</div>
+		    </div>
+		</div>
+	</body>
+	<script>
+		mui.plusReady(function(){
+			var subpages = ['PreReceivable.html','PreDetail.html'];
+			var index = 0;
+			var wb = plus.webview.currentWebview();
+			var activeDiv = 'PreReceivable.html';
+			var activeEle = document.getElementById("preSelect").getElementsByClassName('active')[0];
+			for (let i = 0; i < subpages.length; i++) {
+				var appendView = plus.webview.create(subpages[i],subpages[i],{
+					top : '40px'
+				});
+				
+				if(i != index){
+					appendView.hide();
+				}
+			
+				wb.append(appendView);
+						
+			}
+			
+			mui("#preSelect").on('tap','div',function(){
+				var clickDiv = this.getAttribute('data-id');
+				if(clickDiv !== activeDiv){
+					//页面切换
+					plus.webview.hide(activeDiv);
+					plus.webview.show(clickDiv);
+					//样式改变
+					addClass(this,'active');
+					removeClass(activeEle,'active');
+					//当前活跃Element改变
+					activeEle = this;
+					activeDiv = clickDiv;
+				}
+			});
+		});
+	</script>
+</html>

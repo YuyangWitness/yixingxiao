@@ -1,0 +1,67 @@
+span {
+	font-size: 0.8em;
+}
+
+.allDetail {
+	height: 70px;
+	width: 100%;
+	border-top: 1px solid #D3D3D3;
+}
+
+.allDetail .detailSpan {
+	width: 50%;
+	height: 60px;
+	border-right: 1px solid #D3D3D3;
+	display: block;
+	float: left;
+	margin-top: 5px;
+}
+
+.allDetail .detailSpan label {
+	display: block;
+	width: 100%;
+	text-align: center;
+	margin-top: 5px;
+}
+
+hr {
+	border: none;
+	border-top: 1px solid #D3D3D3;
+	margin: 0;
+}
+
+.allTitle {
+	width: 100%;
+	background-color: #1E90FF;
+	overflow: hidden;
+	margin-top: 10px;
+}
+
+.allTitle span {
+	width: 33%;
+	text-align: center;
+	color: white;
+	display: block;
+	float: left;
+}
+
+.allInsurance {
+	background-color: transparent;
+}
+
+.allInsurance span {
+	display: block;
+	float: left;
+	width: 33%;
+	text-align: center;
+	word-break: break-all;
+	display: -webkit-box;
+	-webkit-line-clamp: 2;
+	-webkit-box-orient: vertical;
+	overflow: hidden;
+	height: 45px;
+}
+
+.allInsurance .InsuranceNum{
+	line-height: 45px;
+}

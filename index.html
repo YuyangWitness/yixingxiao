@@ -10,6 +10,7 @@
 		<link rel="stylesheet" href="css/yixingxiao.css" />
 		<script type="text/javascript" src="js/jquery-3.1.0.min.js"></script>
 		<script type="text/javascript" src="js/vue.min.js"></script>
+		<script type="text/javascript" src="js/yixingxiao.js" ></script>
 	</head>
 
 	<body>
@@ -39,9 +40,9 @@
 			<div class="mui-inner-wrap">`
 				<!-- 主页面标题 -->
 				<header class="mui-bar mui-bar-nav" id="head">
-					<a class="mui-icon mui-action-menu mui-icon-bars mui-pull-left"></a>
+					<a class="mui-icon mui-action-menu mui-icon-bars mui-pull-left Aicon"></a>
 					<h1 class="mui-title">易行销</h1>
-					<a class="mui-icon icon-kaiguan iconfont mui-pull-right"></a>
+					<a class="mui-icon icon-kaiguan iconfont mui-pull-right Aicon"></a>
 				</header>
 				<div class="mui-content mui-scroll-wrapper">
 					<div class="mui-scroll" id="index">
@@ -129,6 +130,11 @@
 				    icons : ['icon-shouyeshouye','icon-kehu','icon-jihua','icon-richeng','icon-yinxing','icon-20140609102112349easyiconnet',
 				'icon-e617','icon-baoquancaiwu','icon-lipeiguanli','icon-baojiakaidan','icon-xinfengpsd','icon-gongju']
 				},
+			});
+			
+			var customer = document.getElementById("customer");
+			setEvent(customer,'tap',function(){
+				mui.openWindow('customer/customer.html','customer');
 			})
 		}
 	</script>

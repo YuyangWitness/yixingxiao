@@ -1,0 +1,48 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../../css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" href="../../css/drag.css" />
+		<script type="text/javascript" src="../../js/dragComponent.js" ></script>
+		
+	</head>
+
+	<body>
+		<script src="../../js/mui.min.js"></script>
+		<script type="text/javascript">
+			mui.init()
+		</script>
+		<div class="mui-content">
+			<form id="selectWriting">
+				<div class="table-view">
+					<label>理赔状态</label>
+				</div>
+				<div class="table-view">
+					<input type="text" placeholder="请输入被保人" />
+				</div>
+				<div class="table-view">
+					<input type="text" placeholder="请输入受理日期" />
+				</div>
+				<div class="table-view">
+					<input type="text" placeholder="请输入证件号" />
+				</div>
+				<div class="table-view">
+					<a class="table-btn">查&nbsp;&nbsp;&nbsp;询</a>
+				</div>
+		</div>
+		</form>
+		</div>
+	</body>
+	<script>
+		mui.plusReady(function() {
+			window.addEventListener("openClaims", function() {
+
+			})
+		})
+	</script>
+
+</html>

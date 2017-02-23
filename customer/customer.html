@@ -38,7 +38,7 @@
 		<div class="mui-content">
 			<div id="SelectUser" class="Select">
 				<div id="PUser" class="SelectActive active">潜在客户</div>
-				<div id="User" class="SelectNoActive Notactive">正式客户</div>
+				<div id="User" class="SelectNoActive">正式客户</div>
 			</div>
 		</div>
 
@@ -91,10 +91,10 @@
 						$("#PUserSearch").show();
 						$("#addCustomer").show();
 									
-						$("#User").addClass("Notactive");
+
 						$("#User").removeClass("active");
 						$("#PUser").addClass("active");
-						$("#PUser").removeClass("Notactive");
+
 						
 						
 					} else {
@@ -103,8 +103,6 @@
 						$("#addCustomer").hide();
 						
 						$("#User").addClass("active");
-						$("#User").removeClass("Notactive");
-						$("#PUser").addClass("Notactive");
 						$("#PUser").removeClass("active");
 					}
 

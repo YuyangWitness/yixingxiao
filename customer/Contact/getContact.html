@@ -76,13 +76,13 @@
 		});
 
 		mui.plusReady(function() {
-
+			
 			plus.contacts.getAddressBook(plus.contacts.ADDRESSBOOK_PHONE, function(addressbook) { //获取通讯录信息
 				// 可通过addressbook进行通讯录操作
-				//alert("aaaa");
 				addressbook.find(null, function(contacts) {
 					var username = new Array();
 					var LinkList = new LinkedList();
+				
 					if(contacts.length > 0) { //获取当前通讯录里面所有人
 						for(var i = 0; i < contacts.length; i++) {
 							//console.log(contacts[i].phoneNumbers[0].value);
@@ -106,7 +106,7 @@
 				});
 
 			}, function(e) {
-
+				alert("Find contact error: " + e.message);
 			});
 
 			mui("#nav").on("hold", "a", function() { //侧栏手势，按住跳转到首字母第一个名字上，并在屏幕中间显示字母

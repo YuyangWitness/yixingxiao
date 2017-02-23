@@ -11,39 +11,36 @@
 		<link rel="stylesheet" href="../../css/drag.css" />
 		<script type="text/javascript" src="../../js/dragComponent.js"></script>
 		<style>
-		#selectWriting{
-			width: 100%;
-			height: 0;
-			overflow: hidden;
-			position: absolute;
-			top: 44px;
-			background: #f0f0f0;
-			z-index: 999;			
-			transition: all .2s;
-		}
-		.mui-backdrop{
-			top : 44px;
-			z-index:10;
-		}
+			#selectWriting{
+				width: 100%;
+				height: 0;
+				overflow: hidden;
+				position: absolute;
+				top: 44px;
+				background: #f0f0f0;
+				z-index: 999;			
+				transition: all .2s;
+			}
+			.mui-backdrop{
+				top : 44px;
+				z-index:10;
+			}
 		</style>
 	</head>
 
-	<body>
+	<body>	
 		<script type="text/javascript">
 			mui.init()
 		</script>
 		<header class="mui-bar mui-bar-nav" id="head">
-			<a class="mui-icon mui-icon-left-nav mui-pull-left Aicon" id="UnderWritingBack"></a>
-			<h1 class="mui-title">核保报价</h1>
-			<a class="mui-icon mui-icon-search Aicon mui-pull-right" id="underWritingSearch"></a>
+		    <a class="mui-icon mui-icon-left-nav mui-pull-left Aicon" id="groupBack"></a>
+		    <h1 class="mui-title">团险</h1>
+		    <a class="mui-icon mui-icon-search Aicon mui-pull-right" id="groupSearch"></a>
 		</header>
 		<div class="mui-content">
-			<form id="selectWriting">
+		    <form id="selectWriting">
 				<div class="table-view">
-					<input type="text" placeholder="请选择申请日期" />
-				</div>
-				<div class="table-view">
-					<label>申请状态</label>
+					<label>保单状态</label>
 					<div class="stage">
 						<div class="drag"></div>
 					</div>
@@ -53,7 +50,7 @@
 				</div>
 				</div>
 			</form>
-			<ul class="mui-table-view">
+			<ul class="mui-table-view" id="InsuranceDetail">
 			    <li class="mui-table-view-cell">Item 1</li>
 			    <li class="mui-table-view-cell">Item 2</li>
 			    <li class="mui-table-view-cell">Item 3</li>
@@ -68,45 +65,42 @@
 			    <li class="mui-table-view-cell">Item 3</li>
 			</ul>
 		</div>
-
 	</body>
 	<script>
-		window.onload = function() {
-			var stage = document.getElementsByClassName("stage")[0];
-			var underWritingSearch = document.getElementById("underWritingSearch");
-			var selectWriting = document.getElementById("selectWriting");	
-			var UnderWritingBack = document.getElementById('UnderWritingBack');
+		window.onload = function(){
+			var groupSearch = document.getElementById("groupSearch");
+			var groupBack = document.getElementById("groupBack");
+			var selectWriting = document.getElementById("selectWriting");
 			var mask = mui.createMask();
 			var maskEle = mask[0];
-			
+			var stage = document.getElementsByClassName("stage")[0];
 			var dragComponent = new Drag({
-				data: ['全部', '处理中', '已批复', '已撤销'], 
-				index: [1, 2, 3, 4],
+				data: ['全部', '生效', '失效'], 
+				index: [1, 2, 3],
 				stageEle: stage
 			});
 			var dragDiv = document.getElementsByClassName("drag")[0];
 			dragComponent.drag(dragDiv);
 			
-			underWritingSearch.addEventListener("tap",function(){
-				
+			groupSearch.addEventListener('tap',function(){
 				if(selectWriting.offsetHeight == 0){
 					mask.show();
-					selectWriting.style.height = '180px';
-					
-					
+					selectWriting.style.height = '120px';
 				}else{
-					mask.close();
 					selectWriting.style.height = '0';
+					mask.close();
 				}
-				
 			});
 			
 			maskEle.addEventListener('tap',function(){
-				selectWriting.style.height = '0';
+				if(selectWriting.offsetHeight == 120){					
+					selectWriting.style.height = '0';
+					mask.close();
+				}
 			});
 			
-			UnderWritingBack.addEventListener('tap',function(){
-				if(selectWriting.offsetHeight == 180){
+			groupBack.addEventListener('tap',function(){
+				if(selectWriting.offsetHeight == 120){					
 					selectWriting.style.height = '0';
 					mask.close();
 					setTimeout(function(){
@@ -115,9 +109,11 @@
 				}else{
 					mui.back();
 				}
-				
 			});
 			
+			mui('#InsuranceDetail').on('tap','.mui-table-view-cell',function(){
+				mui.openWindow("gInsuranceDetail.html",'gInsuranceDetail.html');
+			})
 		}
 	</script>
 

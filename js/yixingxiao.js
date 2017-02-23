@@ -22,3 +22,38 @@ function eventLive( el, ClassName, ev, fn ){
 		}
 	});
 }
+
+	/*兼容性   设置text*/
+function setHtml(ele, setEle) { //ele被设置对象,setEle设置对象
+		if(ele.textContent != null) {
+			ele.textContent = setEle.textContent;
+		} else {
+			ele.innerText = setEle.innerText;
+		}
+}
+
+/*模拟jquery添加classname，防止不被覆盖*/
+function addClass(ele,classname){ //ele被添加class的element, classname被添加的类名
+	var oldClassName = trim(ele.className);
+	classname = trim(classname);
+	var newClassName = oldClassName + " " + classname;
+
+	ele.className = newClassName;
+}
+
+/*模拟jquery删除classname，防止不被覆盖*/
+function removeClass(ele,classname){ //ele被添加class的element, classname被添加的类名
+	var oldClassName = trim(ele.className);
+	var classNameArray = oldClassName.split(" ");
+	classname = trim(classname);
+		classNameArray.forEach(function(element,index){
+			if(element === classname){
+				classNameArray.splice(index,1);
+			}
+		});
+	var newClassName = classNameArray.join(" ");
+	ele.className = newClassName;
+}
+function trim(str){ //删除左右两端的空格
+　　 return str.replace(/^\s\s*/, '').replace(/\s\s*$/, '');
+}

@@ -54,7 +54,7 @@
 			mui.init()
 		</script>
 
-		<ul class="mui-table-view"></ul>
+		<ul class="mui-table-view" id="customerList"></ul>
 
 		<p id="word"></p>
 		<div id="nav">
@@ -132,6 +132,10 @@
 		$("#btn").click(function(){
 				mui.openWindow("dataBaseController.html","database"); 
 			});
+			
+		$('#customerList').on('tap','.mui-table-view-cell',function(){
+			mui.openWindow('searchCustomer.html','searchCustomer');
+		})
       });
 	</script>
 

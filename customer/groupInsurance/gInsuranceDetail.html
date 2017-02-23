@@ -1,0 +1,83 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../../css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" href="../../css/yixingxiao.css" />
+		<link rel="stylesheet" href="../../css/index.css" />
+		<script type="text/javascript" src="../../js/yixingxiao.js" ></script>
+		<style>
+			.openSearchForClaims{
+				display: none;
+			}
+		</style>
+	</head>
+
+	<body>
+		<script src="../../js/mui.min.js"></script>
+		<script type="text/javascript">
+			mui.init()
+		</script>
+		<header class="mui-bar mui-bar-nav" id="head">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left Aicon"></a>
+			<h1 class="mui-title">基本</h1>
+			<a class="mui-icon mui-icon-search mui-pull-right Aicon openSearchForClaims"></a>
+		</header>
+		<nav class="mui-bar mui-bar-tab" id="Insurance-bar">
+			<a class="mui-tab-item mui-active" href="basicInfo.html">
+				<span class="mui-icon iconfont icon-jihua"></span>
+				<span class="mui-tab-label">基本</span>
+			</a>
+			<a class="mui-tab-item" href="Claims.html">
+				<span class="mui-icon iconfont icon-lipeiguanli"></span>
+				<span class="mui-tab-label">理赔</span>
+			</a>
+			<a class="mui-tab-item" href="preservation.html">
+				<span class="mui-icon iconfont icon-baoquancaiwu"></span>
+				<span class="mui-tab-label">保全</span>
+			</a>
+		</nav>
+	</body>
+	<script>
+		mui.plusReady(function(){
+			var subpages = ['basicInfo.html','Claims.html','preservation.html'];
+			var wb = plus.webview.currentWebview();
+			var index = 0;
+			var nowView = 'basicInfo.html';
+			var muiTitle = document.getElementsByClassName('mui-title')[0];
+			for (let i = 0; i < subpages.length; i++) {
+				var Cwebview = plus.webview.create(subpages[i],subpages[i],{
+					top: "43px",
+					bottom : '50px'
+				});
+				if(i !== index){
+					Cwebview.hide();
+				}
+				wb.append(Cwebview);
+
+			}
+			mui('#Insurance-bar').on('tap','a',function(){
+				var href = this.getAttribute('href');
+				if(nowView != href){
+					var titleContent = this.children[1];		
+					setHtml(muiTitle,titleContent);
+					plus.webview.hide(nowView);
+					plus.webview.show(href);
+					nowView = href;
+				}
+				
+			});
+			
+			window.addEventListener('openSearchForClaims',function(){
+				var openSearchForClaims = document.getElementById('head').getElementsByClassName('openSearchForClaims')[0];
+				openSearchForClaims.style.display='block';
+			})
+		});
+			
+		
+	</script>
+
+</html>

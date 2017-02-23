@@ -1,0 +1,83 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../../css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" href="../../css/Customer.css" />
+		<script type="text/javascript" src="../../js/yixingxiao.js" ></script>
+		<style>
+			.Select {
+			width: 40%;
+			margin: 0 auto;
+			}
+			
+			.Select div {
+				width: 50%;
+			}
+		</style>
+	</head>
+
+	<body>
+		<script src="../../js/mui.min.js"></script>
+		<script type="text/javascript">
+			mui.init()
+		</script>
+		<div class="mui-content">
+			 <div id="SelectClaims" class="Select">
+				<div data-id="ClaimsAll.html" class="SelectActive active">汇总</div>
+				<div data-id="ClaimsDetail.html" class="SelectNoActive">明细</div>
+			 </div>
+		</div>
+	</body>
+	<script>
+		mui.plusReady(function(){
+			var subpages = ['ClaimsAll.html','ClaimsDetail.html'];
+			var wb = plus.webview.currentWebview();
+			var index = 0;
+			var nowDiv = 'ClaimsAll.html';
+			var nowEle = document.getElementById("SelectClaims").getElementsByClassName('active')[0];
+			for (let i = 0; i < subpages.length; i++) {
+				var Cwebview = plus.webview.create(subpages[i],subpages[i],{
+					top : '40px'
+				});
+				
+				if(i !== index){
+					Cwebview.hide();
+				}
+				
+				wb.append(Cwebview);
+			}
+			
+			mui('#SelectClaims').on('tap','div',function(){
+				var clickDiv = this.getAttribute('data-id');
+				if(clickDiv != nowDiv){
+					//切换页面
+					plus.webview.show(clickDiv);
+					plus.webview.hide(nowDiv);
+					//改变样式
+					addClass(this,'active');
+					removeClass(nowEle,'active');  
+					//改变当前被选中值
+					nowDiv = clickDiv;
+					nowEle = this;
+					
+					//明细搜索自动弹出
+					if(clickDiv === 'ClaimsDetail.html'){
+						var InsuranceView = plus.webview.getWebviewById('gInsuranceDetail.html');
+						var ClaimsDetailView = plus.webview.getWebviewById("ClaimsDetail.html");
+						alert(InsuranceView);
+						mui.fire(InsuranceView,'openSearchForClaims');
+						mui.fire(ClaimsDetailView,'openClaims');
+					}
+				}
+			});
+			
+			window.addEventListener('openDetailSearch',function(){
+				alert('aaaa');
+			})
+		});
+	</script>
+</html>

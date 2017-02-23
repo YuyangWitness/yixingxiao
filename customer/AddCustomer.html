@@ -44,9 +44,9 @@
 			<div class="Select" id="addCustomer">
 				<div class="SelectActive active">基本信息</div>
 				<a href="BasicInformation.html"></a>
-				<div class="Notactive">业务意向</div>
+				<div class="">业务意向</div>
 				<a href="BusinessIntention.html"></a>
-				<div class="SelectNoActive Notactive">联系人</div>
+				<div class="SelectNoActive">联系人</div>
 				<a href="Contact/Contact.html"></a>
 			</div>
 			<a class="mui-icon mui-icon-plus" id="addContact"></a>
@@ -113,13 +113,13 @@
 						}
 
 						//转换样式class，换成active
-						_this.removeClass("Notactive");
+
 						_this.addClass("active");
 						//alert($(this).attr("class"));
 
 						//转换样式class，换成Notactive
 						$("a[href='" + activeView + "']").prev().removeClass("active");
-						$("a[href='" + activeView + "']").prev().addClass("Notactive");
+
 
 						//更换活跃的webview
 						activeView = webview;

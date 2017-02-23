@@ -30,13 +30,13 @@
 		<header class="mui-bar mui-bar-nav" id="head">
 			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left Aicon"></a>
 			<h1 class="mui-title">业务意向</h1>
-			<a class="mui-icon mui-icon-plus mui-pull-right Aicon"></a>
+			<a class="mui-icon mui-icon-plus mui-pull-right Aicon" id="addBusiness"></a>
 		</header>
 		<div class="mui-content">
 			<ul class="mui-table-view" id="BusinessIntentionList">
 				<li class="mui-table-view-cell">
 					<div class="mui-slider-right mui-disabled">
-						<a class="mui-btn mui-btn-primary">修改</a>
+						<a class="mui-btn mui-btn-primary modify">修改</a>
 						<a class="mui-btn mui-btn-red delete">删除</a>
 					</div>
 					<div class="mui-slider-handle">
@@ -45,7 +45,7 @@
 				</li>
 				<li class="mui-table-view-cell">
 					<div class="mui-slider-right mui-disabled">
-						<a class="mui-btn mui-btn-primary">修改</a>
+						<a class="mui-btn mui-btn-primary modify">修改</a>
 						<a class="mui-btn mui-btn-red delete">删除</a>
 					</div>
 					<div class="mui-slider-handle">
@@ -54,7 +54,7 @@
 				</li>
 				<li class="mui-table-view-cell">
 					<div class="mui-slider-right mui-disabled">
-						<a class="mui-btn mui-btn-primary">修改</a>
+						<a class="mui-btn mui-btn-primary modify">修改</a>
 						<a class="mui-btn mui-btn-red delete">删除</a>
 					</div>
 					<div class="mui-slider-handle">
@@ -68,9 +68,19 @@
 		window.onload = function() {
 			var Delete = document.getElementsByClassName("delete");
 			var List = document.getElementById("BusinessIntentionList");
-			eventLive(List,"delete","click",function(src){
+			var addBusiness = document.getElementById("addBusiness");
+			eventLive(List,"delete","tap",function(src){
 				src.parentElement.parentElement.remove();
 			});
+			
+			eventLive(List,"modify","tap",function(src){
+				mui.openWindow('modifyBusinessIntention.html','modifyBusinessIntention');
+			});
+			
+			setEvent(addBusiness,'tap',function(){
+				mui.openWindow('AddBusinessIntention.html','AddBusinessIntention');
+			})
+			
 
 		}
 	</script>

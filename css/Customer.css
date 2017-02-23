@@ -13,20 +13,19 @@
 	border-right: 1px solid #C8C7CC;
 	border-bottom: 1px solid #C8C7CC;
 	padding: 1% 3%;
+	color: #000000;
+	background: #EEEEEE;
 }
 
 .SelectActive {	
 	-webkit-border-bottom-left-radius: 25px;
+	
+	
 }
 
-.active{
+.Select .active{
 	background: #6495ED;
 	color: white;
-}
-
-.Notactive{
-	color: #000000;
-	background: #EEEEEE;
 }
 
 .SelectNoActive {	
