@@ -10,12 +10,16 @@
 		<script type="text/javascript" src="../../js/yixingxiao.js" ></script>
 		<style>
 			.Select {
-			width: 40%;
-			margin: 0 auto;
+				width: 40%;
+				margin: 0 auto;
+				
 			}
 			
 			.Select div {
 				width: 50%;
+			}
+			.mui-content{
+				margin-bottom: 0;
 			}
 		</style>
 	</head>
@@ -68,16 +72,13 @@
 					if(clickDiv === 'ClaimsDetail.html'){
 						var InsuranceView = plus.webview.getWebviewById('gInsuranceDetail.html');
 						var ClaimsDetailView = plus.webview.getWebviewById("ClaimsDetail.html");
-						alert(InsuranceView);
 						mui.fire(InsuranceView,'openSearchForClaims');
 						mui.fire(ClaimsDetailView,'openClaims');
 					}
 				}
 			});
 			
-			window.addEventListener('openDetailSearch',function(){
-				alert('aaaa');
-			})
+			
 		});
 	</script>
 </html>

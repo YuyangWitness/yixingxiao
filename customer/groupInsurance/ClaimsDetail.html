@@ -7,8 +7,114 @@
 		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
 		<link href="../../css/mui.min.css" rel="stylesheet" />
 		<link rel="stylesheet" href="../../css/drag.css" />
-		<script type="text/javascript" src="../../js/dragComponent.js" ></script>
-		
+		<script type="text/javascript" src="../../js/yixingxiao.js"></script>
+		<style>
+			#searchBox{
+				width: 100%;
+				height: 0px;
+				overflow: hidden;
+				position: relative;
+				z-index: 999;
+				font-size: 0.8em;
+				transition: all .2s;
+			}
+			#selectWriting {
+				width: 100%;
+				height: 230px;
+				overflow: hidden;
+				position: absolute;
+				background: #f0f0f0;
+				
+				top: 0;
+				
+			}
+			
+			#selectWriting .table-view {
+				height: 45px;
+			}
+			
+			#selectWriting .table-view .table-btn {
+				height: 30px;
+				line-height: 30px;
+			}
+			
+			.mui-backdrop {
+				top: 44px;
+				z-index: 10;
+			}
+			
+			#stateSelect {
+				position: absolute;
+				height: 172px;
+				top: 0;
+				background: #f0f0f0;
+				width: 100%;
+				overflow: hidden;
+				transform: translateX(100%);
+				
+			}
+			
+			#searchBox .is-active1 {
+				animation: writing1 .5s linear both;
+			}
+			#searchBox .is-active2 {
+				animation: writing2 .5s linear both;
+			}
+			@keyframes writing1{
+				0%{
+					height: 230px;
+					transform: translateX(0);
+				}
+				50%{
+					height: 172px;
+					transform: translateX(0);
+				}
+	
+				100%{
+					height: 172px; 
+					transform: translateX(-100%);
+				}
+			}
+			@keyframes writing2{
+				0%{
+					height: 172px;
+					transform: translateX(-100%);
+				}
+				50%{
+					height: 172px;
+					transform: translateX(0);
+				}
+	
+				100%{
+					height: 230px; 
+					transform: translateX(0);
+				}
+			}
+			
+			#searchBox .no-active1 {
+				animation: stateSelect1 .2s .2s linear both;
+			}
+			#searchBox .no-active2 {
+				animation: stateSelect2 .25s linear both;
+			}
+			@keyframes stateSelect1{	
+				0%{
+					height: 172px;
+				}		
+				100%{
+					transform: translateX(0);
+				}
+			}
+			@keyframes stateSelect2{			
+				0%{
+					transform: translateX(0);
+				}
+				
+				100%{
+					transform: translateX(100%);
+				}
+			}
+		</style>
 	</head>
 
 	<body>
@@ -16,9 +122,11 @@
 		<script type="text/javascript">
 			mui.init()
 		</script>
-		<div class="mui-content">
-			<form id="selectWriting">
-				<div class="table-view">
+		<form id="searchBox">
+			<div id="selectWriting">
+				<div class="table-view" id="selectState">
+					<span class="mui-icon mui-icon-arrowright mui-pull-right"></span>
+					<span class="state mui-pull-right"></span>
 					<label>理赔状态</label>
 				</div>
 				<div class="table-view">
@@ -33,16 +141,74 @@
 				<div class="table-view">
 					<a class="table-btn">查&nbsp;&nbsp;&nbsp;询</a>
 				</div>
-		</div>
+			</div>
+
+			<ul class="mui-table-view" id="stateSelect">
+				<li class="mui-table-view-cell">
+					<a class="mui-navigate-right">处理中</a>
+				</li>
+				<li class="mui-table-view-cell">
+					<a class="mui-navigate-right">审核</a>
+				</li>
+				<li class="mui-table-view-cell">
+					<a class="mui-navigate-right">签批</a>
+				</li>
+				<li class="mui-table-view-cell">
+					<a class="mui-navigate-right">结案</a>
+				</li>
+			</ul>
 		</form>
+		<div class="mui-content">
+
 		</div>
 	</body>
 	<script>
-		mui.plusReady(function() {
+		window.onload = function(){
+			var mask = mui.createMask();
+			var maskEle = mask[0];
+			var searchBox = document.getElementById("searchBox");
 			window.addEventListener("openClaims", function() {
+				if(searchBox.offsetHeight == 0) {
+					mask.show();
+					searchBox.style.height = '230px';
+				}
+			});
 
+			maskEle.addEventListener('tap', function() {
+				if(searchBox.offsetHeight == 230) {
+					searchBox.style.height = '0';
+					mask.close();
+				}
+			});
+
+			window.addEventListener("ClaimsSearch", function() {
+				if(searchBox.offsetHeight == 0) {
+					mask.show();
+					searchBox.style.height = '230px';
+				} else {
+					searchBox.style.height = '0';
+					mask.close();
+				}
+			});
+
+			var selectState = document.getElementById("selectState");
+			var stateSelect = document.getElementById("stateSelect");
+			selectState.addEventListener("tap", function() {
+				removeClass(stateSelect,'no-active2');
+				removeClass(selectWriting,'is-active2');
+				addClass(selectWriting, 'is-active1');
+				addClass(stateSelect, 'no-active1');
+			});
+			
+			mui("#stateSelect").on('tap','li',function(){
+				removeClass(stateSelect,'no-active1');
+				removeClass(selectWriting,'is-active1');
+				addClass(stateSelect,'no-active2');
+				addClass(selectWriting,'is-active2');
+				var state = document.getElementById("selectState").getElementsByClassName("state")[0];
+				setHtml(state,this.children[0]);
 			})
-		})
+		}
 	</script>
 
 </html>

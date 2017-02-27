@@ -24,7 +24,7 @@
 		<header class="mui-bar mui-bar-nav" id="head">
 			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left Aicon"></a>
 			<h1 class="mui-title">基本</h1>
-			<a class="mui-icon mui-icon-search mui-pull-right Aicon openSearchForClaims"></a>
+			<a class="mui-icon mui-icon-search mui-pull-right Aicon CopenSearch"></a>
 		</header>
 		<nav class="mui-bar mui-bar-tab" id="Insurance-bar">
 			<a class="mui-tab-item mui-active" href="basicInfo.html">
@@ -48,6 +48,7 @@
 			var index = 0;
 			var nowView = 'basicInfo.html';
 			var muiTitle = document.getElementsByClassName('mui-title')[0];
+			var CopenSearch = document.getElementById("head").getElementsByClassName("CopenSearch")[0];
 			for (let i = 0; i < subpages.length; i++) {
 				var Cwebview = plus.webview.create(subpages[i],subpages[i],{
 					top: "43px",
@@ -72,8 +73,14 @@
 			});
 			
 			window.addEventListener('openSearchForClaims',function(){
-				var openSearchForClaims = document.getElementById('head').getElementsByClassName('openSearchForClaims')[0];
-				openSearchForClaims.style.display='block';
+				
+				CopenSearch.style.display='block';
+			})
+			
+			
+			CopenSearch.addEventListener('tap',function(){
+				var ClaimsDetailView = plus.webview.getWebviewById("ClaimsDetail.html");
+				mui.fire(ClaimsDetailView,'ClaimsSearch');
 			})
 		});
 			

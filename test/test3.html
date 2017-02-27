@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+			#Div{
+				width : 100px;
+				height: 100px;
+				background: red;
+				transition: all 1s;
+			}
+			.div1{
+				transform: translateX(100px);
+			}
+			
+		</style>
+	</head>
+	<body>
+		<button id="Btn">运动</button>
+		<div id="Div">adfadsf</div>
+	</body>
+	<script>
+		window.onload = function(){
+			var Btn = document.getElementById("Btn");
+			var Div = document.getElementById("Div");
+			Btn.onclick = function(){
+				if(Div.className !== ''){
+					Div.className = '';
+				}else{
+					Div.className = 'div1';
+				}
+				
+			}
+		}
+	</script>
+</html>
