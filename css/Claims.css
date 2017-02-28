@@ -62,6 +62,191 @@ hr {
 	height: 45px;
 }
 
-.allInsurance .InsuranceNum{
+.allInsurance .InsuranceNum {
 	line-height: 45px;
+}
+
+#searchBox {
+	width: 100%;
+	height: 230px;
+	overflow: hidden;
+	position: relative;
+	z-index: 999;
+	font-size: 0.8em;
+	transition: all .2s;
+}
+
+#selectWriting {
+	width: 100%;
+	height: 230px;
+	overflow: hidden;
+	position: absolute;
+	background: #f0f0f0;
+	top: 0;
+}
+
+#selectWriting .table-view {
+	height: 45px;
+	
+}
+#selectWriting .table-view input{
+	font-size: 1em;
+}
+
+#selectWriting .table-view .table-btn {
+	height: 30px;
+	line-height: 30px;
+	font-size: 1em;
+}
+
+.mui-backdrop {
+	top: 44px;
+	z-index: 10;
+}
+
+.stateList {
+	position: absolute;
+	height: 250px;
+	top: 0;
+	background: #f0f0f0;
+	width: 100%;
+	overflow: scroll;
+	transform: translateX(100%);
+}
+.stateList:after{
+	height: 0;
+}
+
+#searchBox .is-active1 {
+	animation: writing1 .5s linear both;
+}
+
+#searchBox .is-active2 {
+	animation: writing2 2s linear both;
+}
+
+@keyframes writing1 {
+	0% {
+		height: 230px;
+		transform: translateX(0);
+	}
+	50% {
+		height: 172px;
+		transform: translateX(0);
+	}
+	100% {
+		height: 172px;
+		transform: translateX(-100%);
+	}
+}
+
+@keyframes writing2 {
+	0% {
+		height: 172px;
+		transform: translateX(-100%);
+	}
+	50% {
+		height: 172px;
+		transform: translateX(0);
+	}
+	100% {
+		height: 230px;
+		transform: translateX(0);
+	}
+}
+
+#searchBox .no-active1 {
+	animation: stateSelect1 .2s .2s linear both;
+}
+
+#searchBox .no-active2 {
+	animation: stateSelect2 .25s linear both;
+}
+
+@keyframes stateSelect1 {
+	0% {
+		height: 172px;
+	}
+	100% {
+		height: 172px;
+		transform: translateX(0);
+	}
+}
+
+@keyframes stateSelect2 {
+	0% {
+		height: 172px;
+		transform: translateX(0);
+	}
+	100% {
+		height: 172px;
+		transform: translateX(100%);
+	}
+}
+
+.is-active3 {
+	animation: writing3 .5s linear both;
+}
+
+.is-active4 {
+	animation: writing4 .5s linear both;
+}
+
+@keyframes writing3 {
+	0% {
+		height: 190px;
+		transform: translateX(0);
+	}
+	50% {
+		height: 250px;
+		transform: translateX(0);
+	}
+	100% {
+		height: 250px;
+		transform: translateX(-100%);
+	}
+}
+
+@keyframes writing4 {
+	0% {
+		height: 250px;
+		transform: translateX(-100%);
+	}
+	50% {
+		height: 250px;
+		transform: translateX(0);
+	}
+	100% {
+		height: 190px;
+		transform: translateX(0);
+	}
+}
+
+.no-active3 {
+	animation: stateSelect3 .2s .2s linear both;
+}
+
+.no-active4 {
+	animation: stateSelect4 .25s linear both;
+}
+
+@keyframes stateSelect3 {
+	0% {
+		height: 250px;
+	}
+	100% {
+		height: 250px;
+		transform: translateX(0);
+	}
+}
+
+@keyframes stateSelect4 {
+	0% {
+		height: 250px;
+		transform: translateX(0);
+	}
+	100% {
+		height: 250px;
+		transform: translateX(100%);
+	}
 }

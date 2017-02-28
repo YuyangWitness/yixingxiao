@@ -6,6 +6,9 @@
 		<title></title>
 		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
 		<link href="../../css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" href="../../css/drag.css" />
+		<link rel="stylesheet" href="../../css/Claims.css" />
+		<script type="text/javascript" src="../../js/yixingxiao.js" ></script>
 	</head>
 
 	<body>
@@ -14,8 +17,263 @@
 			mui.init()
 		</script>
 		<div class="mui-content">
-		    <h1>明细查询</h1>
+		    
 		</div>
-	</body>
+		<form id="searchBox">
+			<div id="selectWriting">
+				<div class="table-view" id="selectProject">
+					<span class="mui-icon mui-icon-arrowright mui-pull-right"></span>
+					<span class="state mui-pull-right"></span>
+					<label>保全项目</label>
+				</div>
+				<div class="table-view" id="selectState">
+					<span class="mui-icon mui-icon-arrowright mui-pull-right"></span>
+					<span class="state mui-pull-right">全部</span>
+					<label>保全状态</label>
+				</div>
+				<div class="table-view">
+					<input type="text" placeholder="请输入受理日期" />
+				</div>
+				<div class="table-view">
+					<a class="table-btn">查&nbsp;&nbsp;&nbsp;询</a>
+				</div>
+			</div>
 
+			<ul class="mui-table-view stateList" id="PreProject">
+				<li class="mui-table-view-cell">
+					<a class="mui-navigate-right">保单转出</a>
+				</li>
+				<li class="mui-table-view-cell">
+					<a class="mui-navigate-right">保单内部转移</a>
+				</li>
+				<li class="mui-table-view-cell">
+					<a class="mui-navigate-right">网厅自助服务授权</a>
+				</li>
+				<li class="mui-table-view-cell">
+					<a class="mui-navigate-right">红利领取</a>
+				</li>
+				<li class="mui-table-view-cell">
+					<a class="mui-navigate-right">网点撤单</a>
+				</li>
+				<li class="mui-table-view-cell">
+					<a class="mui-navigate-right">投保人变更</a>
+				</li>
+				<li class="mui-table-view-cell">
+					<a class="mui-navigate-right">团体客户信息变更</a>
+				</li>
+				<li class="mui-table-view-cell">
+					<a class="mui-navigate-right">个人客户信息变更</a>
+				</li>
+				<li class="mui-table-view-cell">
+					<a class="mui-navigate-right">收付费类保单信息变更</a>
+				</li>
+				<li class="mui-table-view-cell">
+					<a class="mui-navigate-right">生日年龄性别变更</a>
+				</li>
+				<li class="mui-table-view-cell">
+					<a class="mui-navigate-right">受益人变更</a>
+				</li>
+				<li class="mui-table-view-cell">
+					<a class="mui-navigate-right">特别约定变更</a>
+				</li>
+				<li class="mui-table-view-cell">
+					<a class="mui-navigate-right">领取信息变更</a>
+				</li>
+				<li class="mui-table-view-cell">
+					<a class="mui-navigate-right">红利选择方式变更</a>
+				</li>
+				<li class="mui-table-view-cell">
+					<a class="mui-navigate-right">红利选择方式变更</a>
+				</li>
+				<li class="mui-table-view-cell">
+					<a class="mui-navigate-right">减少被保险人</a>
+				</li>
+				<li class="mui-table-view-cell">
+					<a class="mui-navigate-right">新增被保险人</a>
+				</li>
+				<li class="mui-table-view-cell">
+					<a class="mui-navigate-right">增加保额</a>
+				</li>
+				<li class="mui-table-view-cell">
+					<a class="mui-navigate-right">减少缴清</a>
+				</li>
+				<li class="mui-table-view-cell">
+					<a class="mui-navigate-right">新增投保等级</a>
+				</li>
+				<li class="mui-table-view-cell">
+					<a class="mui-navigate-right">投保等级变更</a>
+				</li>
+				<li class="mui-table-view-cell">
+					<a class="mui-navigate-right">犹豫期撤保</a>
+				</li>
+				<li class="mui-table-view-cell">
+					<a class="mui-navigate-right">保单解约</a>
+				</li>
+				<li class="mui-table-view-cell">
+					<a class="mui-navigate-right">新增附约(长险)</a>
+				</li>
+				<li class="mui-table-view-cell">
+					<a class="mui-navigate-right">终止附约(长险)</a>
+				</li>
+				<li class="mui-table-view-cell">
+					<a class="mui-navigate-right">保险期限变更</a>
+				</li>
+				<li class="mui-table-view-cell">
+					<a class="mui-navigate-right">保单归属比例调整</a>
+				</li>
+				<li class="mui-table-view-cell">
+					<a class="mui-navigate-right">投资组合变更</a>
+				</li>
+				<li class="mui-table-view-cell">
+					<a class="mui-navigate-right">投资单位转换</a>
+				</li>
+				<li class="mui-table-view-cell">
+					<a class="mui-navigate-right">全额减保</a>
+				</li>
+				<li class="mui-table-view-cell">
+					<a class="mui-navigate-right">一般减保</a>
+				</li>
+				<li class="mui-table-view-cell">
+					<a class="mui-navigate-right">账户转移</a>
+				</li>
+				<li class="mui-table-view-cell">
+					<a class="mui-navigate-right">离职转保留</a>
+				</li>
+				<li class="mui-table-view-cell">
+					<a class="mui-navigate-right">帐户余额结转</a>
+				</li>
+				<li class="mui-table-view-cell">
+					<a class="mui-navigate-right">保单分离</a>
+				</li>
+				<li class="mui-table-view-cell">
+					<a class="mui-navigate-right">个人银行转账信息变更</a>
+				</li>
+				<li class="mui-table-view-cell">
+					<a class="mui-navigate-right">保单复效</a>
+				</li>
+				<li class="mui-table-view-cell">
+					<a class="mui-navigate-right">保单补发</a>
+				</li>
+				<li class="mui-table-view-cell">
+					<a class="mui-navigate-right">退保</a>
+				</li>
+				<li class="mui-table-view-cell">
+					<a class="mui-navigate-right">不记名业务实名化</a>
+				</li>
+				<li class="mui-table-view-cell">
+					<a class="mui-navigate-right">保全定义</a>
+				</li>
+				<li class="mui-table-view-cell">
+					<a class="mui-navigate-right">被保险人归属信息调整</a>
+				</li>
+				<li class="mui-table-view-cell">
+					<a class="mui-navigate-right">批单删除</a>
+				</li>
+				<li class="mui-table-view-cell">
+					<a class="mui-navigate-right">帐户满期退费</a>
+				</li>
+			</ul>
+			<ul class="mui-table-view stateList" id="PreState">
+				<li class="mui-table-view-cell">
+					<a class="mui-navigate-right">全部</a>
+				</li>
+				<li class="mui-table-view-cell">
+					<a class="mui-navigate-right">处理中</a>
+				</li>
+				<li class="mui-table-view-cell">
+					<a class="mui-navigate-right">审核</a>
+				</li>
+				<li class="mui-table-view-cell">
+					<a class="mui-navigate-right">待收待付</a>
+				</li>
+				<li class="mui-table-view-cell">
+					<a class="mui-navigate-right">生效</a>
+				</li>
+				<li class="mui-table-view-cell">
+					<a class="mui-navigate-right">受理拒绝</a>
+				</li>
+			</ul>
+		</form>
+	</body>
+	<script>
+		window.onload = function(){
+			var mask = mui.createMask();
+			var maskEle = mask[0];
+			var searchBox = document.getElementById("searchBox");
+			window.addEventListener('openPreSearch',function(){
+				if(searchBox.offsetHeight == 0) {
+					mask.show();
+					searchBox.style.height = '190px';
+				}
+			});
+			
+			maskEle.addEventListener('tap', function() {
+				if(searchBox.offsetHeight == 190) {
+					searchBox.style.height = '0';
+					mask.close();
+				}
+			});
+			
+			window.addEventListener("PreSearch", function() {
+				if(searchBox.offsetHeight == 0) {
+					mask.show();
+					searchBox.style.height = '190px';
+				} else {
+					searchBox.style.height = '0';
+					mask.close();
+				}
+			});
+			
+			var selectProject = document.getElementById("selectProject");
+			var PreProject = document.getElementById("PreProject");
+			var PreSelect = document.getElementById("selectState");
+			
+			selectProject.addEventListener("tap", function() {
+				searchBox.style.height = '250px';
+				removeClass(PreProject,'no-active4');
+				removeClass(selectWriting,'is-active4');
+				addClass(selectWriting, 'is-active3');
+				addClass(PreProject, 'no-active3');
+			});
+			
+			mui("#PreProject").on('tap','li',function(){
+				removeClass(PreProject,'no-active3');
+				removeClass(selectWriting,'is-active3');
+				addClass(PreProject,'no-active4');
+				addClass(selectWriting,'is-active4');
+				var state = document.getElementById("selectProject").getElementsByClassName("state")[0];
+				setHtml(state,this.children[0]);
+				setTimeout(function(){
+					searchBox.style.height = '190px';
+				},500)
+			});
+			
+			PreSelect.addEventListener("tap", function() {
+				searchBox.style.height = '250px';
+				removeClass(PreState,'no-active4');
+				removeClass(selectWriting,'is-active4');
+				addClass(selectWriting, 'is-active3');
+				addClass(PreState, 'no-active3');
+			});
+			
+			mui("#PreState").on('tap','li',function(){
+				removeClass(PreState,'no-active3');
+				removeClass(selectWriting,'is-active3');
+				addClass(PreState,'no-active4');
+				addClass(selectWriting,'is-active4');
+				var state = document.getElementById("selectState").getElementsByClassName("state")[0];
+				setHtml(state,this.children[0]);
+				setTimeout(function(){
+					searchBox.style.height = '190px';
+				},500)
+			});
+			
+			window.addEventListener("hidePreSearch",function(){
+				if(searchBox.offsetHeight == 190) {
+					searchBox.style.height = '0';
+					mask.close();
+				}
+			})
+		}
+	</script>
 </html>

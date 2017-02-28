@@ -39,9 +39,12 @@
 	<script>
 		mui.plusReady(function(){
 			var subpages = ['ClaimsAll.html','ClaimsDetail.html'];
+			var SelectActive = document.getElementsByClassName('SelectActive')[0];
+			var SelectNoActive = document.getElementsByClassName("SelectNoActive")[0];
 			var wb = plus.webview.currentWebview();
 			var index = 0;
 			var nowDiv = 'ClaimsAll.html';
+			var set = true;
 			var nowEle = document.getElementById("SelectClaims").getElementsByClassName('active')[0];
 			for (let i = 0; i < subpages.length; i++) {
 				var Cwebview = plus.webview.create(subpages[i],subpages[i],{
@@ -69,15 +72,43 @@
 					nowEle = this;
 					
 					//明细搜索自动弹出
+					var InsuranceView = plus.webview.getWebviewById('gInsuranceDetail.html');
+					var ClaimsDetailView = plus.webview.getWebviewById("ClaimsDetail.html");
 					if(clickDiv === 'ClaimsDetail.html'){
-						var InsuranceView = plus.webview.getWebviewById('gInsuranceDetail.html');
-						var ClaimsDetailView = plus.webview.getWebviewById("ClaimsDetail.html");
 						mui.fire(InsuranceView,'openSearchForClaims');
 						mui.fire(ClaimsDetailView,'openClaims');
+					}else{
+						mui.fire(ClaimsDetailView,'hideClaimsSearch');
+						mui.fire(InsuranceView,'hideSearchForClaims');
 					}
+					set = false;
 				}
 			});
 			
+			window.addEventListener('hideDetail',function(){
+				if(!set){
+					var ClaimsDetailView = plus.webview.getWebviewById("ClaimsDetail.html");
+					plus.webview.hide('ClaimsDetail.html');
+					plus.webview.show('ClaimsAll.html');
+					removeClass(SelectActive,'active');
+					addClass(SelectActive,'active');
+					removeClass(SelectNoActive,'active');
+					//当前活跃Element改变
+					nowEle = document.getElementById("SelectClaims").getElementsByClassName('SelectActive')[0];
+					nowDiv = 'ClaimsAll.html';
+					set = true;
+					mui.fire(ClaimsDetailView,'hideClaimsSearch');
+				}
+				
+			});
+			
+//			var btn = document.getElementById("set");
+//			btn.onclick = function(){
+//				alert(activeDiv);
+//				alert(activeEle.textContent);
+//				alert(SelectActive.className);
+//				alert(SelectNoActive.className);
+//			}
 			
 		});
 	</script>

@@ -29,16 +29,21 @@
 		    <div id="preSelect" class="Select">
 		    		<div data-id="PreReceivable.html" class="SelectActive active">应收未收</div>
 		    		<div data-id="PreDetail.html" class="SelectNoActive">明细查询</div>
+		 
 		    </div>
+		    
 		</div>
 	</body>
 	<script>
 		mui.plusReady(function(){
 			var subpages = ['PreReceivable.html','PreDetail.html'];
 			var index = 0;
+			var SelectActive = document.getElementsByClassName('SelectActive')[0];
+			var SelectNoActive = document.getElementsByClassName("SelectNoActive")[0];
 			var wb = plus.webview.currentWebview();
 			var activeDiv = 'PreReceivable.html';
 			var activeEle = document.getElementById("preSelect").getElementsByClassName('active')[0];
+			var set = true;
 			for (let i = 0; i < subpages.length; i++) {
 				var appendView = plus.webview.create(subpages[i],subpages[i],{
 					top : '40px'
@@ -64,8 +69,47 @@
 					//当前活跃Element改变
 					activeEle = this;
 					activeDiv = clickDiv;
+					
+					//打开应收未收的查询页面
+					var InsuranceView = plus.webview.getWebviewById('gInsuranceDetail.html');
+					var PreDetailView = plus.webview.getWebviewById("PreDetail.html");
+					if(clickDiv === 'PreDetail.html'){
+						mui.fire(InsuranceView,'openSearchForPre');
+						mui.fire(PreDetailView,'openPreSearch');
+					}else{
+						mui.fire(PreDetailView,'hidePreSearch');
+						mui.fire(InsuranceView,'hideSearchForPre');
+					}
+					set = false;
 				}
 			});
+			
+			
+			window.addEventListener('hideDetail',function(){
+
+				if(!set){ 
+					var PreDetailView = plus.webview.getWebviewById("PreDetail.html");
+					plus.webview.hide('PreDetail.html'); 
+					plus.webview.show('PreReceivable.html');
+					removeClass(SelectActive,'active');
+					addClass(SelectActive,'active');
+					removeClass(SelectNoActive,'active');
+					//当前活跃Element改变
+					activeEle = document.getElementById("preSelect").getElementsByClassName('SelectActive')[0];
+					activeDiv = 'PreReceivable.html';
+					set = true;
+					mui.fire(PreDetailView,'hidePreSearch');
+				}
+				
+			});
+			
+//			var btn = document.getElementById("set");
+//			btn.onclick = function(){
+//				alert(activeDiv);
+//				alert(activeEle.textContent);
+//				alert(SelectActive.className);
+//				alert(SelectNoActive.className);
+//			}
 		});
 	</script>
 </html>

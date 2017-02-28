@@ -13,6 +13,12 @@
 			.openSearchForClaims{
 				display: none;
 			}
+			.CopenSearch{
+				display: none;
+			}
+			.PopenSearch{
+				display: none;
+			}
 		</style>
 	</head>
 
@@ -25,6 +31,7 @@
 			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left Aicon"></a>
 			<h1 class="mui-title">基本</h1>
 			<a class="mui-icon mui-icon-search mui-pull-right Aicon CopenSearch"></a>
+			<a class="mui-icon mui-icon-search mui-pull-right Aicon PopenSearch"></a>
 		</header>
 		<nav class="mui-bar mui-bar-tab" id="Insurance-bar">
 			<a class="mui-tab-item mui-active" href="basicInfo.html">
@@ -49,6 +56,7 @@
 			var nowView = 'basicInfo.html';
 			var muiTitle = document.getElementsByClassName('mui-title')[0];
 			var CopenSearch = document.getElementById("head").getElementsByClassName("CopenSearch")[0];
+			var PopenSearch = document.getElementById("head").getElementsByClassName("PopenSearch")[0];
 			for (let i = 0; i < subpages.length; i++) {
 				var Cwebview = plus.webview.create(subpages[i],subpages[i],{
 					top: "43px",
@@ -69,19 +77,46 @@
 					plus.webview.show(href);
 					nowView = href;
 				}
+				if(nowView !== 'Claims.html'){
+					var ClaimView = plus.webview.getWebviewById('Claims.html');
+					mui.fire(ClaimView,'hideDetail');
+					CopenSearch.style.display='none'; 
+				}
+				if(nowView !== 'preservation.html'){
+					var PreView = plus.webview.getWebviewById('preservation.html');
+					mui.fire(PreView,'hideDetail');
+					PopenSearch.style.display = 'none';
+				}
 				
 			});
 			
 			window.addEventListener('openSearchForClaims',function(){
 				
 				CopenSearch.style.display='block';
+			});
+			
+			window.addEventListener('hideSearchForClaims',function(){
+				CopenSearch.style.display = 'none';
+			});
+			
+			PopenSearch.addEventListener('tap',function(){
+				var PreDetailView = plus.webview.getWebviewById("PreDetail.html");
+				mui.fire(PreDetailView,'PreSearch');
 			})
 			
 			
 			CopenSearch.addEventListener('tap',function(){
 				var ClaimsDetailView = plus.webview.getWebviewById("ClaimsDetail.html");
 				mui.fire(ClaimsDetailView,'ClaimsSearch');
-			})
+			});
+			
+			window.addEventListener('openSearchForPre',function(){
+				PopenSearch.style.display = 'block';
+			});
+			
+			window.addEventListener('hideSearchForPre',function(){
+				PopenSearch.style.display = 'none';
+			});
 		});
 			
 		
